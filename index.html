@@ -4,21 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard V2 - TÊN CHUYÊN VIÊN/PHÒNG</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Cấu hình Tailwind để hỗ trợ Dark Mode bằng class
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
+        /* --- CSS Gốc & Tùy chỉnh --- */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f8f9fa;
             color: #212529;
+            transition: background-color 0.3s, color 0.3s;
         }
-        /* Style cho các phần tín hiệu */
+
+        /* --- Dark Mode Styles Override --- */
+        body.dark {
+            background-color: #0f172a; /* Slate 900 */
+            color: #e2e8f0;
+        }
+        body.dark .stock-card {
+            background-color: #1e293b; /* Slate 800 */
+            border-color: #334155;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        }
+        body.dark .stock-card:hover {
+            background-color: #334155;
+        }
+        body.dark input#stock-search {
+            background-color: #1e293b;
+            color: #fff;
+            border-color: #475569;
+        }
+        body.dark .modal-content {
+            background-color: #1e293b;
+            color: #fff;
+            border-color: #475569;
+        }
+        /* Chỉnh màu chữ trong card khi dark mode */
+        body.dark .text-gray-900, 
+        body.dark .text-gray-800,
+        body.dark .text-gray-700 {
+            color: #e2e8f0 !important;
+        }
+        body.dark .text-gray-600,
+        body.dark .text-gray-500 {
+            color: #94a3b8 !important;
+        }
+        body.dark .bg-white {
+            background-color: #1e293b !important;
+        }
+        body.dark .bg-gray-50, 
+        body.dark .bg-blue-50,
+        body.dark .bg-green-50,
+        body.dark .bg-red-50,
+        body.dark .bg-yellow-50 {
+            background-color: #334155 !important; /* Làm tối các box thông tin */
+            border-color: #475569 !important;
+        }
+        body.dark .bg-gray-100 {
+            background-color: #334155 !important;
+            color: #e2e8f0;
+        }
+
+        /* --- Các Style cũ --- */
         .signal-strength { border-left: 5px solid #45dfb1; }
         .signal-weakness { border-left: 5px solid #dc3545; }
         .signal-observe { border-left: 5px solid #3b82f6; }
         
-        /* Style cho Header cố định */
         .header-container {
             background-color: #213a57;
             background-image: linear-gradient(to right, #213a57, #14919b);
@@ -30,7 +92,6 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
-        /* Style cho Card Cổ phiếu */
         .stock-card {
             background-color: #ffffff;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
@@ -43,19 +104,17 @@
         }
         ::placeholder { color: #a0aec0; }
         
-        /* Style cho Danh sách có thể cuộn */
         .scrollable-list {
             max-height: 65vh;
             overflow-y: auto;
             padding-right: 10px;
         }
-        /* Tối ưu cuộn trên WebKit (Chrome, Safari) */
         .scrollable-list::-webkit-scrollbar { width: 8px; }
         .scrollable-list::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
         .scrollable-list::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
         .scrollable-list::-webkit-scrollbar-thumb:hover { background: #aaa; }
         
-        /* --- CSS cho Nút Công Cụ Nổi --- */
+        /* Float Button */
         .floating-tool-button {
             position: fixed; 
             bottom: 30px; 
@@ -81,7 +140,7 @@
             transform: scale(1.05); 
         }
 
-        /* --- CSS cho Modal Chung --- */
+        /* Modal */
         .modal {
             display: none; 
             position: fixed;
@@ -139,34 +198,60 @@
             cursor: pointer;
         }
         
-        /* Modal Header Stock */
         .stock-modal-header {
             padding: 15px 25px;
             color: white;
         }
         
-        /* Điều chỉnh cho mobile */
         @media (min-width: 768px) {
-            .modal {
-                 padding: 50px 10px; 
-            }
-            .modal-content {
-                 min-height: auto; 
-                 margin: 5% auto;
-            }
+            .modal { padding: 50px 10px; }
+            .modal-content { min-height: auto; margin: 5% auto; }
+        }
+
+        /* Style cho nút công cụ trên header */
+        .header-tools {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 10px;
+        }
+        .tool-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .tool-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased" id="main-body">
 
-    <div class="header-container text-center mb-8">
+    <div class="header-container text-center mb-8" id="dashboard-header">
+        <div class="header-tools">
+            <button id="theme-toggle" class="tool-btn" title="Chuyển chế độ Sáng/Tối">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="capture-btn" class="tool-btn" title="Chụp ảnh báo cáo">
+                <i class="fas fa-camera"></i>
+            </button>
+        </div>
+
         <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">Dashboard V2 - TTTV BSC HCM</h1>
 
         <div id="datetime-container" class="text-gray-300 font-medium mb-2"></div>
         <p class="text-sm text-gray-400 mb-4">Dữ liệu giá đóng cửa ngày 28/11/2025</p>
-        <div class="max-w-2xl mx-auto">
-            <div class="relative">
-                <input type="text" id="stock-search" placeholder="Nhập mã CK, hoặc từ khoá (MUA, BÁN, NẮM GIỮ)..." class="w-full bg-white text-gray-800 py-3 px-4 text-lg border-2 border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-[#80ed99] transition">
+        <div class="max-w-2xl mx-auto" data-html2canvas-ignore="true"> <div class="relative">
+                <input type="text" id="stock-search" placeholder="Nhập mã CK, hoặc từ khoá (MUA, BÁN, NẮM GIỮ)..." class="w-full bg-white text-gray-800 py-3 px-4 text-lg border-2 border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-[#80ed99] transition shadow-md">
                 <button id="search-btn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-[#14919b] text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#45dfb1] transition">
                     <i class="fas fa-search"></i>
                 </button>
@@ -175,8 +260,8 @@
         </div>        
     </div>
 
-    <div class="container mx-auto p-4 md:p-6" >
-        <div class="text-center mb-8 flex flex-wrap justify-center gap-4">
+    <div class="container mx-auto p-4 md:p-6" id="dashboard-content">
+        <div class="text-center mb-8 flex flex-wrap justify-center gap-4" data-html2canvas-ignore="true">
             <a href="https://vannyla.github.io/Nhan-dinh-sang/" target="_blank" rel="noopener noreferrer" class="news-link inline-block bg-[#14919b] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#0b6477] transition duration-300 ease-in-out shadow-md"><i class="fas fa-sun mr-2"></i>Nhận định sáng</a>
             <a href="#" target="_blank" rel="noopener noreferrer" class="news-link inline-block bg-[#0b6477] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#14919b] transition duration-300 ease-in-out shadow-md"><i class="fas fa-calendar-week mr-2"></i>Bản tin tuần</a>
             <a href="#" target="_blank" rel="noopener noreferrer" class="news-link inline-block bg-gray-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-700 transition duration-300 ease-in-out shadow-md"><i class="fas fa-calendar-alt mr-2"></i>Sự kiện</a>
@@ -186,21 +271,21 @@
 
         <div id="stock-dashboard" class="grid grid-cols-1 gap-8">
             <div id="strength-section">
-                <h2 id="strength-header" class="text-2xl font-bold text-[#213a57] mb-4 border-b-2 border-[#45dfb1] pb-2 cursor-pointer">
+                <h2 id="strength-header" class="text-2xl font-bold text-[#213a57] dark:text-[#45dfb1] mb-4 border-b-2 border-[#45dfb1] pb-2 cursor-pointer">
                     <i class="fas fa-arrow-trend-up mr-2 text-green-500"></i>TÍN HIỆU SỨC MẠNH (STRENGTH)
                 </h2>
                 <div id="strength-list" class="scrollable-list grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </div>
 
             <div id="weakness-section">
-                <h2 id="weakness-header" class="text-2xl font-bold text-red-600 mb-4 border-b-2 border-red-500 pb-2 cursor-pointer">
+                <h2 id="weakness-header" class="text-2xl font-bold text-red-600 dark:text-red-400 mb-4 border-b-2 border-red-500 pb-2 cursor-pointer">
                     <i class="fas fa-arrow-trend-down mr-2 text-red-500"></i>TÍN HIỆU SUY YẾU (WEAKNESS)
                 </h2>
                 <div id="weakness-list" class="scrollable-list grid grid-cols-1 md:grid-cols-2 gap-4"></div>
             </div>
             
             <div id="observe-section">
-                <h2 id="observe-header" class="text-2xl font-bold text-blue-600 mb-4 border-b-2 border-blue-500 pb-2 cursor-pointer">
+                <h2 id="observe-header" class="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4 border-b-2 border-blue-500 pb-2 cursor-pointer">
                     <i class="fas fa-binoculars mr-2 text-blue-500"></i>QUAN SÁT THÊM (OBSERVE)
                 </h2>
                 <div id="observe-list" class="scrollable-list grid grid-cols-1 md:grid-cols-2 gap-4"></div>
@@ -212,12 +297,12 @@
             </div>
         </div>
         
-        <footer class="text-center mt-10 py-6 border-t border-gray-200">
-            <p class="text-gray-600 font-semibold mb-6">Chúc Quý nhà đầu tư một tuần giao dịch thành công và hiệu quả.!</p>
+        <footer class="text-center mt-10 py-6 border-t border-gray-200 dark:border-gray-700">
+            <p class="text-gray-600 dark:text-gray-400 font-semibold mb-6">Chúc Quý nhà đầu tư một tuần giao dịch thành công và hiệu quả.!</p>
             
-            <div class="max-w-4xl mx-auto text-left p-4 bg-gray-100 rounded-lg border-l-4 border-yellow-500">
-                <h4 class="font-bold text-gray-800">Miễn trừ trách nhiệm:</h4>
-                <p class="text-sm text-gray-700 mt-2 leading-relaxed">
+            <div class="max-w-4xl mx-auto text-left p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border-l-4 border-yellow-500">
+                <h4 class="font-bold text-gray-800 dark:text-gray-200">Miễn trừ trách nhiệm:</h4>
+                <p class="text-sm text-gray-700 dark:text-gray-300 mt-2 leading-relaxed">
                     Dashboard này là công cụ hỗ trợ tham khảo, cung cấp các phân tích kỹ thuật và hiện trạng diễn biến của cổ phiếu tại thời điểm cập nhật. Các nội dung, thông tin, và phân tích trên dashboard (bao gồm cả phân tích từ AI) chỉ mang tính chất tham khảo, giúp nhà đầu tư có thêm góc nhìn về thị trường và không mang ý nghĩa khuyến nghị mua, bán hay nắm giữ bất kỳ mã cổ phiếu nào. Nhà đầu tư cần cân nhắc kỹ lưỡng và chịu hoàn toàn trách nhiệm về mọi quyết định đầu tư của mình.
                 </p>
             </div>
@@ -225,7 +310,7 @@
         
     </div>
     
-    <button id="open-term-modal-btn" class="floating-tool-button">
+    <button id="open-term-modal-btn" class="floating-tool-button" data-html2canvas-ignore="true">
         <i class="fas fa-book-open mr-2"></i> Tra Cứu Thuật Ngữ
     </button>
     
@@ -235,16 +320,16 @@
                 <span class="close-btn" id="close-term-modal-btn">&times;</span>
                 <h2 class="text-xl font-bold"><i class="fas fa-book mr-2"></i>Tra Cứu Thuật Ngữ VSA/PTKT</h2>
             </div>
-            <div class="term-table-container">
-                <table id="term-table" class="term-table min-w-full bg-white border-collapse">
+            <div class="term-table-container p-4">
+                <table id="term-table" class="term-table min-w-full bg-white dark:bg-gray-800 border-collapse">
                     <thead>
-                        <tr class="text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
-                            <th class="w-1/5">Thuật ngữ / Viết tắt</th>
-                            <th class="w-1/5">Tên đầy đủ</th>
-                            <th class="w-3/5">Diễn giải</th>
+                        <tr class="text-left text-sm font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                            <th class="w-1/5 py-2">Thuật ngữ / Viết tắt</th>
+                            <th class="w-1/5 py-2">Tên đầy đủ</th>
+                            <th class="w-3/5 py-2">Diễn giải</th>
                         </tr>
                     </thead>
-                    <tbody id="term-table-body">
+                    <tbody id="term-table-body" class="text-gray-600 dark:text-gray-400">
                     </tbody>
                 </table>
             </div>
@@ -257,18 +342,18 @@
                 <h2 id="modal-ticker-title" class="text-2xl font-bold"></h2>
                 <span class="close-btn" id="close-stock-modal-btn">&times;</span>
             </div>
-            <div id="stock-modal-body" class="p-4 md:p-6 lg:p-8">
+            <div id="stock-modal-body" class="p-4 md:p-6 lg:p-8 dark:bg-gray-900">
                 </div>
         </div>
     </div>
     
     <script>
         // =========================================================================
-        // === CẤU TRÚC DỮ LIỆU ===
+        // === CẤU TRÚC DỮ LIỆU (Đã sửa lỗi thiếu mảng) ===
         // =========================================================================
        const stockData = {
             "strength": [
-              {
+                   {
     ticker: "TCH",
     exchange: "HOSE",
     companyName: "CTCP Đầu tư Dịch vụ Tài chính Hoàng Huy",
@@ -989,637 +1074,11 @@
     <p><strong>🟢 Kịch bản Tích cực (Mua tích lũy):</strong> Mua gom dần tại vùng nền <strong>101.0 - 102.5</strong>. Đây là vùng mua an toàn cho mục tiêu trung hạn 110-115.</p>
     <p><strong>🔴 Kịch bản Tiêu cực:</strong> Chỉ bán khi giá đóng cửa dưới <strong>98.0</strong> với khối lượng lớn.</p>
     `
-}
-],
- "observe": [
+}    
+          ],
+          "weakness": [
 {
-    ticker: "KDH",
-    exchange: "HOSE",
-    companyName: "CTCP Đầu tư và Kinh doanh Nhà Khang Điền",
-    price: "35.0",
-    priceChange: "-0.4 (-1.1%)",
-    priceColorClass: "text-red",
-    trendText: "➡️ Trend: Tích lũy biên độ hẹp",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Điều chỉnh Vol thấp",
-    signalDesc: "Giá điều chỉnh nhẹ về vùng hỗ trợ MA20 với khối lượng thấp hơn trung bình (71%), cho thấy áp lực bán không lớn.",
-    rsi: "54.06",
-    macd: "Dương (Yếu)",
-    macdColorClass: "text-yellow",
-    vol: "71%",
-    buyZone: "34.5 - 34.8",
-    cutLoss: "< 33.5",
-    target: "37.5",
-    riskWarning: "Cổ phiếu bất động sản thường nhạy cảm với tin tức vĩ mô. Cần kiên nhẫn chờ dòng tiền kích hoạt.",
-    chartData: [35.85, 34.0, 35.6, 34.95, 34.1, 32.5, 32.0, 33.0, 34.1, 34.45, 34.65, 35.1, 35.4, 34.6, 34.65, 34.85, 34.85, 34.5, 35.4, 35.4, 35.0],
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ, nằm gọn trong cây nến tăng trước đó (Inside Bar). Đây là trạng thái nghỉ ngơi bình thường.</li>
-        <li><strong>VSA:</strong> Khối lượng giao dịch sụt giảm (71% TB20). Trong nhịp điều chỉnh, Vol giảm là dấu hiệu tốt (Cạn cung).</li>
-        <li><strong>Hành động giá:</strong> KDH đang giữ vững nền giá 34.x - 35.x trong suốt 2 tuần qua.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Sideway Up. Đáy sau cao hơn đáy trước.</li>
-        <li><strong>Động lượng:</strong> RSI quanh 54, trung tính. MACD vẫn nằm trên đường 0, xu hướng tăng chưa bị gãy.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Chờ đợi điểm mua Pullback tại <strong>34.5</strong>. Chỉ mua mạnh khi giá vượt <strong>35.5</strong> với Vol > 5 triệu cp.</p>
-    `
-},
-{
-    ticker: "IDC",
-    exchange: "HNX",
-    companyName: "Tổng công ty IDICO",
-    price: "40.3",
-    priceChange: "+0.5 (+1.3%)",
-    priceColorClass: "text-green",
-    trendText: "📈 Trend: Phục hồi từ đáy ngắn hạn",
-    dateText: "📅 28/11",
-    signalTitle: "✅ Tín hiệu: Đảo chiều tại hỗ trợ",
-    signalDesc: "Giá bật tăng từ vùng hỗ trợ 39.x với khối lượng cải thiện, phủ nhận cây nến giảm trước đó.",
-    rsi: "53.19",
-    macd: "Âm (Đang thu hẹp)",
-    macdColorClass: "text-yellow",
-    vol: "90%",
-    buyZone: "39.8 - 40.2",
-    cutLoss: "< 39.0",
-    target: "43.0",
-    riskWarning: "Đang gặp vùng cản dày đặc quanh 41.5 - 42.0. Có thể sẽ rung lắc mạnh tại đây.",
-    chartData: [38.1, 38.2, 38.1, 38.6, 38.3, 38.0, 37.6, 39.2, 39.3, 41.7, 42.7, 42.4, 41.1, 41.5, 41.2, 41.2, 40.0, 39.8, 40.9, 39.8, 40.3],
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến tăng bao phủ (Piercing Line/Engulfing). Giá đóng cửa cao hơn mức mở cửa hôm qua.</li>
-        <li><strong>VSA:</strong> Khối lượng gần đạt trung bình (90%). Sự hồi phục đi kèm thanh khoản gia tăng nhẹ là tín hiệu tích cực.</li>
-        <li><strong>Hành động giá:</strong> IDC đang nỗ lực tạo đáy thứ 2 (Higher Low) cao hơn đáy trước (38.0).</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Đang trong nhịp điều chỉnh của xu hướng tăng trung hạn.</li>
-        <li><strong>Động lượng:</strong> RSI cắt lên đường 50, báo hiệu phe mua bắt đầu quay lại. MACD histogram đang thu hẹp đà giảm, chuẩn bị cho điểm giao cắt vàng (Golden Cross).</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Có thể mở vị thế thăm dò 30% tại vùng <strong>40.0</strong>. Gia tăng khi giá vượt 41.5.</p>
-    `
-},
-{
-    ticker: "HHV",
-    exchange: "HOSE",
-    companyName: "CTCP Đầu tư Hạ tầng Giao thông Đèo Cả",
-    price: "14.25",
-    priceChange: "+0.25 (+1.8%)",
-    priceColorClass: "text-green",
-    trendText: "📈 Trend: Bứt phá nền tích lũy",
-    dateText: "📅 28/11",
-    signalTitle: "✅ Tín hiệu: Dòng tiền vào (Vol Spike)",
-    signalDesc: "Giá tăng tốt đi kèm khối lượng xấp xỉ trung bình (97%). Đang mấp mé vượt khỏi vùng hộp tích lũy.",
-    rsi: "49.96",
-    macd: "Dương (Mới cắt lên)",
-    macdColorClass: "text-green",
-    vol: "97%",
-    buyZone: "14.0 - 14.1",
-    cutLoss: "< 13.5",
-    target: "15.5",
-    riskWarning: "Nhóm đầu tư công thường chạy theo sóng thông tin. Cần theo dõi sát tiến độ giải ngân.",
-    chartData: [14.8, 14.1, 14.4, 14.1, 14.25, 13.9, 13.2, 13.35, 13.65, 13.55, 13.6, 14.4, 14.3, 14.25, 14.2, 14.1, 14.05, 13.8, 14.15, 14.0, 14.25],
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến tăng dứt khoát, đóng cửa ở mức cao nhất phiên.</li>
-        <li><strong>VSA:</strong> Vol cải thiện đáng kể so với các phiên trước. Đây là dấu hiệu của dòng tiền mồi (Smart Money) bắt đầu tham gia.</li>
-        <li><strong>Hành động giá:</strong> HHV đang test lại vùng kháng cự ngắn hạn 14.3 - 14.4. Nếu vượt qua đây sẽ mở ra xu hướng tăng mới.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Tích lũy đáy. Đang chuyển pha từ đi ngang sang tăng.</li>
-        <li><strong>Động lượng:</strong> RSI chạm mốc 50, chuẩn bị bước vào vùng tăng trưởng. MACD vừa cắt lên đường tín hiệu.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Mua gom quanh <strong>14.0 - 14.2</strong>. Điểm nổ (Pivot point) là khi giá vượt 14.5 vol lớn.</p>
-    `
-},
-{
-    ticker: "TPB",
-    exchange: "HOSE",
-    companyName: "Ngân hàng TMCP Tiên Phong",
-    price: "17.3",
-    priceChange: "-0.05 (-0.3%)",
-    priceColorClass: "text-red",
-    trendText: "➡️ Trend: Tích lũy chặt",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Test cung cạn Vol",
-    signalDesc: "Giá đi ngang quanh tham chiếu với khối lượng chỉ bằng 50% trung bình. Cho thấy không còn ai muốn bán giá thấp.",
-    rsi: "50.42",
-    macd: "Dương (Yếu)",
-    macdColorClass: "text-yellow",
-    vol: "51%",
-    buyZone: "17.1 - 17.2",
-    cutLoss: "< 16.8",
-    target: "18.5",
-    riskWarning: "Biến động giá rất thấp, cần sự kiên nhẫn cao độ khi nắm giữ.",
-    chartData: [16.65, 16.65, 17.25, 16.9, 16.9, 16.5, 16.5, 16.9, 17.3, 16.95, 16.95, 17.15, 17.6, 17.15, 17.25, 17.25, 17.25, 16.95, 17.4, 17.35, 17.3],
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến Doji "ngủ gật" (Sleepy Doji). Biến động giá cực hẹp.</li>
-        <li><strong>VSA:</strong> Khối lượng siêu thấp (51% ~ 3.7 triệu cp). Đây là trạng thái "Tiết cung" điển hình trước khi có biến động lớn (thường là tăng theo xu hướng chính).</li>
-        <li><strong>Hành động giá:</strong> TPB đang xây nền giá phẳng (Flat Base) quanh 17.x rất chắc chắn.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Up trend chậm rãi.</li>
-        <li><strong>Động lượng:</strong> RSI đi ngang quanh 50. MACD đi ngang sát đường 0.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Mua tích sản vùng <strong>17.0 - 17.3</strong>. Đây là vùng giá vốn của tổ chức.</p>
-    `
-},
-{
-    ticker: "GMD",
-    exchange: "HOSE",
-    companyName: "CTCP Gemadept",
-    price: "64.0",
-    priceChange: "+0.1 (+0.2%)",
-    priceColorClass: "text-green",
-    trendText: "📈 Trend: Tích lũy kênh trên",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Siết nền (Tightening)",
-    signalDesc: "Giá biến động hẹp ngay tại vùng hỗ trợ MA50 với thanh khoản thấp. Đang chờ đợi tín hiệu bùng nổ.",
-    rsi: "47.86",
-    macd: "Dương (Yếu)",
-    macdColorClass: "text-yellow",
-    vol: "70%",
-    buyZone: "63.0 - 64.0",
-    cutLoss: "< 61.0",
-    target: "68.0",
-    riskWarning: "Thanh khoản khá thấp so với các mã thị trường, khó giải ngân số vốn lớn nhanh chóng.",
-    chartData: [68.1, 68.5, 67.3, 67.0, 66.1, 63.4, 61.0, 61.0, 62.0, 63.0, 62.5, 63.6, 63.5, 63.2, 62.6, 63.2, 62.9, 62.9, 63.4, 63.9, 64.0],
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến thân nhỏ (Spinning Top) thể hiện sự cân bằng cung cầu.</li>
-        <li><strong>VSA:</strong> Khối lượng thấp (70%). Lực bán đã suy yếu đáng kể sau nhịp điều chỉnh từ đỉnh 68.</li>
-        <li><strong>Hành động giá:</strong> GMD đang giữ vững trendline tăng trung hạn. Vùng 63-64 là bệ đỡ cứng.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Xu hướng chính vẫn là Tăng. Hiện tại đang trong pha tái tích lũy.</li>
-        <li><strong>Động lượng:</strong> RSI dưới 50 một chút nhưng đang hướng lên. MACD đang vận động tích cực dần.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Gom hàng dần tại vùng <strong>63.x - 64.x</strong>. Kỳ vọng nhịp đánh lên đỉnh cũ 68.</p>
-    `
-},
-{
-    ticker: "KBC",
-    exchange: "HOSE",
-    companyName: "Tổng Công ty Phát triển Đô thị Kinh Bắc",
-    price: "35.3",
-    priceChange: "-0.4 (-1.1%)",
-    priceColorClass: "text-red",
-    trendText: "➡️ Trend: Tích lũy nền cao",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Shakeout (Rũ bỏ)",
-    signalDesc: "Giá điều chỉnh nhẹ với thanh khoản thấp (76%). Đây là hành động rũ bỏ các nhà đầu tư đeo bám trước khi chạy tiếp.",
-    rsi: "52.70",
-    macd: "Dương (Tích cực)",
-    macdColorClass: "text-green",
-    vol: "76%",
-    buyZone: "34.5 - 35.0",
-    cutLoss: "< 33.5",
-    target: "38.0",
-    riskWarning: "Cổ phiếu có lịch sử biến động mạnh (Beta cao). Cần tuân thủ kỷ luật cắt lỗ.",
-    chartData: [35.0, 34.2, 35.65, 35.1, 35.7, 33.85, 32.45, 32.3, 33.1, 33.55, 33.6, 34.95, 34.95, 34.45, 35.25, 34.9, 34.95, 35.6, 35.95, 35.7, 35.3],
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ, nằm trong vùng giá của phiên tăng mạnh trước đó. Áp lực bán không quá áp đảo.</li>
-        <li><strong>VSA:</strong> Khối lượng thấp hơn trung bình (76%). Điều này xác nhận đây chỉ là nhịp chốt lời ngắn hạn (Profit Taking) chứ không phải phân phối.</li>
-        <li><strong>Hành động giá:</strong> KBC đang xây nền số 2 sau khi bứt thoát khỏi đáy 32.x. Vùng 35.x đang được giữ khá tốt.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Xu hướng tăng ngắn hạn đang hình thành.</li>
-        <li><strong>Động lượng:</strong> RSI trên 50, hỗ trợ xu hướng tăng. MACD Histogram dương cho thấy phe mua vẫn kiểm soát thế trận.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Canh mua khi giá test lại <strong>34.8 - 35.0</strong>. Gia tăng khi vượt đỉnh ngắn hạn 36.0.</p>
-    `
-},
-{
-    ticker: "DBC",
-    exchange: "HOSE",
-    companyName: "Tập đoàn Dabaco Việt Nam",
-    price: "26.65",
-    priceChange: "-0.05 (-0.2%)",
-    priceColorClass: "text-red",
-    trendText: "➡️ Trend: Sideway Up",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: No Supply (Cạn cung)",
-    signalDesc: "Biến động giá cực hẹp đi kèm khối lượng thấp (61%). Lượng hàng trôi nổi đã được thu gom đáng kể.",
-    rsi: "51.44",
-    macd: "Dương (Yếu)",
-    macdColorClass: "text-yellow",
-    vol: "61%",
-    buyZone: "26.2 - 26.5",
-    cutLoss: "< 25.5",
-    target: "29.0",
-    riskWarning: "Giá lợn hơi biến động thất thường có thể ảnh hưởng tâm lý nhà đầu tư ngắn hạn.",
-    chartData: [26.55, 25.8, 26.35, 25.8, 25.75, 25.1, 25.15, 25.15, 25.4, 26.05, 26.15, 26.45, 26.55, 27.2, 26.9, 27.0, 27.2, 26.5, 27.15, 26.7, 26.65],
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến Doji hoặc thân rất nhỏ (Small Candle). Thị trường đang chờ đợi một cú hích thông tin.</li>
-        <li><strong>VSA:</strong> Vol sụt giảm (61% TB20). Dòng tiền lớn (Smart Money) vẫn nằm trong cổ phiếu và chưa có dấu hiệu thoát ra.</li>
-        <li><strong>Hành động giá:</strong> DBC đang dao động quanh trục 26.x - 27.x. Đây là vùng tích lũy khá an toàn.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Đi ngang tích lũy trong xu hướng tăng.</li>
-        <li><strong>Động lượng:</strong> RSI trung tính (51.44). MACD đang đi ngang sát đường 0, chờ tín hiệu bùng nổ.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Mua thăm dò tại nền <strong>26.x</strong>. Chờ phiên nổ Vol > 4 triệu cổ để gia tăng.</p>
-    `
-},
-{
-    ticker: "DIG",
-    exchange: "HOSE",
-    companyName: "Tổng CTCP Đầu tư Phát triển Xây dựng",
-    price: "20.65",
-    priceChange: "+0.4 (+2.0%)",
-    priceColorClass: "text-green",
-    trendText: "🔄 Trend: Đảo chiều hồi phục",
-    dateText: "📅 28/11",
-    signalTitle: "✅ Tín hiệu: Dòng tiền đầu cơ trở lại",
-    signalDesc: "Giá tăng 2% với Vol cải thiện (84%). Có dấu hiệu tạo đáy ngắn hạn thành công tại vùng 20.0.",
-    rsi: "48.79",
-    macd: "Tiệm cận dương",
-    macdColorClass: "text-yellow",
-    vol: "84%",
-    buyZone: "20.0 - 20.3",
-    cutLoss: "< 19.5",
-    target: "22.5",
-    riskWarning: "Cổ phiếu mang tính đầu cơ cao. Kháng cự mạnh tại vùng 21.5 - 22.0.",
-    chartData: [20.6, 19.3, 20.65, 20.15, 20.3, 19.7, 19.65, 20.15, 20.6, 20.0, 20.45, 21.35, 21.0, 21.1, 21.1, 21.0, 20.7, 20.05, 20.75, 20.25, 20.65],
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến xanh đặc (Bullish Candle) bao trùm cây nến đỏ hôm trước. Tín hiệu đảo chiều tích cực.</li>
-        <li><strong>VSA:</strong> Khối lượng giao dịch tăng lên mức 84% TB20. Tuy chưa bùng nổ nhưng đã cải thiện so với giai đoạn cạn cung trước đó.</li>
-        <li><strong>Hành động giá:</strong> DIG đã test thành công mốc hỗ trợ tâm lý 20.0. Nhịp hồi phục này có thể kéo dài lên vùng kháng cự bên trên.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Sideway trong biên độ rộng 19 - 22.</li>
-        <li><strong>Động lượng:</strong> RSI đang hướng lên từ vùng thấp (48.79). MACD đang thu hẹp khoảng cách với đường tín hiệu.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Có thể bắt đáy ngắn hạn quanh <strong>20.x</strong> với tỷ trọng vừa phải. Mục tiêu lướt sóng T+.</p>
-    `
-},
-{
-    ticker: "GEX",
-    exchange: "HOSE",
-    companyName: "Tập đoàn GELEX",
-    price: "46.55",
-    priceChange: "-1.4 (-2.9%)",
-    priceColorClass: "text-red",
-    trendText: "⚠️ Trend: Điều chỉnh vùng đỉnh",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Phân phối ngắn hạn",
-    signalDesc: "Giá giảm mạnh gần 3% với Vol lớn (135%). Áp lực bán chốt lời tại vùng đỉnh lịch sử là rất quyết liệt.",
-    rsi: "48.52",
-    macd: "Dương (Suy yếu)",
-    macdColorClass: "text-orange",
-    vol: "135%",
-    buyZone: "44.0 - 45.0",
-    cutLoss: "< 43.5",
-    target: "50.0",
-    riskWarning: "Mẫu hình nến giảm bao trùm (Bearish Engulfing) tại đỉnh là tín hiệu xấu. Cần thận trọng.",
-    chartData: [44.05, 44.1, 47.15, 45.3, 45.1, 43.95, 40.9, 43.25, 45.1, 44.25, 45.1, 45.5, 45.65, 43.8, 44.65, 44.0, 43.5, 45.1, 48.25, 47.95, 46.55],
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến giảm dài (Long Black Candle) xóa bỏ nỗ lực tăng của 2-3 phiên trước.</li>
-        <li><strong>VSA:</strong> Khối lượng đột biến 135% (gần 15 triệu cp). Giá giảm + Vol tăng = Áp lực cung lớn (SOW - Sign of Weakness).</li>
-        <li><strong>Hành động giá:</strong> GEX thất bại trong việc chinh phục mốc 48.0 và đang quay lại tìm điểm cân bằng thấp hơn.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Vẫn trong xu hướng tăng trung hạn, nhưng ngắn hạn đang điều chỉnh sâu.</li>
-        <li><strong>Động lượng:</strong> RSI cắm đầu giảm về dưới 50. MACD có dấu hiệu tạo đỉnh thứ 2 thấp hơn (Phân kỳ âm).</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>🔴 Cảnh báo:</strong> Không bắt đáy vội vàng. Chờ giá ổn định tại vùng hỗ trợ <strong>44.x - 45.x</strong> và Vol giảm trở lại mới xem xét tham gia.</p>
-    `
-},
-{
-    ticker: "SIP",
-    exchange: "HOSE",
-    companyName: "CTCP Đầu tư Sài Gòn VRG",
-    price: "56.6",
-    priceChange: "-0.4 (-0.7%)",
-    priceColorClass: "text-red",
-    trendText: "➡️ Trend: Tích lũy nền tảng lớn",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Test cung thành công",
-    signalDesc: "Giá giảm nhẹ, Vol ở mức trung bình thấp (79%). Cổ phiếu đang xây nền giá rất chặt chẽ quanh vùng 56-58.",
-    rsi: "51.76",
-    macd: "Âm (Nhẹ)",
-    macdColorClass: "text-yellow",
-    vol: "80%",
-    buyZone: "56.0 - 56.5",
-    cutLoss: "< 54.0",
-    target: "62.0",
-    riskWarning: "Thanh khoản cổ phiếu này khá cô đặc, biến động trong phiên có thể lớn (Râu nến dài).",
-    chartData: [55.36, 55.55, 55.06, 54.96, 55.55, 54.08, 54.08, 53.39, 54.47, 57.03, 58.01, 59.49, 58.7, 57.8, 58.0, 57.7, 57.0, 57.0, 57.7, 57.0, 56.6],
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Các cây nến thân nhỏ xếp bằng nhau (Railroad Tracks/Flat Base).</li>
-        <li><strong>VSA:</strong> Khối lượng duy trì ổn định dưới mức trung bình. Đây là giai đoạn "gom hàng" điển hình của tổ chức.</li>
-        <li><strong>Hành động giá:</strong> SIP đang tích lũy sau một nhịp tăng. Vùng giá 56.x là hỗ trợ cứng (MA50).</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Xu hướng tăng dài hạn vẫn được bảo toàn.</li>
-        <li><strong>Động lượng:</strong> RSI đi ngang quanh 52. MACD đang vận động hẹp quanh đường 0.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Mua gom cho mục tiêu trung dài hạn tại vùng <strong>56.x</strong>. Cổ phiếu cơ bản tốt, phù hợp nắm giữ.</p>
-    `
-},
-{
-    ticker: "TNG",
-    exchange: "HNX",
-    companyName: "CTCP Đầu tư và Thương mại TNG",
-    price: "19.3",
-    priceChange: "-0.1 (-0.5%)",
-    priceColorClass: "text-red",
-    trendText: "➡️ Trend: Tích lũy đáy hộp",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Cạn kiệt nguồn cung",
-    signalDesc: "Giao dịch ảm đạm với Vol thấp (77%). Giá đang dao động quanh vùng hỗ trợ cứng 19.x.",
-    rsi: "51.68",
-    macd: "Âm (Nhẹ)",
-    macdColorClass: "text-yellow",
-    vol: "77%",
-    buyZone: "19.0 - 19.2",
-    cutLoss: "< 18.5",
-    target: "21.0",
-    riskWarning: "Nhóm dệt may đang thiếu thông tin hỗ trợ ngắn hạn. Cần kiên nhẫn.",
-    chartData: [19.08, 18.69, 18.89, 18.89, 19.08, 18.79, 18.11, 18.5, 18.7, 19.3, 19.7, 20.0, 20.1, 19.7, 19.9, 19.6, 19.5, 19.1, 19.3, 19.4, 19.3],
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Chuỗi nến thân nhỏ đi ngang (Sideway). Biến động giá không đáng kể.</li>
-        <li><strong>VSA:</strong> Thanh khoản sụt giảm, cho thấy cả phe mua và bán đều đang thận trọng quan sát.</li>
-        <li><strong>Hành động giá:</strong> TNG đang giữ giá tốt trên vùng hỗ trợ MA20.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Đi ngang tích lũy.</li>
-        <li><strong>Động lượng:</strong> RSI trung tính ~ 51. Các chỉ báo chưa cho tín hiệu rõ ràng về xu hướng tiếp theo.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Có thể mua thăm dò tại <strong>19.x</strong>. Chờ đợi dòng tiền vào nhóm xuất khẩu cuối năm.</p>
-    `
-},
-{
-    ticker: "PC1",
-    exchange: "HOSE",
-    companyName: "CTCP Tập đoàn PC1",
-    price: "21.70",
-    priceChange: "-0.30 (-1.4%)",
-    priceColorClass: "text-red",
-    trendText: "➡️ Trend: Tích lũy điều chỉnh",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Điều chỉnh Vol thấp",
-    signalDesc: "Giá giảm nhẹ với khối lượng rất thấp (47% trung bình). Đây là nhịp nghỉ cần thiết sau chuỗi tăng điểm.",
-    rsi: "51.33",
-    macd: "Đi ngang (Sát mức 0)",
-    macdColorClass: "text-yellow",
-    vol: "47%",
-    buyZone: "21.0 - 21.5",
-    cutLoss: "< 20.5",
-    target: "23.5",
-    riskWarning: "Cổ phiếu này thường có các nhịp rũ bỏ khá gắt (Shakeout) trước khi vào sóng.",
-    chartData: [20.7, 21.0, 21.48, 21.39, 21.52, 21.09, 20.48, 20.91, 21.9, 21.9, 22.05, 22.55, 22.5, 22.1, 22.2, 22.1, 21.85, 21.7, 22.2, 22.0, 21.7]
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến giảm thân nhỏ, biên độ hẹp. Cho thấy sự cân bằng cung cầu, không có áp lực bán tháo.</li>
-        <li><strong>VSA:</strong> Khối lượng "cạn kiệt" (chỉ đạt 47% TB20). Người cầm hàng không muốn bán ra ở vùng giá này (No Supply).</li>
-        <li><strong>Hành động giá:</strong> PC1 vẫn đang giữ được xu hướng tăng ngắn hạn kể từ đáy 20.5. Nhịp chỉnh này đang test lại hỗ trợ MA20.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Tích lũy trong biên độ hẹp 21 - 22.5.</li>
-        <li><strong>Động lượng:</strong> RSI trên 50, vẫn giữ được thế tích cực. MACD đang hội tụ sát đường 0, chờ tín hiệu xác nhận.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Canh mua gom khi giá về vùng hỗ trợ cứng <strong>21.0 - 21.5</strong>. Gia tăng khi vượt 22.5.</p>
-    `
-},
-{
-    ticker: "ANV",
-    exchange: "HOSE",
-    companyName: "CTCP Nam Việt",
-    price: "29.25",
-    priceChange: "-0.05 (-0.2%)",
-    priceColorClass: "text-red",
-    trendText: "🔄 Trend: Tạo đáy ngắn hạn",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Cạn cung vùng đáy",
-    signalDesc: "Giao dịch ảm đạm với Vol thấp (55%). Giá ngừng rơi và bắt đầu đi ngang tạo nền.",
-    rsi: "49.22",
-    macd: "Dương (Yếu)",
-    macdColorClass: "text-yellow",
-    vol: "55%",
-    buyZone: "28.8 - 29.2",
-    cutLoss: "< 28.0",
-    target: "31.0",
-    riskWarning: "Nhóm thủy sản đang gặp khó khăn về đầu ra, cần kiên nhẫn chờ đợi tín hiệu từ KQKD.",
-    chartData: [29.8, 29.3, 29.1, 28.1, 28.15, 27.2, 27.6, 27.9, 28.35, 28.75, 28.4, 28.8, 30.8, 30.6, 30.2, 30.4, 30.0, 29.15, 30.0, 29.3, 29.25]
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến Doji "chuồn chuồn" (Dragonfly Doji) hoặc nến thân rất nhỏ. Thể hiện sự lưỡng lự tại vùng đáy.</li>
-        <li><strong>VSA:</strong> Khối lượng thấp (55%). Không còn lực bán mạnh, nhưng cũng chưa có dòng tiền lớn vào đẩy giá.</li>
-        <li><strong>Hành động giá:</strong> ANV đang nỗ lực giữ vùng hỗ trợ 29.x. Nếu thủng vùng này sẽ rất xấu.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Đang trong pha tích lũy đáy (Bottoming process).</li>
-        <li><strong>Động lượng:</strong> RSI xấp xỉ 50, trung tính. MACD dương nhẹ nhưng chưa mở rộng.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Chỉ nên mua thăm dò tỷ trọng nhỏ tại <strong>29.x</strong>. Chờ tín hiệu dòng tiền cải thiện.</p>
-    `
-},
-{
-    ticker: "PDR",
-    exchange: "HOSE",
-    companyName: "CTCP Phát triển Bất động sản Phát Đạt",
-    price: "22.50",
-    priceChange: "0.0 (0.0%)",
-    priceColorClass: "text-yellow",
-    trendText: "➡️ Trend: Tích lũy chờ biến động",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Siết cung chặt chẽ",
-    signalDesc: "Giá đóng cửa tham chiếu, đi ngang trong biên độ hẹp. Khối lượng ở mức trung bình khá (86%).",
-    rsi: "49.07",
-    macd: "Dương (Thu hẹp)",
-    macdColorClass: "text-yellow",
-    vol: "86%",
-    buyZone: "22.0 - 22.3",
-    cutLoss: "< 21.0",
-    target: "24.5",
-    riskWarning: "Nhóm BĐS dân cư đang bị phân hóa mạnh. Cần chọn lọc kỹ.",
-    chartData: [22.55, 21.4, 22.85, 22.45, 22.0, 21.15, 20.8, 21.2, 22.2, 22.0, 22.2, 23.05, 23.0, 22.8, 22.8, 22.6, 22.3, 21.8, 22.6, 22.5, 22.5]
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến Doji. Thể hiện sự cân bằng tuyệt đối giữa cung và cầu.</li>
-        <li><strong>VSA:</strong> Khối lượng duy trì ổn định. Đây là giai đoạn tích lũy điển hình, dòng tiền lớn đang "gom hàng" âm thầm.</li>
-        <li><strong>Hành động giá:</strong> PDR đang giữ nền giá quanh 22.5 rất tốt sau khi vượt qua vùng đáy 21.x.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Sideway Up (Đi ngang hướng lên).</li>
-        <li><strong>Động lượng:</strong> RSI tiệm cận 50. MACD vẫn nằm trên đường 0, hỗ trợ xu hướng tăng.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Mua tại nền tích lũy <strong>22.x</strong>. Điểm gia tăng là khi vượt 23.5 vol lớn.</p>
-    `
-},
-{
-    ticker: "HDG",
-    exchange: "HOSE",
-    companyName: "CTCP Tập đoàn Hà Đô",
-    price: "31.75",
-    priceChange: "-0.45 (-1.4%)",
-    priceColorClass: "text-red",
-    trendText: "⚠️ Trend: Điều chỉnh về hỗ trợ",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Test cung (Test Supply)",
-    signalDesc: "Giá giảm về vùng hỗ trợ gần nhất với Vol thấp (74%). Chưa có dấu hiệu bán tháo.",
-    rsi: "49.03",
-    macd: "Dương (Yếu)",
-    macdColorClass: "text-yellow",
-    vol: "74%",
-    buyZone: "31.0 - 31.5",
-    cutLoss: "< 30.0",
-    target: "34.0",
-    riskWarning: "Mảng năng lượng của HDG ổn định nhưng mảng BĐS còn khó khăn. Dòng tiền chưa thực sự mạnh.",
-    chartData: [30.8, 29.8, 31.6, 30.9, 31.4, 30.2, 30.2, 30.55, 31.55, 31.25, 32.7, 33.6, 32.8, 32.0, 32.4, 32.3, 32.8, 31.8, 32.5, 32.2, 31.75]
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến đỏ bao trùm nhẹ phiên tăng trước đó. Tín hiệu điều chỉnh ngắn hạn.</li>
-        <li><strong>VSA:</strong> Khối lượng thấp hơn trung bình (74%). Cho thấy áp lực bán chủ yếu đến từ nhà đầu tư cá nhân chốt lời.</li>
-        <li><strong>Hành động giá:</strong> HDG đang quay lại kiểm định vùng hỗ trợ 31.5 - 31.7 (đỉnh cũ vừa vượt qua).</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Xu hướng chính vẫn là Tăng, nhưng đang trong nhịp chỉnh (Correction).</li>
-        <li><strong>Động lượng:</strong> RSI quay về dưới 50 một chút. MACD vẫn dương nhưng đang suy yếu.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Chờ tín hiệu đảo chiều (nến rút chân hoặc nến xanh) tại vùng <strong>31.5</strong> để tham gia.</p>
-    `
-},
-{
-    ticker: "EIB",
-    exchange: "HOSE",
-    companyName: "Ngân hàng TMCP Xuất Nhập Khẩu Việt Nam",
-    price: "22.00",
-    priceChange: "-0.25 (-1.1%)",
-    priceColorClass: "text-red",
-    trendText: "🔄 Trend: Biến động khó lường",
-    dateText: "📅 28/11",
-    signalTitle: "⚠️ Tín hiệu: Tích lũy đáy",
-    signalDesc: "Giá giảm nhẹ về mốc hỗ trợ tâm lý 22.0. Vol ở mức trung bình thấp (73%).",
-    rsi: "45.16",
-    macd: "Dương (Rất yếu)",
-    macdColorClass: "text-yellow",
-    vol: "73%",
-    buyZone: "21.5 - 21.8",
-    cutLoss: "< 20.8",
-    target: "23.5",
-    riskWarning: "EIB thường có những diễn biến bất ngờ do câu chuyện cổ đông lớn. Cần thận trọng.",
-    chartData: [22.15, 21.5, 22.5, 22.3, 21.75, 21.45, 20.8, 20.9, 21.6, 21.35, 21.35, 22.15, 22.5, 22.5, 22.45, 22.3, 22.15, 21.05, 22.2, 22.25, 22.0]
-
-    detailedAnalysisHTML: `
-    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
-    <ul>
-        <li><strong>Mẫu hình nến:</strong> Nến giảm thân nhỏ. Giá đóng cửa thấp nhất phiên nhưng không thủng vùng hỗ trợ quan trọng.</li>
-        <li><strong>VSA:</strong> Khối lượng 73% trung bình. Lực bán không quá mạnh.</li>
-        <li><strong>Hành động giá:</strong> EIB đang dao động trong biên độ hẹp 21.5 - 22.5.</li>
-    </ul>
-
-    <h3>2. Phân tích bối cảnh chung</h3>
-    <ul>
-        <li><strong>Xu hướng:</strong> Đi ngang (Sideway) là chủ đạo.</li>
-        <li><strong>Động lượng:</strong> RSI dưới 50 (45.16), cho thấy xung lực yếu. MACD gần như đi ngang.</li>
-    </ul>
-
-    <h3>3. Kịch bản hành động</h3>
-    <p><strong>👀 Quan sát:</strong> Chỉ nên tham gia khi có thông tin hỗ trợ rõ ràng hoặc dòng tiền vào mạnh đẩy giá vượt 22.5.</p>
-    `
-}
-],
-"weakness":[
-{
-    ticker: "VCI",
+ticker: "VCI",
     exchange: "HOSE",
     companyName: "CTCP Chứng khoán Vietcap",
     price: "33.75",
@@ -3450,10 +2909,728 @@
     <h3>3. Kịch bản hành động</h3>
     <p><strong>🟢 Khuyến nghị:</strong> Có thể mua gom quanh <strong>48.5 - 49.0</strong>.</p>
     `
-}            
- ]
+}
+], 
+          "observe": [
+{
+    ticker: "KDH",
+    exchange: "HOSE",
+    companyName: "CTCP Đầu tư và Kinh doanh Nhà Khang Điền",
+    price: "35.0",
+    priceChange: "-0.4 (-1.1%)",
+    priceColorClass: "text-red",
+    trendText: "➡️ Trend: Tích lũy biên độ hẹp",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Điều chỉnh Vol thấp",
+    signalDesc: "Giá điều chỉnh nhẹ về vùng hỗ trợ MA20 với khối lượng thấp hơn trung bình (71%), cho thấy áp lực bán không lớn.",
+    rsi: "54.06",
+    macd: "Dương (Yếu)",
+    macdColorClass: "text-yellow",
+    vol: "71%",
+    buyZone: "34.5 - 34.8",
+    cutLoss: "< 33.5",
+    target: "37.5",
+    riskWarning: "Cổ phiếu bất động sản thường nhạy cảm với tin tức vĩ mô. Cần kiên nhẫn chờ dòng tiền kích hoạt.",
+    chartData: [35.85, 34.0, 35.6, 34.95, 34.1, 32.5, 32.0, 33.0, 34.1, 34.45, 34.65, 35.1, 35.4, 34.6, 34.65, 34.85, 34.85, 34.5, 35.4, 35.4, 35.0],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ, nằm gọn trong cây nến tăng trước đó (Inside Bar). Đây là trạng thái nghỉ ngơi bình thường.</li>
+        <li><strong>VSA:</strong> Khối lượng giao dịch sụt giảm (71% TB20). Trong nhịp điều chỉnh, Vol giảm là dấu hiệu tốt (Cạn cung).</li>
+        <li><strong>Hành động giá:</strong> KDH đang giữ vững nền giá 34.x - 35.x trong suốt 2 tuần qua.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Sideway Up. Đáy sau cao hơn đáy trước.</li>
+        <li><strong>Động lượng:</strong> RSI quanh 54, trung tính. MACD vẫn nằm trên đường 0, xu hướng tăng chưa bị gãy.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Chờ đợi điểm mua Pullback tại <strong>34.5</strong>. Chỉ mua mạnh khi giá vượt <strong>35.5</strong> với Vol > 5 triệu cp.</p>
+    `
+},
+{
+    ticker: "IDC",
+    exchange: "HNX",
+    companyName: "Tổng công ty IDICO",
+    price: "40.3",
+    priceChange: "+0.5 (+1.3%)",
+    priceColorClass: "text-green",
+    trendText: "📈 Trend: Phục hồi từ đáy ngắn hạn",
+    dateText: "📅 28/11",
+    signalTitle: "✅ Tín hiệu: Đảo chiều tại hỗ trợ",
+    signalDesc: "Giá bật tăng từ vùng hỗ trợ 39.x với khối lượng cải thiện, phủ nhận cây nến giảm trước đó.",
+    rsi: "53.19",
+    macd: "Âm (Đang thu hẹp)",
+    macdColorClass: "text-yellow",
+    vol: "90%",
+    buyZone: "39.8 - 40.2",
+    cutLoss: "< 39.0",
+    target: "43.0",
+    riskWarning: "Đang gặp vùng cản dày đặc quanh 41.5 - 42.0. Có thể sẽ rung lắc mạnh tại đây.",
+    chartData: [38.1, 38.2, 38.1, 38.6, 38.3, 38.0, 37.6, 39.2, 39.3, 41.7, 42.7, 42.4, 41.1, 41.5, 41.2, 41.2, 40.0, 39.8, 40.9, 39.8, 40.3],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến tăng bao phủ (Piercing Line/Engulfing). Giá đóng cửa cao hơn mức mở cửa hôm qua.</li>
+        <li><strong>VSA:</strong> Khối lượng gần đạt trung bình (90%). Sự hồi phục đi kèm thanh khoản gia tăng nhẹ là tín hiệu tích cực.</li>
+        <li><strong>Hành động giá:</strong> IDC đang nỗ lực tạo đáy thứ 2 (Higher Low) cao hơn đáy trước (38.0).</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Đang trong nhịp điều chỉnh của xu hướng tăng trung hạn.</li>
+        <li><strong>Động lượng:</strong> RSI cắt lên đường 50, báo hiệu phe mua bắt đầu quay lại. MACD histogram đang thu hẹp đà giảm, chuẩn bị cho điểm giao cắt vàng (Golden Cross).</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Có thể mở vị thế thăm dò 30% tại vùng <strong>40.0</strong>. Gia tăng khi giá vượt 41.5.</p>
+    `
+},
+{
+    ticker: "HHV",
+    exchange: "HOSE",
+    companyName: "CTCP Đầu tư Hạ tầng Giao thông Đèo Cả",
+    price: "14.25",
+    priceChange: "+0.25 (+1.8%)",
+    priceColorClass: "text-green",
+    trendText: "📈 Trend: Bứt phá nền tích lũy",
+    dateText: "📅 28/11",
+    signalTitle: "✅ Tín hiệu: Dòng tiền vào (Vol Spike)",
+    signalDesc: "Giá tăng tốt đi kèm khối lượng xấp xỉ trung bình (97%). Đang mấp mé vượt khỏi vùng hộp tích lũy.",
+    rsi: "49.96",
+    macd: "Dương (Mới cắt lên)",
+    macdColorClass: "text-green",
+    vol: "97%",
+    buyZone: "14.0 - 14.1",
+    cutLoss: "< 13.5",
+    target: "15.5",
+    riskWarning: "Nhóm đầu tư công thường chạy theo sóng thông tin. Cần theo dõi sát tiến độ giải ngân.",
+    chartData: [14.8, 14.1, 14.4, 14.1, 14.25, 13.9, 13.2, 13.35, 13.65, 13.55, 13.6, 14.4, 14.3, 14.25, 14.2, 14.1, 14.05, 13.8, 14.15, 14.0, 14.25],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến tăng dứt khoát, đóng cửa ở mức cao nhất phiên.</li>
+        <li><strong>VSA:</strong> Vol cải thiện đáng kể so với các phiên trước. Đây là dấu hiệu của dòng tiền mồi (Smart Money) bắt đầu tham gia.</li>
+        <li><strong>Hành động giá:</strong> HHV đang test lại vùng kháng cự ngắn hạn 14.3 - 14.4. Nếu vượt qua đây sẽ mở ra xu hướng tăng mới.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Tích lũy đáy. Đang chuyển pha từ đi ngang sang tăng.</li>
+        <li><strong>Động lượng:</strong> RSI chạm mốc 50, chuẩn bị bước vào vùng tăng trưởng. MACD vừa cắt lên đường tín hiệu.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Mua gom quanh <strong>14.0 - 14.2</strong>. Điểm nổ (Pivot point) là khi giá vượt 14.5 vol lớn.</p>
+    `
+},
+{
+    ticker: "TPB",
+    exchange: "HOSE",
+    companyName: "Ngân hàng TMCP Tiên Phong",
+    price: "17.3",
+    priceChange: "-0.05 (-0.3%)",
+    priceColorClass: "text-red",
+    trendText: "➡️ Trend: Tích lũy chặt",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Test cung cạn Vol",
+    signalDesc: "Giá đi ngang quanh tham chiếu với khối lượng chỉ bằng 50% trung bình. Cho thấy không còn ai muốn bán giá thấp.",
+    rsi: "50.42",
+    macd: "Dương (Yếu)",
+    macdColorClass: "text-yellow",
+    vol: "51%",
+    buyZone: "17.1 - 17.2",
+    cutLoss: "< 16.8",
+    target: "18.5",
+    riskWarning: "Biến động giá rất thấp, cần sự kiên nhẫn cao độ khi nắm giữ.",
+    chartData: [16.65, 16.65, 17.25, 16.9, 16.9, 16.5, 16.5, 16.9, 17.3, 16.95, 16.95, 17.15, 17.6, 17.15, 17.25, 17.25, 17.25, 16.95, 17.4, 17.35, 17.3],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến Doji "ngủ gật" (Sleepy Doji). Biến động giá cực hẹp.</li>
+        <li><strong>VSA:</strong> Khối lượng siêu thấp (51% ~ 3.7 triệu cp). Đây là trạng thái "Tiết cung" điển hình trước khi có biến động lớn (thường là tăng theo xu hướng chính).</li>
+        <li><strong>Hành động giá:</strong> TPB đang xây nền giá phẳng (Flat Base) quanh 17.x rất chắc chắn.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Up trend chậm rãi.</li>
+        <li><strong>Động lượng:</strong> RSI đi ngang quanh 50. MACD đi ngang sát đường 0.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Mua tích sản vùng <strong>17.0 - 17.3</strong>. Đây là vùng giá vốn của tổ chức.</p>
+    `
+},
+{
+    ticker: "GMD",
+    exchange: "HOSE",
+    companyName: "CTCP Gemadept",
+    price: "64.0",
+    priceChange: "+0.1 (+0.2%)",
+    priceColorClass: "text-green",
+    trendText: "📈 Trend: Tích lũy kênh trên",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Siết nền (Tightening)",
+    signalDesc: "Giá biến động hẹp ngay tại vùng hỗ trợ MA50 với thanh khoản thấp. Đang chờ đợi tín hiệu bùng nổ.",
+    rsi: "47.86",
+    macd: "Dương (Yếu)",
+    macdColorClass: "text-yellow",
+    vol: "70%",
+    buyZone: "63.0 - 64.0",
+    cutLoss: "< 61.0",
+    target: "68.0",
+    riskWarning: "Thanh khoản khá thấp so với các mã thị trường, khó giải ngân số vốn lớn nhanh chóng.",
+    chartData: [68.1, 68.5, 67.3, 67.0, 66.1, 63.4, 61.0, 61.0, 62.0, 63.0, 62.5, 63.6, 63.5, 63.2, 62.6, 63.2, 62.9, 62.9, 63.4, 63.9, 64.0],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến thân nhỏ (Spinning Top) thể hiện sự cân bằng cung cầu.</li>
+        <li><strong>VSA:</strong> Khối lượng thấp (70%). Lực bán đã suy yếu đáng kể sau nhịp điều chỉnh từ đỉnh 68.</li>
+        <li><strong>Hành động giá:</strong> GMD đang giữ vững trendline tăng trung hạn. Vùng 63-64 là bệ đỡ cứng.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Xu hướng chính vẫn là Tăng. Hiện tại đang trong pha tái tích lũy.</li>
+        <li><strong>Động lượng:</strong> RSI dưới 50 một chút nhưng đang hướng lên. MACD đang vận động tích cực dần.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Gom hàng dần tại vùng <strong>63.x - 64.x</strong>. Kỳ vọng nhịp đánh lên đỉnh cũ 68.</p>
+    `
+},
+{
+    ticker: "KBC",
+    exchange: "HOSE",
+    companyName: "Tổng Công ty Phát triển Đô thị Kinh Bắc",
+    price: "35.3",
+    priceChange: "-0.4 (-1.1%)",
+    priceColorClass: "text-red",
+    trendText: "➡️ Trend: Tích lũy nền cao",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Shakeout (Rũ bỏ)",
+    signalDesc: "Giá điều chỉnh nhẹ với thanh khoản thấp (76%). Đây là hành động rũ bỏ các nhà đầu tư đeo bám trước khi chạy tiếp.",
+    rsi: "52.70",
+    macd: "Dương (Tích cực)",
+    macdColorClass: "text-green",
+    vol: "76%",
+    buyZone: "34.5 - 35.0",
+    cutLoss: "< 33.5",
+    target: "38.0",
+    riskWarning: "Cổ phiếu có lịch sử biến động mạnh (Beta cao). Cần tuân thủ kỷ luật cắt lỗ.",
+    chartData: [35.0, 34.2, 35.65, 35.1, 35.7, 33.85, 32.45, 32.3, 33.1, 33.55, 33.6, 34.95, 34.95, 34.45, 35.25, 34.9, 34.95, 35.6, 35.95, 35.7, 35.3],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ, nằm trong vùng giá của phiên tăng mạnh trước đó. Áp lực bán không quá áp đảo.</li>
+        <li><strong>VSA:</strong> Khối lượng thấp hơn trung bình (76%). Điều này xác nhận đây chỉ là nhịp chốt lời ngắn hạn (Profit Taking) chứ không phải phân phối.</li>
+        <li><strong>Hành động giá:</strong> KBC đang xây nền số 2 sau khi bứt thoát khỏi đáy 32.x. Vùng 35.x đang được giữ khá tốt.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Xu hướng tăng ngắn hạn đang hình thành.</li>
+        <li><strong>Động lượng:</strong> RSI trên 50, hỗ trợ xu hướng tăng. MACD Histogram dương cho thấy phe mua vẫn kiểm soát thế trận.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Canh mua khi giá test lại <strong>34.8 - 35.0</strong>. Gia tăng khi vượt đỉnh ngắn hạn 36.0.</p>
+    `
+},
+{
+    ticker: "DBC",
+    exchange: "HOSE",
+    companyName: "Tập đoàn Dabaco Việt Nam",
+    price: "26.65",
+    priceChange: "-0.05 (-0.2%)",
+    priceColorClass: "text-red",
+    trendText: "➡️ Trend: Sideway Up",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: No Supply (Cạn cung)",
+    signalDesc: "Biến động giá cực hẹp đi kèm khối lượng thấp (61%). Lượng hàng trôi nổi đã được thu gom đáng kể.",
+    rsi: "51.44",
+    macd: "Dương (Yếu)",
+    macdColorClass: "text-yellow",
+    vol: "61%",
+    buyZone: "26.2 - 26.5",
+    cutLoss: "< 25.5",
+    target: "29.0",
+    riskWarning: "Giá lợn hơi biến động thất thường có thể ảnh hưởng tâm lý nhà đầu tư ngắn hạn.",
+    chartData: [26.55, 25.8, 26.35, 25.8, 25.75, 25.1, 25.15, 25.15, 25.4, 26.05, 26.15, 26.45, 26.55, 27.2, 26.9, 27.0, 27.2, 26.5, 27.15, 26.7, 26.65],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến Doji hoặc thân rất nhỏ (Small Candle). Thị trường đang chờ đợi một cú hích thông tin.</li>
+        <li><strong>VSA:</strong> Vol sụt giảm (61% TB20). Dòng tiền lớn (Smart Money) vẫn nằm trong cổ phiếu và chưa có dấu hiệu thoát ra.</li>
+        <li><strong>Hành động giá:</strong> DBC đang dao động quanh trục 26.x - 27.x. Đây là vùng tích lũy khá an toàn.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Đi ngang tích lũy trong xu hướng tăng.</li>
+        <li><strong>Động lượng:</strong> RSI trung tính (51.44). MACD đang đi ngang sát đường 0, chờ tín hiệu bùng nổ.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Mua thăm dò tại nền <strong>26.x</strong>. Chờ phiên nổ Vol > 4 triệu cổ để gia tăng.</p>
+    `
+},
+{
+    ticker: "DIG",
+    exchange: "HOSE",
+    companyName: "Tổng CTCP Đầu tư Phát triển Xây dựng",
+    price: "20.65",
+    priceChange: "+0.4 (+2.0%)",
+    priceColorClass: "text-green",
+    trendText: "🔄 Trend: Đảo chiều hồi phục",
+    dateText: "📅 28/11",
+    signalTitle: "✅ Tín hiệu: Dòng tiền đầu cơ trở lại",
+    signalDesc: "Giá tăng 2% với Vol cải thiện (84%). Có dấu hiệu tạo đáy ngắn hạn thành công tại vùng 20.0.",
+    rsi: "48.79",
+    macd: "Tiệm cận dương",
+    macdColorClass: "text-yellow",
+    vol: "84%",
+    buyZone: "20.0 - 20.3",
+    cutLoss: "< 19.5",
+    target: "22.5",
+    riskWarning: "Cổ phiếu mang tính đầu cơ cao. Kháng cự mạnh tại vùng 21.5 - 22.0.",
+    chartData: [20.6, 19.3, 20.65, 20.15, 20.3, 19.7, 19.65, 20.15, 20.6, 20.0, 20.45, 21.35, 21.0, 21.1, 21.1, 21.0, 20.7, 20.05, 20.75, 20.25, 20.65],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến xanh đặc (Bullish Candle) bao trùm cây nến đỏ hôm trước. Tín hiệu đảo chiều tích cực.</li>
+        <li><strong>VSA:</strong> Khối lượng giao dịch tăng lên mức 84% TB20. Tuy chưa bùng nổ nhưng đã cải thiện so với giai đoạn cạn cung trước đó.</li>
+        <li><strong>Hành động giá:</strong> DIG đã test thành công mốc hỗ trợ tâm lý 20.0. Nhịp hồi phục này có thể kéo dài lên vùng kháng cự bên trên.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Sideway trong biên độ rộng 19 - 22.</li>
+        <li><strong>Động lượng:</strong> RSI đang hướng lên từ vùng thấp (48.79). MACD đang thu hẹp khoảng cách với đường tín hiệu.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Có thể bắt đáy ngắn hạn quanh <strong>20.x</strong> với tỷ trọng vừa phải. Mục tiêu lướt sóng T+.</p>
+    `
+},
+{
+    ticker: "GEX",
+    exchange: "HOSE",
+    companyName: "Tập đoàn GELEX",
+    price: "46.55",
+    priceChange: "-1.4 (-2.9%)",
+    priceColorClass: "text-red",
+    trendText: "⚠️ Trend: Điều chỉnh vùng đỉnh",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Phân phối ngắn hạn",
+    signalDesc: "Giá giảm mạnh gần 3% với Vol lớn (135%). Áp lực bán chốt lời tại vùng đỉnh lịch sử là rất quyết liệt.",
+    rsi: "48.52",
+    macd: "Dương (Suy yếu)",
+    macdColorClass: "text-orange",
+    vol: "135%",
+    buyZone: "44.0 - 45.0",
+    cutLoss: "< 43.5",
+    target: "50.0",
+    riskWarning: "Mẫu hình nến giảm bao trùm (Bearish Engulfing) tại đỉnh là tín hiệu xấu. Cần thận trọng.",
+    chartData: [44.05, 44.1, 47.15, 45.3, 45.1, 43.95, 40.9, 43.25, 45.1, 44.25, 45.1, 45.5, 45.65, 43.8, 44.65, 44.0, 43.5, 45.1, 48.25, 47.95, 46.55],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến giảm dài (Long Black Candle) xóa bỏ nỗ lực tăng của 2-3 phiên trước.</li>
+        <li><strong>VSA:</strong> Khối lượng đột biến 135% (gần 15 triệu cp). Giá giảm + Vol tăng = Áp lực cung lớn (SOW - Sign of Weakness).</li>
+        <li><strong>Hành động giá:</strong> GEX thất bại trong việc chinh phục mốc 48.0 và đang quay lại tìm điểm cân bằng thấp hơn.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Vẫn trong xu hướng tăng trung hạn, nhưng ngắn hạn đang điều chỉnh sâu.</li>
+        <li><strong>Động lượng:</strong> RSI cắm đầu giảm về dưới 50. MACD có dấu hiệu tạo đỉnh thứ 2 thấp hơn (Phân kỳ âm).</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>🔴 Cảnh báo:</strong> Không bắt đáy vội vàng. Chờ giá ổn định tại vùng hỗ trợ <strong>44.x - 45.x</strong> và Vol giảm trở lại mới xem xét tham gia.</p>
+    `
+},
+{
+    ticker: "SIP",
+    exchange: "HOSE",
+    companyName: "CTCP Đầu tư Sài Gòn VRG",
+    price: "56.6",
+    priceChange: "-0.4 (-0.7%)",
+    priceColorClass: "text-red",
+    trendText: "➡️ Trend: Tích lũy nền tảng lớn",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Test cung thành công",
+    signalDesc: "Giá giảm nhẹ, Vol ở mức trung bình thấp (79%). Cổ phiếu đang xây nền giá rất chặt chẽ quanh vùng 56-58.",
+    rsi: "51.76",
+    macd: "Âm (Nhẹ)",
+    macdColorClass: "text-yellow",
+    vol: "80%",
+    buyZone: "56.0 - 56.5",
+    cutLoss: "< 54.0",
+    target: "62.0",
+    riskWarning: "Thanh khoản cổ phiếu này khá cô đặc, biến động trong phiên có thể lớn (Râu nến dài).",
+    chartData: [55.36, 55.55, 55.06, 54.96, 55.55, 54.08, 54.08, 53.39, 54.47, 57.03, 58.01, 59.49, 58.7, 57.8, 58.0, 57.7, 57.0, 57.0, 57.7, 57.0, 56.6],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Các cây nến thân nhỏ xếp bằng nhau (Railroad Tracks/Flat Base).</li>
+        <li><strong>VSA:</strong> Khối lượng duy trì ổn định dưới mức trung bình. Đây là giai đoạn "gom hàng" điển hình của tổ chức.</li>
+        <li><strong>Hành động giá:</strong> SIP đang tích lũy sau một nhịp tăng. Vùng giá 56.x là hỗ trợ cứng (MA50).</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Xu hướng tăng dài hạn vẫn được bảo toàn.</li>
+        <li><strong>Động lượng:</strong> RSI đi ngang quanh 52. MACD đang vận động hẹp quanh đường 0.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Mua gom cho mục tiêu trung dài hạn tại vùng <strong>56.x</strong>. Cổ phiếu cơ bản tốt, phù hợp nắm giữ.</p>
+    `
+},
+{
+    ticker: "TNG",
+    exchange: "HNX",
+    companyName: "CTCP Đầu tư và Thương mại TNG",
+    price: "19.3",
+    priceChange: "-0.1 (-0.5%)",
+    priceColorClass: "text-red",
+    trendText: "➡️ Trend: Tích lũy đáy hộp",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Cạn kiệt nguồn cung",
+    signalDesc: "Giao dịch ảm đạm với Vol thấp (77%). Giá đang dao động quanh vùng hỗ trợ cứng 19.x.",
+    rsi: "51.68",
+    macd: "Âm (Nhẹ)",
+    macdColorClass: "text-yellow",
+    vol: "77%",
+    buyZone: "19.0 - 19.2",
+    cutLoss: "< 18.5",
+    target: "21.0",
+    riskWarning: "Nhóm dệt may đang thiếu thông tin hỗ trợ ngắn hạn. Cần kiên nhẫn.",
+    chartData: [19.08, 18.69, 18.89, 18.89, 19.08, 18.79, 18.11, 18.5, 18.7, 19.3, 19.7, 20.0, 20.1, 19.7, 19.9, 19.6, 19.5, 19.1, 19.3, 19.4, 19.3],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Chuỗi nến thân nhỏ đi ngang (Sideway). Biến động giá không đáng kể.</li>
+        <li><strong>VSA:</strong> Thanh khoản sụt giảm, cho thấy cả phe mua và bán đều đang thận trọng quan sát.</li>
+        <li><strong>Hành động giá:</strong> TNG đang giữ giá tốt trên vùng hỗ trợ MA20.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Đi ngang tích lũy.</li>
+        <li><strong>Động lượng:</strong> RSI trung tính ~ 51. Các chỉ báo chưa cho tín hiệu rõ ràng về xu hướng tiếp theo.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Có thể mua thăm dò tại <strong>19.x</strong>. Chờ đợi dòng tiền vào nhóm xuất khẩu cuối năm.</p>
+    `
+},
+{
+    ticker: "PC1",
+    exchange: "HOSE",
+    companyName: "CTCP Tập đoàn PC1",
+    price: "21.70",
+    priceChange: "-0.30 (-1.4%)",
+    priceColorClass: "text-red",
+    trendText: "➡️ Trend: Tích lũy điều chỉnh",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Điều chỉnh Vol thấp",
+    signalDesc: "Giá giảm nhẹ với khối lượng rất thấp (47% trung bình). Đây là nhịp nghỉ cần thiết sau chuỗi tăng điểm.",
+    rsi: "51.33",
+    macd: "Đi ngang (Sát mức 0)",
+    macdColorClass: "text-yellow",
+    vol: "47%",
+    buyZone: "21.0 - 21.5",
+    cutLoss: "< 20.5",
+    target: "23.5",
+    riskWarning: "Cổ phiếu này thường có các nhịp rũ bỏ khá gắt (Shakeout) trước khi vào sóng.",
+    chartData: [20.7, 21.0, 21.48, 21.39, 21.52, 21.09, 20.48, 20.91, 21.9, 21.9, 22.05, 22.55, 22.5, 22.1, 22.2, 22.1, 21.85, 21.7, 22.2, 22.0, 21.7],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến giảm thân nhỏ, biên độ hẹp. Cho thấy sự cân bằng cung cầu, không có áp lực bán tháo.</li>
+        <li><strong>VSA:</strong> Khối lượng "cạn kiệt" (chỉ đạt 47% TB20). Người cầm hàng không muốn bán ra ở vùng giá này (No Supply).</li>
+        <li><strong>Hành động giá:</strong> PC1 vẫn đang giữ được xu hướng tăng ngắn hạn kể từ đáy 20.5. Nhịp chỉnh này đang test lại hỗ trợ MA20.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Tích lũy trong biên độ hẹp 21 - 22.5.</li>
+        <li><strong>Động lượng:</strong> RSI trên 50, vẫn giữ được thế tích cực. MACD đang hội tụ sát đường 0, chờ tín hiệu xác nhận.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Canh mua gom khi giá về vùng hỗ trợ cứng <strong>21.0 - 21.5</strong>. Gia tăng khi vượt 22.5.</p>
+    `
+},
+{
+    ticker: "ANV",
+    exchange: "HOSE",
+    companyName: "CTCP Nam Việt",
+    price: "29.25",
+    priceChange: "-0.05 (-0.2%)",
+    priceColorClass: "text-red",
+    trendText: "🔄 Trend: Tạo đáy ngắn hạn",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Cạn cung vùng đáy",
+    signalDesc: "Giao dịch ảm đạm với Vol thấp (55%). Giá ngừng rơi và bắt đầu đi ngang tạo nền.",
+    rsi: "49.22",
+    macd: "Dương (Yếu)",
+    macdColorClass: "text-yellow",
+    vol: "55%",
+    buyZone: "28.8 - 29.2",
+    cutLoss: "< 28.0",
+    target: "31.0",
+    riskWarning: "Nhóm thủy sản đang gặp khó khăn về đầu ra, cần kiên nhẫn chờ đợi tín hiệu từ KQKD.",
+    chartData: [29.8, 29.3, 29.1, 28.1, 28.15, 27.2, 27.6, 27.9, 28.35, 28.75, 28.4, 28.8, 30.8, 30.6, 30.2, 30.4, 30.0, 29.15, 30.0, 29.3, 29.25],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến Doji "chuồn chuồn" (Dragonfly Doji) hoặc nến thân rất nhỏ. Thể hiện sự lưỡng lự tại vùng đáy.</li>
+        <li><strong>VSA:</strong> Khối lượng thấp (55%). Không còn lực bán mạnh, nhưng cũng chưa có dòng tiền lớn vào đẩy giá.</li>
+        <li><strong>Hành động giá:</strong> ANV đang nỗ lực giữ vùng hỗ trợ 29.x. Nếu thủng vùng này sẽ rất xấu.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Đang trong pha tích lũy đáy (Bottoming process).</li>
+        <li><strong>Động lượng:</strong> RSI xấp xỉ 50, trung tính. MACD dương nhẹ nhưng chưa mở rộng.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Chỉ nên mua thăm dò tỷ trọng nhỏ tại <strong>29.x</strong>. Chờ tín hiệu dòng tiền cải thiện.</p>
+    `
+},
+{
+    ticker: "PDR",
+    exchange: "HOSE",
+    companyName: "CTCP Phát triển Bất động sản Phát Đạt",
+    price: "22.50",
+    priceChange: "0.0 (0.0%)",
+    priceColorClass: "text-yellow",
+    trendText: "➡️ Trend: Tích lũy chờ biến động",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Siết cung chặt chẽ",
+    signalDesc: "Giá đóng cửa tham chiếu, đi ngang trong biên độ hẹp. Khối lượng ở mức trung bình khá (86%).",
+    rsi: "49.07",
+    macd: "Dương (Thu hẹp)",
+    macdColorClass: "text-yellow",
+    vol: "86%",
+    buyZone: "22.0 - 22.3",
+    cutLoss: "< 21.0",
+    target: "24.5",
+    riskWarning: "Nhóm BĐS dân cư đang bị phân hóa mạnh. Cần chọn lọc kỹ.",
+    chartData: [22.55, 21.4, 22.85, 22.45, 22.0, 21.15, 20.8, 21.2, 22.2, 22.0, 22.2, 23.05, 23.0, 22.8, 22.8, 22.6, 22.3, 21.8, 22.6, 22.5, 22.5],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến Doji. Thể hiện sự cân bằng tuyệt đối giữa cung và cầu.</li>
+        <li><strong>VSA:</strong> Khối lượng duy trì ổn định. Đây là giai đoạn tích lũy điển hình, dòng tiền lớn đang "gom hàng" âm thầm.</li>
+        <li><strong>Hành động giá:</strong> PDR đang giữ nền giá quanh 22.5 rất tốt sau khi vượt qua vùng đáy 21.x.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Sideway Up (Đi ngang hướng lên).</li>
+        <li><strong>Động lượng:</strong> RSI tiệm cận 50. MACD vẫn nằm trên đường 0, hỗ trợ xu hướng tăng.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Mua tại nền tích lũy <strong>22.x</strong>. Điểm gia tăng là khi vượt 23.5 vol lớn.</p>
+    `
+},
+{
+    ticker: "HDG",
+    exchange: "HOSE",
+    companyName: "CTCP Tập đoàn Hà Đô",
+    price: "31.75",
+    priceChange: "-0.45 (-1.4%)",
+    priceColorClass: "text-red",
+    trendText: "⚠️ Trend: Điều chỉnh về hỗ trợ",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Test cung (Test Supply)",
+    signalDesc: "Giá giảm về vùng hỗ trợ gần nhất với Vol thấp (74%). Chưa có dấu hiệu bán tháo.",
+    rsi: "49.03",
+    macd: "Dương (Yếu)",
+    macdColorClass: "text-yellow",
+    vol: "74%",
+    buyZone: "31.0 - 31.5",
+    cutLoss: "< 30.0",
+    target: "34.0",
+    riskWarning: "Mảng năng lượng của HDG ổn định nhưng mảng BĐS còn khó khăn. Dòng tiền chưa thực sự mạnh.",
+    chartData: [30.8, 29.8, 31.6, 30.9, 31.4, 30.2, 30.2, 30.55, 31.55, 31.25, 32.7, 33.6, 32.8, 32.0, 32.4, 32.3, 32.8, 31.8, 32.5, 32.2, 31.75],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến đỏ bao trùm nhẹ phiên tăng trước đó. Tín hiệu điều chỉnh ngắn hạn.</li>
+        <li><strong>VSA:</strong> Khối lượng thấp hơn trung bình (74%). Cho thấy áp lực bán chủ yếu đến từ nhà đầu tư cá nhân chốt lời.</li>
+        <li><strong>Hành động giá:</strong> HDG đang quay lại kiểm định vùng hỗ trợ 31.5 - 31.7 (đỉnh cũ vừa vượt qua).</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Xu hướng chính vẫn là Tăng, nhưng đang trong nhịp chỉnh (Correction).</li>
+        <li><strong>Động lượng:</strong> RSI quay về dưới 50 một chút. MACD vẫn dương nhưng đang suy yếu.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Chờ tín hiệu đảo chiều (nến rút chân hoặc nến xanh) tại vùng <strong>31.5</strong> để tham gia.</p>
+    `
+},
+{
+    ticker: "EIB",
+    exchange: "HOSE",
+    companyName: "Ngân hàng TMCP Xuất Nhập Khẩu Việt Nam",
+    price: "22.00",
+    priceChange: "-0.25 (-1.1%)",
+    priceColorClass: "text-red",
+    trendText: "🔄 Trend: Biến động khó lường",
+    dateText: "📅 28/11",
+    signalTitle: "⚠️ Tín hiệu: Tích lũy đáy",
+    signalDesc: "Giá giảm nhẹ về mốc hỗ trợ tâm lý 22.0. Vol ở mức trung bình thấp (73%).",
+    rsi: "45.16",
+    macd: "Dương (Rất yếu)",
+    macdColorClass: "text-yellow",
+    vol: "73%",
+    buyZone: "21.5 - 21.8",
+    cutLoss: "< 20.8",
+    target: "23.5",
+    riskWarning: "EIB thường có những diễn biến bất ngờ do câu chuyện cổ đông lớn. Cần thận trọng.",
+    chartData: [22.15, 21.5, 22.5, 22.3, 21.75, 21.45, 20.8, 20.9, 21.6, 21.35, 21.35, 22.15, 22.5, 22.5, 22.45, 22.3, 22.15, 21.05, 22.2, 22.25, 22.0],
+
+    detailedAnalysisHTML: `
+    <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+    <ul>
+        <li><strong>Mẫu hình nến:</strong> Nến giảm thân nhỏ. Giá đóng cửa thấp nhất phiên nhưng không thủng vùng hỗ trợ quan trọng.</li>
+        <li><strong>VSA:</strong> Khối lượng 73% trung bình. Lực bán không quá mạnh.</li>
+        <li><strong>Hành động giá:</strong> EIB đang dao động trong biên độ hẹp 21.5 - 22.5.</li>
+    </ul>
+
+    <h3>2. Phân tích bối cảnh chung</h3>
+    <ul>
+        <li><strong>Xu hướng:</strong> Đi ngang (Sideway) là chủ đạo.</li>
+        <li><strong>Động lượng:</strong> RSI dưới 50 (45.16), cho thấy xung lực yếu. MACD gần như đi ngang.</li>
+    </ul>
+
+    <h3>3. Kịch bản hành động</h3>
+    <p><strong>👀 Quan sát:</strong> Chỉ nên tham gia khi có thông tin hỗ trợ rõ ràng hoặc dòng tiền vào mạnh đẩy giá vượt 22.5.</p>
+    `
+}
+] 
         };
         
+        // =========================================================================
+        // === TÍNH NĂNG DARK MODE & CHỤP ẢNH ===
+        // =========================================================================
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const bodyElement = document.body;
+        
+        // Kiểm tra preference đã lưu
+        if (localStorage.getItem('theme') === 'dark') {
+            bodyElement.classList.add('dark');
+            themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            bodyElement.classList.toggle('dark');
+            
+            if (bodyElement.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+// =========================================================================
+        // === TÍNH NĂNG CHỤP ẢNH BÁO CÁO (ĐÃ CHỈNH SỬA) ===
+        // =========================================================================
+        document.getElementById('capture-btn').addEventListener('click', function() {
+            const btn = this;
+            const originalIcon = btn.innerHTML;
+            
+            // 1. Hiệu ứng đang xử lý
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            btn.disabled = true;
+
+            // Tạm thời xử lý header dính (sticky) để chụp ảnh không bị lỗi trắng
+            const header = document.querySelector('.header-container');
+            const originalPosition = header.style.position;
+            header.style.position = 'static'; // Chuyển về static để chụp toàn bộ
+
+            // 2. Cấu hình chụp ảnh
+            html2canvas(document.body, {
+                scale: 2, // Tăng độ phân giải ảnh (cho nét)
+                useCORS: true, // Cho phép tải ảnh từ nguồn ngoài (nếu có)
+                scrollY: -window.scrollY, // Cuộn lên đầu trang để chụp đầy đủ
+                backgroundColor: document.body.classList.contains('dark') ? '#0f172a' : '#f8f9fa', // Lấy đúng màu nền hiện tại
+                
+                // --- QUAN TRỌNG: BỘ LỌC CÁC PHẦN KHÔNG MUỐN CHỤP ---
+                ignoreElements: function(element) {
+                    // Loại bỏ các thành phần sau khỏi ảnh:
+                    
+                    // 1. Các nút công cụ ở góc phải và nút nổi
+                    if (element.classList.contains('header-tools') || element.classList.contains('floating-tool-button')) return true;
+                    
+                    // 2. Thanh tìm kiếm và nút Reset (nằm trong thẻ input hoặc id specific)
+                    if (element.id === 'stock-search' || element.id === 'search-btn' || element.id === 'reset-btn') return true;
+                    
+                    // 3. Hàng nút liên kết tin tức (Nhận diện qua class news-link)
+                    if (element.classList.contains('news-link')) return true;
+                    
+                    // 4. Chân trang (Footer)
+                    if (element.tagName === 'FOOTER') return true;
+
+                    // 5. Modal đang ẩn (để tránh lỗi layer)
+                    if (element.classList.contains('modal')) return true;
+
+                    return false; // Giữ lại các phần khác (Tiêu đề, Ngày tháng, Danh sách cổ phiếu)
+                }
+            }).then(canvas => {
+                // 3. Tạo link tải xuống
+                const link = document.createElement('a');
+                // Đặt tên file có kèm thời gian thực
+                const now = new Date();
+                const timeString = `${now.getHours()}h${now.getMinutes()}_${now.getDate()}-${now.getMonth()+1}`;
+                link.download = `BaoCao_Dashboard_${timeString}.png`;
+                
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                // 4. Khôi phục trạng thái nút
+                btn.innerHTML = originalIcon;
+                btn.disabled = false;
+                header.style.position = originalPosition; // Trả lại sticky header
+            }).catch(err => {
+                console.error("Lỗi chụp ảnh:", err);
+                alert("Có lỗi xảy ra khi chụp ảnh.");
+                btn.innerHTML = originalIcon;
+                btn.disabled = false;
+                header.style.position = originalPosition;
+            });
+        });
         // =========================================================================
         // === CHART.JS LOGIC ===
         // =========================================================================
@@ -3491,6 +3668,10 @@
 
             const ctx = document.getElementById('priceChart').getContext('2d');
             const labels = createDateLabels(chartData.length, dateText);
+            
+            const isDark = bodyElement.classList.contains('dark');
+            const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(200, 200, 200, 0.2)';
+            const textColor = isDark ? '#e2e8f0' : '#666';
 
             priceChart = new Chart(ctx, {
                 type: 'line',
@@ -3513,16 +3694,18 @@
                     scales: {
                         y: {
                             beginAtZero: false,
-                            title: { display: true, text: 'Giá (VNĐ)' },
-                            grid: { color: 'rgba(200, 200, 200, 0.2)' }
+                            title: { display: true, text: 'Giá (VNĐ)', color: textColor },
+                            grid: { color: gridColor },
+                            ticks: { color: textColor }
                         },
                         x: {
-                             title: { display: true, text: 'Ngày giao dịch' },
-                            grid: { display: false }
+                            title: { display: true, text: 'Ngày giao dịch', color: textColor },
+                            grid: { display: false },
+                            ticks: { color: textColor }
                         }
                     },
                     plugins: {
-                        legend: { display: true, position: 'top' },
+                        legend: { display: true, position: 'top', labels: { color: textColor } },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
@@ -3598,7 +3781,7 @@
 
                             <div class="lg:border-r border-gray-200 lg:px-3">
                                 <p class="text-xs uppercase font-semibold text-gray-500 mb-1">Trend</p>
-                                <p class="text-sm font-bold text-[#213a57] leading-tight break-words">
+                                <p class="text-sm font-bold text-[#213a57] dark:text-blue-300 leading-tight break-words">
                                     ${stock.trendText}
                                 </p>
                             </div>
@@ -3623,14 +3806,14 @@
 
                     <div class="lg:col-span-1 space-y-4 pt-4 lg:pt-0">
                         <div class="${signalBgColor} p-4 rounded-lg border border-gray-200 shadow-sm">
-                            <h4 class="font-bold text-lg mb-2 flex items-center border-b border-gray-300 pb-2 ${signalTextColor}">
+                            <h4 class="font-bold text-lg mb-2 flex items-center border-b border-gray-300 pb-2 ${signalTextColor} dark:text-gray-200">
                                 ${stock.signalTitle}
                             </h4>
-                            <p class="text-sm ${signalTextColor} font-medium leading-relaxed">${stock.signalDesc}</p>
+                            <p class="text-sm ${signalTextColor} font-medium leading-relaxed dark:text-gray-300">${stock.signalDesc}</p>
                         </div>
 
                         <div class="bg-blue-50 p-4 rounded-lg border border-blue-200 shadow-sm">
-                            <h5 class="font-bold text-blue-700 mb-2 flex items-center"><i class="fas fa-hand-holding-usd mr-2"></i>Vùng Hành động</h5>
+                            <h5 class="font-bold text-blue-700 dark:text-blue-300 mb-2 flex items-center"><i class="fas fa-hand-holding-usd mr-2"></i>Vùng Hành động</h5>
                             <div class="space-y-1">
                                 <p class="text-sm text-gray-700 flex justify-between"><span>🎯 Target:</span> <span class="font-bold">${stock.target}</span></p>
                                 <p class="text-sm text-gray-700 flex justify-between"><span>🟢 Buy Zone:</span> <span class="font-bold">${stock.buyZone}</span></p>
@@ -3639,14 +3822,14 @@
                         </div>
 
                         <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200 shadow-sm">
-                            <h5 class="font-bold text-yellow-700 mb-2 flex items-center"><i class="fas fa-exclamation-triangle mr-2"></i>Cảnh báo Rủi ro</h5>
+                            <h5 class="font-bold text-yellow-700 dark:text-yellow-400 mb-2 flex items-center"><i class="fas fa-exclamation-triangle mr-2"></i>Cảnh báo Rủi ro</h5>
                             <p class="text-sm text-gray-700 leading-relaxed">${stock.riskWarning}</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="mt-6 p-4 md:p-6 bg-white rounded-xl shadow-lg border border-gray-100">
-                    <h3 class="text-2xl font-extrabold text-[#213a57] mb-4 border-b-2 border-dashed border-gray-300 pb-2">
+                    <h3 class="text-2xl font-extrabold text-[#213a57] dark:text-blue-300 mb-4 border-b-2 border-dashed border-gray-300 pb-2">
                         <i class="fas fa-microscope mr-2"></i>Phân tích Chuyên sâu
                     </h3>
                     <div class="detailed-analysis-content text-gray-800 leading-relaxed space-y-4 text-justify">
@@ -3681,16 +3864,16 @@
 
             if (type === 'strength') {
                 cardBorder = 'signal-strength';
-                tickerColor = 'text-[#0b6477]';
-                signalBgColor = 'bg-green-50 text-green-700';
+                tickerColor = 'text-[#0b6477] dark:text-[#45dfb1]';
+                signalBgColor = 'bg-green-50 text-green-700 dark:bg-green-900 dark:text-green-300';
             } else if (type === 'weakness') {
                 cardBorder = 'signal-weakness';
-                tickerColor = 'text-red-600';
-                signalBgColor = 'bg-red-50 text-red-700';
+                tickerColor = 'text-red-600 dark:text-red-400';
+                signalBgColor = 'bg-red-50 text-red-700 dark:bg-red-900 dark:text-red-300';
             } else {
                 cardBorder = 'signal-observe';
-                tickerColor = 'text-blue-600';
-                signalBgColor = 'bg-blue-50 text-blue-700';
+                tickerColor = 'text-blue-600 dark:text-blue-400';
+                signalBgColor = 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-300';
             }
 
             return `
@@ -3742,10 +3925,10 @@
             termTableBody.innerHTML = '';
             vsaTerms.forEach(term => {
                 const row = termTableBody.insertRow();
-                row.className = 'hover:bg-gray-50 transition duration-150 ease-in-out';
+                row.className = 'hover:bg-gray-50 dark:hover:bg-gray-700 transition duration-150 ease-in-out';
                 
                 const termCell = row.insertCell();
-                termCell.innerHTML = `<span class="font-bold text-[#213a57]">${term.term}</span>`;
+                termCell.innerHTML = `<span class="font-bold text-[#213a57] dark:text-blue-300">${term.term}</span>`;
 
                 const fullNameCell = row.insertCell();
                 fullNameCell.textContent = term.fullName;
@@ -3812,19 +3995,16 @@
             const observeSection = document.getElementById('observe-section');
             const noResults = document.getElementById('no-results');
             
-            // Chuẩn hóa từ khóa tìm kiếm: Bỏ dấu, viết hoa, cắt khoảng trắng
+            // Chuẩn hóa từ khóa tìm kiếm
             const searchKey = removeVietnameseTones(filter).trim().toUpperCase();
             
-            // Hàm logic lọc: Kiểm tra Ticker OR SignalTitle OR TrendText
             const filterFunction = (stock) => {
-                if (searchKey === '') return true; // Nếu ô tìm kiếm rỗng, hiển thị tất cả
+                if (searchKey === '') return true; 
 
-                // Chuẩn hóa các trường thông tin của cổ phiếu
                 const ticker = stock.ticker.toUpperCase();
                 const signalTitle = removeVietnameseTones(stock.signalTitle).toUpperCase();
                 const trendText = removeVietnameseTones(stock.trendText).toUpperCase();
                 
-                // Cũng kiểm tra bản gốc có dấu đề phòng người dùng gõ có dấu
                 const rawSignal = stock.signalTitle.toUpperCase();
 
                 return ticker.includes(searchKey) || 
@@ -3833,22 +4013,19 @@
                        trendText.includes(searchKey);
             };
 
-            // Lọc dữ liệu
+            // Lọc dữ liệu (Đã an toàn vì có mảng rỗng)
             const filteredStrength = stockData.strength.filter(filterFunction);
             const filteredWeakness = stockData.weakness.filter(filterFunction);
             const filteredObserve = stockData.observe.filter(filterFunction);
 
-            // Render lại HTML cho các danh sách
             strengthList.innerHTML = filteredStrength.map(stock => createStockCard(stock, 'strength')).join('');
             weaknessList.innerHTML = filteredWeakness.map(stock => createStockCard(stock, 'weakness')).join('');
             observeList.innerHTML = filteredObserve.map(stock => createStockCard(stock, 'observe')).join('');
 
-            // Ẩn hiện các section nếu không có dữ liệu
             strengthSection.style.display = filteredStrength.length > 0 ? 'block' : 'none';
             weaknessSection.style.display = filteredWeakness.length > 0 ? 'block' : 'none';
             observeSection.style.display = filteredObserve.length > 0 ? 'block' : 'none';
             
-            // Hiển thị thông báo "Không tìm thấy" nếu tất cả đều trống
             const anyResult = filteredStrength.length > 0 || filteredWeakness.length > 0 || filteredObserve.length > 0;
             noResults.style.display = anyResult ? 'none' : 'block';
         }
@@ -3868,17 +4045,14 @@
             updateTime();
             setInterval(updateTime, 1000);
 
-            // Sự kiện tìm kiếm ngay khi gõ (Real-time search)
             searchInput.addEventListener('input', () => {
                 renderStocks(searchInput.value);
             });
             
-            // Nút tìm kiếm (cho chắc chắn)
             searchBtn.addEventListener('click', () => {
                 renderStocks(searchInput.value);
             });
 
-            // Nút Reset
             resetBtn.addEventListener('click', () => {
                 searchInput.value = '';
                 renderStocks();
@@ -3887,9 +4061,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-

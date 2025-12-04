@@ -1921,7 +1921,28 @@
 ]
 };
 
-        // --- DARK MODE LOGIC ---
+        // --- 1. CONFIG & UTILS ---
+        
+        // Hàm xóa dấu tiếng Việt để tìm kiếm chính xác hơn
+        function removeVietnameseTones(str) {
+            str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
+            str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
+            str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
+            str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
+            str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
+            str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
+            str = str.replace(/đ/g,"d");
+            str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+            str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+            str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+            str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+            str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+            str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+            str = str.replace(/Đ/g, "D");
+            return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        // --- 2. DARK MODE LOGIC ---
         const themeToggleBtn = document.getElementById('theme-toggle');
         const bodyElement = document.body;
         
@@ -1941,50 +1962,7 @@
             }
         });
 
-        // --- CAPTURE SCREENSHOT LOGIC ---
-        document.getElementById('capture-btn').addEventListener('click', function() {
-            const btn = this;
-            const originalIcon = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            btn.disabled = true;
-
-            const header = document.querySelector('.header-container');
-            const originalPosition = header.style.position;
-            header.style.position = 'static';
-
-            html2canvas(document.body, {
-                scale: 2,
-                useCORS: true,
-                scrollY: -window.scrollY,
-                backgroundColor: document.body.classList.contains('dark') ? '#0f172a' : '#f8f9fa',
-                ignoreElements: function(element) {
-                    if (element.classList.contains('header-tools') || element.classList.contains('floating-tool-button')) return true;
-                    if (element.id === 'stock-search' || element.id === 'search-btn' || element.id === 'reset-btn') return true;
-                    if (element.classList.contains('news-link')) return true;
-                    if (element.tagName === 'FOOTER') return true;
-                    if (element.classList.contains('modal')) return true;
-                    return false;
-                }
-            }).then(canvas => {
-                const link = document.createElement('a');
-                const now = new Date();
-                const timeString = `${now.getHours()}h${now.getMinutes()}_${now.getDate()}-${now.getMonth()+1}`;
-                link.download = `BaoCao_Dashboard_${timeString}.png`;
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-                btn.innerHTML = originalIcon;
-                btn.disabled = false;
-                header.style.position = originalPosition;
-            }).catch(err => {
-                console.error("Lỗi:", err);
-                alert("Lỗi chụp ảnh.");
-                btn.innerHTML = originalIcon;
-                btn.disabled = false;
-                header.style.position = originalPosition;
-            });
-        });
-
-        // --- CHART & MODAL LOGIC (Giữ nguyên) ---
+        // --- 3. CHART & MODAL LOGIC ---
         let priceChart;
         function createDateLabels(length, dateString) {
             const datePart = dateString.replace('📅 ', ''); 
@@ -2032,25 +2010,15 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        y: {
-                            beginAtZero: false,
-                            title: { display: true, text: 'Giá (VNĐ)', color: textColor },
-                            grid: { color: gridColor },
-                            ticks: { color: textColor }
-                        },
-                        x: {
-                            title: { display: true, text: 'Ngày giao dịch', color: textColor },
-                            grid: { display: false },
-                            ticks: { color: textColor }
-                        }
+                        y: { beginAtZero: false, grid: { color: gridColor }, ticks: { color: textColor } },
+                        x: { display: false } 
                     },
-                    plugins: {
-                        legend: { display: true, position: 'top', labels: { color: textColor } }
-                    }
+                    plugins: { legend: { display: false } } // Ẩn legend cho gọn
                 }
             });
         };
 
+        // Modal Chi tiết Cổ phiếu
         const stockDetailModal = document.getElementById('stock-detail-modal');
         const closeStockModalBtn = document.getElementById('close-stock-modal-btn');
         const stockModalBody = document.getElementById('stock-modal-body');
@@ -2069,6 +2037,7 @@
             else if (stockData.weakness.includes(foundStock)) type = 'weakness';
             else type = 'observe';
 
+            // Setup màu sắc modal
             let headerBg = '', signalBgColor = '', signalTextColor = '';
             if (type === 'strength') {
                 headerBg = 'linear-gradient(to right, #213a57, #45dfb1)';
@@ -2086,56 +2055,57 @@
             const priceColorClass = stock.priceColorClass || 'text-gray-900';
             const macdColorClass = stock.macdColorClass || 'text-gray-600';
 
+            // HTML Nội dung Modal
             const htmlContent = `
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                     <div class="lg:col-span-2">
-                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6 p-4 rounded-lg border-b border-gray-200 shadow-sm bg-gray-50">
-                            <div class="col-span-2 lg:col-span-1 lg:border-r border-gray-200 pb-3 lg:pb-0"> 
-                                <h4 class="font-bold text-lg text-gray-800">Giá & Biến động</h4>
+                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6 p-4 rounded-lg border-b border-gray-200 shadow-sm bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                            <div class="col-span-2 lg:col-span-1 lg:border-r border-gray-200 dark:border-gray-600 pb-3 lg:pb-0"> 
+                                <h4 class="font-bold text-lg text-gray-800 dark:text-gray-200">Giá & Biến động</h4>
                                 <div class="flex items-baseline gap-2 lg:block">
                                     <span class="text-3xl font-bold ${priceColorClass}">${stock.price}</span>
                                     <span class="text-sm font-semibold ${priceColorClass} block">${stock.priceChange}</span>
                                 </div>
                             </div>
-                            <div class="lg:border-r border-gray-200 lg:px-3">
+                            <div class="lg:border-r border-gray-200 dark:border-gray-600 lg:px-3">
                                 <p class="text-xs uppercase font-semibold text-gray-500 mb-1">Trend</p>
                                 <p class="text-sm font-bold text-[#213a57] dark:text-blue-300 leading-tight break-words">${stock.trendText}</p>
                             </div>
-                             <div class="lg:border-r border-gray-200 lg:px-3">
+                             <div class="lg:border-r border-gray-200 dark:border-gray-600 lg:px-3">
                                 <p class="text-xs uppercase font-semibold text-gray-500 mb-1">RSI | MACD</p>
-                                <p class="text-md font-bold text-gray-800">${stock.rsi} <span class="text-gray-400 mx-1">|</span> <span class="${macdColorClass}">${stock.macd}</span></p>
+                                <p class="text-md font-bold text-gray-800 dark:text-gray-200">${stock.rsi} <span class="text-gray-400 mx-1">|</span> <span class="${macdColorClass}">${stock.macd}</span></p>
                             </div>
                             <div class="lg:pl-3">
                                 <p class="text-xs uppercase font-semibold text-gray-500 mb-1">Vol (TB20)</p>
-                                <p class="text-md font-bold text-gray-800">${stock.vol}</p>
+                                <p class="text-md font-bold text-gray-800 dark:text-gray-200">${stock.vol}</p>
                             </div>
                         </div>
-                        <div class="bg-white p-4 rounded-lg shadow-lg border border-gray-100" style="height: 400px;">
+                        <div class="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-100 dark:border-gray-700" style="height: 400px;">
                             <canvas id="priceChart"></canvas>
                         </div>
                     </div>
                     <div class="lg:col-span-1 space-y-4 pt-4 lg:pt-0">
-                        <div class="${signalBgColor} p-4 rounded-lg border border-gray-200 shadow-sm">
-                            <h4 class="font-bold text-lg mb-2 flex items-center border-b border-gray-300 pb-2 ${signalTextColor} dark:text-gray-200">${stock.signalTitle}</h4>
+                        <div class="${signalBgColor} p-4 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                            <h4 class="font-bold text-lg mb-2 flex items-center border-b border-gray-300 dark:border-gray-600 pb-2 ${signalTextColor} dark:text-gray-200">${stock.signalTitle}</h4>
                             <p class="text-sm ${signalTextColor} font-medium leading-relaxed dark:text-gray-300">${stock.signalDesc}</p>
                         </div>
-                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200 shadow-sm">
+                        <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg border border-blue-200 dark:border-blue-800 shadow-sm">
                             <h5 class="font-bold text-blue-700 dark:text-blue-300 mb-2 flex items-center"><i class="fas fa-hand-holding-usd mr-2"></i>Vùng Hành động</h5>
-                            <div class="space-y-1">
-                                <p class="text-sm text-gray-700 flex justify-between"><span>🎯 Target:</span> <span class="font-bold">${stock.target}</span></p>
-                                <p class="text-sm text-gray-700 flex justify-between"><span>🟢 Buy Zone:</span> <span class="font-bold">${stock.buyZone}</span></p>
-                                <p class="text-sm text-gray-700 flex justify-between"><span>❌ Cut Loss:</span> <span class="font-bold">${stock.cutLoss}</span></p>
+                            <div class="space-y-1 dark:text-gray-300">
+                                <p class="text-sm flex justify-between"><span>🎯 Target:</span> <span class="font-bold">${stock.target}</span></p>
+                                <p class="text-sm flex justify-between"><span>🟢 Buy Zone:</span> <span class="font-bold">${stock.buyZone}</span></p>
+                                <p class="text-sm flex justify-between"><span>❌ Cut Loss:</span> <span class="font-bold">${stock.cutLoss}</span></p>
                             </div>
                         </div>
-                        <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200 shadow-sm">
+                        <div class="bg-yellow-50 dark:bg-yellow-900/30 p-4 rounded-lg border border-yellow-200 dark:border-yellow-800 shadow-sm">
                             <h5 class="font-bold text-yellow-700 dark:text-yellow-400 mb-2 flex items-center"><i class="fas fa-exclamation-triangle mr-2"></i>Cảnh báo Rủi ro</h5>
-                            <p class="text-sm text-gray-700 leading-relaxed">${stock.riskWarning}</p>
+                            <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">${stock.riskWarning}</p>
                         </div>
                     </div>
                 </div>
-                <div class="mt-6 p-4 md:p-6 bg-white rounded-xl shadow-lg border border-gray-100">
-                    <h3 class="text-2xl font-extrabold text-[#213a57] dark:text-blue-300 mb-4 border-b-2 border-dashed border-gray-300 pb-2"><i class="fas fa-microscope mr-2"></i>Phân tích Chuyên sâu</h3>
-                    <div class="detailed-analysis-content text-gray-800 leading-relaxed space-y-4 text-justify">${stock.detailedAnalysisHTML}</div>
+                <div class="mt-6 p-4 md:p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+                    <h3 class="text-2xl font-extrabold text-[#213a57] dark:text-blue-300 mb-4 border-b-2 border-dashed border-gray-300 dark:border-gray-600 pb-2"><i class="fas fa-microscope mr-2"></i>Phân tích Chuyên sâu</h3>
+                    <div class="detailed-analysis-content text-gray-800 dark:text-gray-300 leading-relaxed space-y-4 text-justify">${stock.detailedAnalysisHTML}</div>
                 </div>
             `;
             stockModalBody.innerHTML = htmlContent;
@@ -2148,74 +2118,52 @@
             stockDetailModal.style.display = 'none';
             document.body.style.overflow = 'auto';
             if (priceChart) priceChart.destroy(); 
-        }; 
+        };
 
-        // --- RENDER CARDS (ĐÃ SỬA LỖI HIỂN THỊ FONT) ---
-function createStockCard(stock, type) {
-    let priceColorClass = stock.priceColorClass || 'text-gray-900';
-    let cardBorder = '', tickerColor = '', signalBgColor = '';
-    
-    if (type === 'strength') {
-        cardBorder = 'signal-strength';
-        tickerColor = 'text-[#0b6477] dark:text-[#45dfb1]';
-        signalBgColor = 'bg-green-50 text-green-700 dark:bg-green-900 dark:text-green-300';
-    } else if (type === 'weakness') {
-        cardBorder = 'signal-weakness';
-        tickerColor = 'text-red-600 dark:text-red-400';
-        signalBgColor = 'bg-red-50 text-red-700 dark:bg-red-900 dark:text-red-300';
-    } else {
-        cardBorder = 'signal-observe';
-        tickerColor = 'text-blue-600 dark:text-blue-400';
-        signalBgColor = 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-300';
-    }
+        // --- 4. RENDER STOCK LIST ---
+        function createStockCard(stock, type) {
+            let priceColorClass = stock.priceColorClass || 'text-gray-900';
+            let cardBorder = '', tickerColor = '', signalBgColor = '';
+            
+            if (type === 'strength') {
+                cardBorder = 'signal-strength';
+                tickerColor = 'text-[#0b6477] dark:text-[#45dfb1]';
+                signalBgColor = 'bg-green-50 text-green-700 dark:bg-green-900 dark:text-green-300';
+            } else if (type === 'weakness') {
+                cardBorder = 'signal-weakness';
+                tickerColor = 'text-red-600 dark:text-red-400';
+                signalBgColor = 'bg-red-50 text-red-700 dark:bg-red-900 dark:text-red-300';
+            } else {
+                cardBorder = 'signal-observe';
+                tickerColor = 'text-blue-600 dark:text-blue-400';
+                signalBgColor = 'bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-300';
+            }
 
-    // Tách icon và text để hiển thị đẹp hơn (nếu trong data có icon ở đầu)
-    // Hoặc đơn giản là hiển thị nguyên gốc stock.signalTitle
-    let displaySignalTitle = stock.signalTitle;
-
-    return `
-        <div class="stock-card rounded-lg overflow-hidden ${cardBorder} bg-white h-full flex flex-col justify-center relative group" onclick="openStockModal('${stock.ticker}')" title="Nhấp để xem chi tiết">
-            <div class="p-4 flex justify-between items-start">
-                <div class="flex items-center min-w-0 pr-2">
-                    <div class="mr-3">
-                        <span class="font-bold text-xl block ${tickerColor}">${stock.ticker}</span>
-                        <span class="text-sm font-semibold ${priceColorClass}">${stock.price}</span>
+            return `
+                <div class="stock-card rounded-lg overflow-hidden ${cardBorder} bg-white h-full flex flex-col justify-center relative group" onclick="openStockModal('${stock.ticker}')" title="Nhấp để xem chi tiết">
+                    <div class="p-4 flex justify-between items-start">
+                        <div class="flex items-center min-w-0 pr-2">
+                            <div class="mr-3">
+                                <span class="font-bold text-xl block ${tickerColor}">${stock.ticker}</span>
+                                <span class="text-sm font-semibold ${priceColorClass}">${stock.price}</span>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-xs ${priceColorClass}">${stock.priceChange}</span>
+                                <span class="text-xs text-gray-500">${stock.dateText.replace('📅 ', '')}</span>
+                            </div>
+                        </div>
+                        <div class="text-right flex flex-col items-end">
+                            <div class="text-xs font-bold ${signalBgColor} py-1 px-2 rounded-full mb-1">
+                                ${stock.signalTitle}
+                            </div>
+                            <p class="text-xs text-gray-500 truncate max-w-[120px]">${stock.trendText}</p>
+                            <div class="mt-1"><i class="fas fa-eye text-gray-300 group-hover:text-[#14919b] transition text-xl"></i></div>
+                        </div>
                     </div>
-                    <div class="flex flex-col">
-                        <span class="text-xs ${priceColorClass}">${stock.priceChange}</span>
-                        <span class="text-xs text-gray-500">${stock.dateText.replace('📅 ', '')}</span>
-                    </div>
-                </div>
-                <div class="text-right flex flex-col items-end">
-                    <div class="text-xs font-bold ${signalBgColor} py-1 px-2 rounded-full mb-1">
-                        ${displaySignalTitle}
-                    </div>
-                    <p class="text-xs text-gray-500 truncate max-w-[120px]">${stock.trendText}</p>
-                    <div class="mt-1"><i class="fas fa-eye text-gray-300 group-hover:text-[#14919b] transition text-xl"></i></div>
-                </div>
-            </div>
-        </div>`;
-}
-        
-        // --- SEARCH LOGIC & RENDER ---
-        function removeVietnameseTones(str) {
-            str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
-            str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
-            str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
-            str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
-            str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
-            str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
-            str = str.replace(/đ/g,"d");
-            str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
-            str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
-            str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
-            str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
-            str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
-            str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
-            str = str.replace(/Đ/g, "D");
-            return str.normalize("NFD").replace(/[u0300-u036f]/g, "");
+                </div>`;
         }
 
+        // --- 5. SEARCH LOGIC (ĐÃ CẬP NHẬT) ---
         function renderStocks(filter = '') {
             const strengthList = document.getElementById('strength-list');
             const weaknessList = document.getElementById('weakness-list');
@@ -2225,15 +2173,26 @@ function createStockCard(stock, type) {
             const observeSection = document.getElementById('observe-section');
             const noResults = document.getElementById('no-results');
             
+            // Chuẩn hóa từ khóa tìm kiếm
             const searchKey = removeVietnameseTones(filter).trim().toUpperCase();
             
             const filterFunction = (stock) => {
                 if (searchKey === '') return true; 
+                
+                // 1. Tìm theo Mã cổ phiếu
                 const ticker = stock.ticker.toUpperCase();
+                
+                // 2. Tìm theo Tín hiệu (Ví dụ: "Bùng nổ", "Cạn cung")
                 const signalTitle = removeVietnameseTones(stock.signalTitle).toUpperCase();
-                const trendText = removeVietnameseTones(stock.trendText).toUpperCase();
-                const rawSignal = stock.signalTitle.toUpperCase();
-                return ticker.includes(searchKey) || signalTitle.includes(searchKey) || rawSignal.includes(filter.trim().toUpperCase()) || trendText.includes(searchKey);
+                
+                // 3. Tìm trong Kịch bản hành động (Nằm trong detailedAnalysisHTML)
+                // Lấy nội dung HTML và xóa dấu để tìm kiếm
+                const detailedInfo = removeVietnameseTones(stock.detailedAnalysisHTML).toUpperCase();
+                
+                // Kiểm tra nếu từ khóa xuất hiện trong bất kỳ trường nào
+                return ticker.includes(searchKey) || 
+                       signalTitle.includes(searchKey) || 
+                       detailedInfo.includes(searchKey);
             };
 
             const filteredStrength = stockData.strength.filter(filterFunction);
@@ -2252,33 +2211,119 @@ function createStockCard(stock, type) {
             noResults.style.display = anyResult ? 'none' : 'block';
         }
         
+        // --- 6. GLOSSARY (TRA CỨU THUẬT NGỮ) ---
+        const vsaTerms = [
+            { term: "VSA", fullName: "Volume Spread Analysis", explanation: "Phương pháp phân tích biến động giá dựa trên mối quan hệ giữa Giá (Spread) và Khối lượng (Volume)." },
+            { term: "SOS", fullName: "Sign of Strength", explanation: "Dấu hiệu sức mạnh: Hành động giá cho thấy lực cầu đang chiếm ưu thế (Ví dụ: Nến xanh dài + Vol lớn)." },
+            { term: "SOW", fullName: "Sign of Weakness", explanation: "Dấu hiệu suy yếu: Hành động giá cho thấy lực cung đang áp đảo (Ví dụ: Nến đỏ dài + Vol lớn, Nến rút chân trên)." },
+            { term: "Test Cung", fullName: "Supply Test", explanation: "Giá giảm xuống kiểm tra lượng bán ra. Nếu Vol thấp => Cung cạn (Tốt)." },
+            { term: "Test Cầu", fullName: "Demand Test", explanation: "Giá tăng lên kiểm tra lượng mua vào." },
+            { term: "Breakout", fullName: "Bùng nổ", explanation: "Giá vượt qua vùng kháng cự/tích lũy với khối lượng lớn." },
+            { term: "Washout", fullName: "Rũ bỏ", explanation: "Phiên giảm mạnh để loại bỏ nhà đầu tư nhỏ lẻ trước khi tăng." },
+            { term: "Upthrust", fullName: "Đảo chiều giảm", explanation: "Nến có râu trên dài, khối lượng lớn, báo hiệu giá từ chối vùng cao." },
+            { term: "No Demand", fullName: "Thiếu cầu", explanation: "Giá tăng hoặc đi ngang nhưng Vol thấp, cho thấy không có dòng tiền lớn tham gia." },
+            { term: "No Supply", fullName: "Cạn cung", explanation: "Giá giảm hoặc đi ngang nhưng Vol thấp, cho thấy áp lực bán đã cạn kiệt." },
+            { term: "PS", fullName: "Preliminary Support", explanation: "Điểm hỗ trợ sơ bộ: Dấu hiệu đầu tiên cho thấy đà giảm chững lại." },
+            { term: "SC", fullName: "Selling Climax", explanation: "Cao trào bán: Đáy của sự hoảng loạn, thường kèm Vol cực lớn." },
+            { term: "AR", fullName: "Automatic Rally", explanation: "Hồi phục tự nhiên: Nhịp hồi phục sau Selling Climax do chốt lời ngắn hạn." },
+            { term: "ST", fullName: "Secondary Test", explanation: "Kiểm tra thứ cấp: Giá quay lại test vùng đáy SC." }
+        ];
+
+        const termModal = document.getElementById('term-modal');
+        const openTermBtn = document.getElementById('open-term-modal-btn');
+        const closeTermBtn = document.getElementById('close-term-modal-btn');
+        const termTableBody = document.getElementById('term-table-body');
+
+        // Render bảng thuật ngữ
+        termTableBody.innerHTML = vsaTerms.map(item => `
+            <tr class="hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 font-bold text-[#213a57] dark:text-[#45dfb1]">${item.term}</td>
+                <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 font-semibold">${item.fullName}</td>
+                <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700">${item.explanation}</td>
+            </tr>
+        `).join('');
+
+        // Logic Mở/Đóng Modal Thuật ngữ
+        openTermBtn.onclick = () => termModal.style.display = "block";
+        closeTermBtn.onclick = () => termModal.style.display = "none";
+
+        // Click outside to close (Áp dụng cho cả 2 modal)
+        window.onclick = function(event) {
+            if (event.target == stockDetailModal) {
+                stockDetailModal.style.display = "none";
+                document.body.style.overflow = 'auto';
+                if (priceChart) priceChart.destroy();
+            }
+            if (event.target == termModal) {
+                termModal.style.display = "none";
+            }
+        }
+
+        // --- 7. CAPTURE SCREENSHOT ---
+        document.getElementById('capture-btn').addEventListener('click', function() {
+            const btn = this;
+            const originalIcon = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            btn.disabled = true;
+
+            const header = document.querySelector('.header-container');
+            const originalPosition = header.style.position;
+            header.style.position = 'static';
+
+            html2canvas(document.body, {
+                scale: 2,
+                useCORS: true,
+                scrollY: -window.scrollY,
+                backgroundColor: document.body.classList.contains('dark') ? '#0f172a' : '#f8f9fa',
+                ignoreElements: function(element) {
+                    if (element.classList.contains('header-tools') || element.classList.contains('floating-tool-button')) return true;
+                    if (element.id === 'stock-search' || element.id === 'search-btn' || element.id === 'reset-btn') return true;
+                    if (element.classList.contains('news-link')) return true;
+                    if (element.tagName === 'FOOTER') return true;
+                    if (element.classList.contains('modal')) return true;
+                    return false;
+                }
+            }).then(canvas => {
+                const link = document.createElement('a');
+                const now = new Date();
+                const timeString = `${now.getHours()}h${now.getMinutes()}_${now.getDate()}-${now.getMonth()+1}`;
+                link.download = `BaoCao_Dashboard_${timeString}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                btn.innerHTML = originalIcon;
+                btn.disabled = false;
+                header.style.position = originalPosition;
+            }).catch(err => {
+                console.error("Lỗi:", err);
+                alert("Lỗi chụp ảnh.");
+                btn.innerHTML = originalIcon;
+                btn.disabled = false;
+                header.style.position = originalPosition;
+            });
+        });
+
+        // --- 8. INIT ---
         function updateTime() {
             const now = new Date();
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
             document.getElementById('datetime-container').textContent = now.toLocaleString('vi-VN', options);
         }
 
-        // --- INIT ---
         document.addEventListener('DOMContentLoaded', () => {
             const searchInput = document.getElementById('stock-search');
             const searchBtn = document.getElementById('search-btn');
             const resetBtn = document.getElementById('reset-btn');
-            renderStocks();
+            renderStocks(); // Render ban đầu
             updateTime();
             setInterval(updateTime, 1000);
+
+            // Gán sự kiện tìm kiếm
             searchInput.addEventListener('input', () => { renderStocks(searchInput.value); });
             searchBtn.addEventListener('click', () => { renderStocks(searchInput.value); });
             resetBtn.addEventListener('click', () => { searchInput.value = ''; renderStocks(); });
         });
-        
-        // --- TERM MODAL LOGIC (Dữ liệu cũ) ---
-        const vsaTerms = [
-            { term: "VSA", fullName: "Volume Spread Analysis", explanation: "Phân tích Chênh lệch Khối lượng..." },
-            { term: "SOS", fullName: "Sign of Strength", explanation: "Dấu hiệu Sức mạnh..." },
-            // ... (Giữ nguyên các thuật ngữ khác nếu cần)
-        ];
-        // (Logic modal thuật ngữ giữ nguyên như cũ)
     </script>
 </body>
 </html>
+
 

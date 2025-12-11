@@ -247,7 +247,7 @@
         <h1 class="text-3xl md:text-4xl font-bold text-white mb-2">Dashboard V2 - TTTV BSC HCM</h1>
 
         <div id="datetime-container" class="text-gray-300 font-medium mb-2"></div>
-        <p class="text-sm text-gray-400 mb-4">Dữ liệu giá đóng cửa ngày 02/12/2025</p>
+        <p class="text-sm text-gray-400 mb-4">Dữ liệu giá đóng cửa ngày 10/12/2025</p>
         <div class="max-w-2xl mx-auto" data-html2canvas-ignore="true"> <div class="relative">
                 <input type="text" id="stock-search" placeholder="Nhập mã CK, hoặc từ khoá (MUA, BÁN, NẮM GIỮ)..." class="w-full bg-white text-gray-800 py-3 px-4 text-lg border-2 border-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-[#80ed99] transition shadow-md">
                 <button id="search-btn" class="absolute right-2 top-1/2 -translate-y-1/2 bg-[#14919b] text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#45dfb1] transition">
@@ -714,775 +714,590 @@
           ],
           "weakness": [
 {
-        "ticker": "ACB",
-        "exchange": "HSX",
-        "companyName": "Ngan hang TMCP A Chau",
-        "price": "23.95",
-        "priceChange": "-0.05 (-0.21%)",
-        "priceColorClass": "text-red",
-        "trendText": "📉 Trend: Giảm",
-        "dateText": "📅 12/02",
-        "signalTitle": "🔴 Tín hiệu: Xả hàng",
-        "signalDesc": "Giá giảm thủng nền kèm thanh khoản lớn (197% so với TB20), cho thấy áp lực bán tháo.",
-        "rsi": "31.79",
-        "macd": "Cắt xuống",
-        "macdColorClass": "text-red",
-        "vol": "197%",
-        "buyZone": "Quan sát (Chưa mua)",
-        "cutLoss": "N/A",
-        "target": "24.75 (Hồi để bán)",
-        "riskWarning": "RSI tiệm cận vùng quá bán, có thể có nhịp nảy nhẹ nhưng rủi ro cao.",
-        "chartData": [25.6, 25.3, 24.9, 24.8, 24.85, 25.2, 25.1, 24.95, 25.15, 25.1, 24.9, 24.8, 24.7, 24.6, 24.2, 24.2, 24.35, 24.25, 24.0, 23.95],
-        "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ đóng cửa thấp nhất phiên, xác nhận xu hướng giảm tiếp diễn.</li> <li><strong>VSA:</strong> Vol đột biến 15.5tr cổ phiếu (gần gấp đôi trung bình). Đây là tín hiệu 'Selling Climax' (Cao trào bán), phe bán đang hoảng loạn thoát hàng.</li> <li><strong>Hành động giá:</strong> Giá đã gãy hoàn toàn các mốc hỗ trợ ngắn hạn, đang tìm đáy mới.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Downtrend ngắn hạn rõ rệt.</li> <li><strong>Động lượng:</strong> RSI(14) = 31.79, rất yếu. MACD cắm đầu xuống dưới 0.</li> <li><strong>Vùng giá:</strong> Hỗ trợ tiếp theo quanh 23.0. Kháng cự (vùng kẹp hàng) dày đặc tại 24.8 - 25.0.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Tiêu cực:</strong> Tiếp tục thủng 23.9 -> Rơi tự do về 23.0.</p> <p><strong>🟢 Tích cực (Hồi phục):</strong> Nếu có lực bắt đáy, giá có thể hồi lại test vùng 24.5. Canh bán tại đây.</p>"
+        ticker: "HPG",
+        exchange: "HSX",
+        companyName: "Tập đoàn Hòa Phát",
+        price: "25.75",
+        priceChange: "-0.20 (-0.77%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "36.25",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "114%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [26.55, 26.65, 26.75, 26.5, 26.6, 26.45, 26.35, 26.4, 26.2, 26.4, 26.4, 26.45, 26.25, 26.2, 26.6, 26.65, 26.3, 26.15, 25.95, 25.75],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 23.95tr (Cao (Áp lực bán mạnh)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 36.25 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 25.95. Hỗ trợ tâm lý 24.65.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
     },
     {
-        "ticker": "ANV",
-        "exchange": "HSX",
-        "companyName": "Thủy sản Nam Việt",
-        "price": "28.8",
-        "priceChange": "-0.70 (-2.37%)",
-        "priceColorClass": "text-red",
-        "trendText": "📉 Trend: Giảm mạnh",
-        "dateText": "📅 12/02",
-        "signalTitle": "🔴 Tín hiệu: Phân phối",
-        "signalDesc": "Giá giảm biên độ rộng (-2.37%) kèm vol lớn (136%).",
-        "rsi": "46.41",
-        "macd": "Cắt xuống",
-        "macdColorClass": "text-red",
-        "vol": "136%",
-        "buyZone": "Quan sát",
-        "cutLoss": "N/A",
-        "target": "29.00 (Kháng cự)",
-        "riskWarning": "Nhóm thủy sản đang chịu áp lực điều chỉnh chung.",
-        "chartData": [28.1, 28.15, 27.2, 27.6, 27.9, 28.35, 28.75, 28.4, 28.8, 30.8, 30.6, 30.2, 30.4, 30.0, 29.15, 30.0, 29.3, 29.25, 29.5, 28.8],
-        "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến Marubozu giảm, thể hiện sự quyết liệt của phe bán từ đầu đến cuối phiên.</li> <li><strong>VSA:</strong> Vol 2.54tr > TB20. Cung hàng ra rất mạnh mỗi khi giá hồi phục.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Gãy trend tăng ngắn hạn.</li> <li><strong>Động lượng:</strong> RSI mất mốc 50, chuyển sang trạng thái tiêu cực.</li> <li><strong>Vùng giá:</strong> Đang rơi về vùng hỗ trợ đáy cũ 28.0.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Tiêu cực:</strong> Thủng 28.0 sẽ kích hoạt đà bán tháo mạnh hơn về 26.x.</p> <p><strong>🟢 Tích cực:</strong> Tích lũy lại quanh 28-29. Chỉ nên quan sát.</p>"
+        ticker: "SSI",
+        exchange: "HSX",
+        companyName: "CTCP Chung khoan SSI",
+        price: "24.3",
+        priceChange: "+0.15 (+0.62%)",
+        priceColorClass: "text-green",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "38.79",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "60%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [25.3, 25.2, 25.4, 25.6, 25.5, 25.35, 25.3, 25.2, 24.9, 25.0, 25.0, 24.7, 24.6, 24.55, 24.8, 25.1, 24.9, 24.55, 24.15, 24.3],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 8.56tr (Thấp (Thiếu cầu)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 38.79 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 24.15. Hỗ trợ tâm lý 23.94.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
     },
-{
-    "ticker": "BID",
-    "exchange": "HSX",
-    "companyName": "Ngân hàng BIDV",
-    "price": "36.85",
-    "priceChange": "-0.10 (-0.27%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "⚠️ Tín hiệu: Cạn cung vùng đáy",
-    "signalDesc": "Giá giảm nhẹ (Drifting) kèm thanh khoản thấp (87% TB20), cho thấy lực bán đã cạn nhưng cầu chưa vào.",
-    "rsi": "38.58",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "87%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "37.80 (Kháng cự MA20)",
-    "riskWarning": "Xu hướng giảm chưa kết thúc. Tuyệt đối không bắt dao rơi (Catching falling knife).",
-    "chartData": [38.65, 38.5, 37.5, 37.4, 38.0, 38.25, 38.3, 38.35, 38.4, 38.4, 38.1, 37.95, 37.6, 37.65, 37.0, 37.35, 37.55, 37.1, 36.95, 36.85],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ (Small Red Candle) đóng cửa gần mức thấp nhất phiên. Đây là dạng nến 'Drifting' (Trôi dạt), giá giảm từ từ gây cảm giác khó chịu và chán nản cho người cầm hàng.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 1.59 triệu, thấp hơn mức trung bình 20 phiên (1.83 triệu). Đây là trạng thái <strong>'Tiết cung' (No Supply)</strong>: Giá giảm nhưng không có người bán tháo mạnh. Tuy nhiên, vấn đề là phe mua (Cầu) cũng hoàn toàn vắng bóng.</li> <li><strong>Hành động giá:</strong> Giá liên tục nằm dưới đường xu hướng ngắn hạn MA20, xác nhận phe Gấu vẫn đang kiểm soát cuộc chơi.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá ngắn hạn (Short-term Downtrend). Cổ phiếu đang trong quá trình mò đáy.</li> <li><strong>Động lượng:</strong> RSI(14) = 38.58, nằm sâu trong vùng suy yếu (Weak Zone). MACD Histogram âm cho thấy xung lực giảm vẫn còn hiện hữu.</li> <li><strong>Vùng giá:</strong> Đang kiểm định lại vùng hỗ trợ đáy cũ 36.5. Kháng cự gần nhất là đường MA20 tại 37.8.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng đáy cứng 36.5 với Vol lớn, BID sẽ kích hoạt đợt bán tháo mới về vùng 34-35.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Giá cần đi ngang tích lũy (Base Building) quanh 36.5 - 37.0 trong ít nhất 1-2 tuần tới để hấp thụ cung và bẻ ngang đường MA20. Nhà đầu tư chỉ nên quan sát, chưa vội giải ngân.</p>"
-},
- {
-    "ticker": "BSR",
-    "exchange": "UPCOM",
-    "companyName": "CTCP Lọc Hóa dầu Bình Sơn",
-    "price": "15.25",
-    "priceChange": "-0.15 (-0.97%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Bán chủ động",
-    "signalDesc": "Giá giảm thủng nền ngắn hạn kèm thanh khoản cao (134% TB20), áp lực cung áp đảo.",
-    "rsi": "39.26",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "134%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "16.00 (Kháng cự)",
-    "riskWarning": "Biên lợi nhuận lọc dầu (Crack Spread) giảm đang ảnh hưởng tiêu cực đến tâm lý.",
-    "chartData": [16.8, 16.5, 15.95, 15.55, 15.6, 15.8, 16.05, 16.0, 16.45, 16.3, 16.2, 16.05, 15.8, 15.55, 15.4, 15.7, 15.5, 15.5, 15.4, 15.25],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ đóng cửa thấp nhất tuần tại 15.25. Đây là cây nến tiếp diễn xu hướng giảm sau chuỗi phiên đi ngang yếu ớt.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 5.15 triệu cổ phiếu, vượt 34% so với mức trung bình 20 phiên. Hành động giá giảm đi kèm khối lượng gia tăng (Volume Expansion on Downside) xác nhận phe bán đang rất quyết liệt hạ giá để thoát hàng.</li> <li><strong>Hành động giá:</strong> BSR đã đánh mất vùng hỗ trợ tích lũy ngắn hạn 15.4 - 15.5, mở ra rủi ro tìm về các vùng đáy sâu hơn.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Xu hướng chủ đạo là Giảm (Bearish). Cổ phiếu liên tục tạo đỉnh sau thấp hơn đỉnh trước.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về vùng 39.26, thể hiện sức mạnh giá rất yếu. MACD Histogram nằm dưới 0 và đang mở rộng, chưa có tín hiệu đảo chiều.</li> <li><strong>Vùng giá:</strong> Đang rơi vào trạng thái dò đáy. Hỗ trợ cứng tiếp theo quanh vùng 14.5 - 14.8. Kháng cự hiện tại là vùng nền vừa gãy 15.8 - 16.0.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu áp lực bán không giảm, giá có thể trượt về vùng hỗ trợ dài hạn 14.x.</p> <p><strong>🟢 Kịch bản Tích cực (Hồi phục):</strong> Nếu có nhịp hồi (Pullback) kiểm định lại vùng 15.8 - 16.0, đây là cơ hội tốt để <strong>hạ tỷ trọng</strong> đối với nhà đầu tư đang kẹp hàng. Chưa có điểm mua mới an toàn.</p>"
-},
-{
-    "ticker": "CMG",
-    "exchange": "HSX",
-    "companyName": "CTCP Tập đoàn Công nghệ CMC",
-    "price": "36.55",
-    "priceChange": "-0.80 (-2.14%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm mạnh (Bearish)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Gãy nền (Broken Base)",
-    "signalDesc": "Giá thủng vùng hỗ trợ quan trọng kèm khối lượng lớn (157% TB20), xác nhận nhịp bán tháo.",
-    "rsi": "34.69",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "157%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "38.10 (Kháng cự)",
-    "riskWarning": "Mô hình gãy nền thường kéo theo quán tính giảm mạnh. Không bắt đáy sớm.",
-    "chartData": [39.3, 39.6, 38.85, 37.65, 37.6, 38.5, 38.55, 38.1, 38.6, 38.65, 38.45, 38.25, 38.0, 38.15, 37.25, 37.5, 37.55, 37.4, 37.35, 36.55],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Xuất hiện nến đỏ đặc thân dài (Bearish Marubozu), đóng cửa tại mức thấp nhất phiên 36.55. Đây là cây nến xác nhận sự sụp đổ của niềm tin, phủ nhận hoàn toàn nỗ lực đi ngang giữ giá của 5 phiên trước đó.</li> <li><strong>VSA:</strong> Khối lượng giao dịch tăng vọt lên 157% so với trung bình 20 phiên. Sự kết hợp giữa 'Biên độ giảm rộng' + 'Vol lớn' là tín hiệu <strong>SOW (Sign of Weakness)</strong> điển hình, cho thấy dòng tiền lớn đang quyết liệt thoát hàng hoặc rũ bỏ (Shakeout) nhà đầu tư nhỏ lẻ.</li> <li><strong>Hành động giá:</strong> Giá đã chính thức xuyên thủng vùng hỗ trợ tâm lý 37.0 - 37.5, biến vùng này thành kháng cự rất mạnh trong thời gian tới.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Chuyển từ đi ngang sang Giảm giá ngắn hạn (Downtrend). Cấu trúc đỉnh sau thấp hơn đỉnh trước ngày càng rõ nét.</li> <li><strong>Động lượng:</strong> RSI(14) cắm đầu về vùng 34.69 (gần quá bán), thể hiện lực bán đang rất mạnh. MACD Histogram âm và mở rộng biên độ xuống dưới, chưa có dấu hiệu chững lại.</li> <li><strong>Vùng giá:</strong> Đã mất mốc hỗ trợ gần nhất. Cổ phiếu đang rơi vào trạng thái 'tìm đáy' (Price Discovery). Hỗ trợ tiếp theo có thể quanh vùng 34.0 - 35.0.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Với quán tính bán mạnh hiện tại, giá có thể tiếp tục rơi về vùng 34.x trước khi có lực cầu bắt đáy.</p> <p><strong>🟢 Kịch bản Tích cực (Hồi phục):</strong> Nếu thị trường chung tốt, CMG có thể có nhịp hồi kỹ thuật (Technical Rebound) kiểm định lại vùng đứt gãy 37.5. Đây là cơ hội để <strong>cơ cấu thoát hàng</strong>, tuyệt đối không phải điểm mua mới.</p>"
-},
-{
-    "ticker": "DIG",
-    "exchange": "HSX",
-    "companyName": "Tổng CTCP Đầu tư Phát triển Xây dựng",
-    "price": "20.0",
-    "priceChange": "-0.20 (-0.99%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Bearish)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Phân phối/Đè giá",
-    "signalDesc": "Giá giảm về mốc hỗ trợ tâm lý 20.0 kèm Vol lớn (11.3tr cổ phiếu), áp lực bán còn mạnh.",
-    "rsi": "44.25",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "117%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "20.50 (Kháng cự)",
-    "riskWarning": "Nếu thủng mốc tròn số 20.0, áp lực giải chấp (Margin Call) có thể xuất hiện.",
-    "chartData": [20.15, 20.3, 19.7, 19.65, 20.15, 20.6, 20.0, 20.45, 21.35, 21.0, 21.1, 21.1, 21.0, 20.7, 20.05, 20.75, 20.25, 20.65, 20.2, 20.0],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ đóng cửa thấp nhất phiên tại 20.0. Đây là cây nến bao trùm (Bearish Engulfing) phủ nhận hoàn toàn nỗ lực hồi phục yếu ớt của phiên trước đó.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 11.35 triệu cổ phiếu, cao hơn mức trung bình 20 phiên (117%). Vol cao nhưng giá không thể bật lên cho thấy lượng cung treo lơ lửng bên trên (Supply Overhang) là rất lớn. Cứ hồi là bị bán.</li> <li><strong>Hành động giá:</strong> Giá đang mấp mé phá vỡ vùng hỗ trợ tâm lý quan trọng 20.0. Đây là 'chốt chặn' cuối cùng của phe bò trong ngắn hạn.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Xu hướng Giảm ngắn hạn đang chi phối. Nhóm Bất động sản thương mại nói chung đang yếu hơn thị trường (Relative Weakness).</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 44.25. MACD Histogram âm. Các chỉ báo kỹ thuật đều ủng hộ phe Gấu.</li> <li><strong>Vùng giá:</strong> Đang kiểm định mốc 20.0. Nếu thủng, hỗ trợ tiếp theo là đáy cũ 19.3. Kháng cự gần nhất là đường MA20 tại 20.5.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu đóng cửa dưới 20.0 với thanh khoản cao, DIG sẽ kích hoạt đà bán tháo (Panic Selling) về vùng 18.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Cần giữ vững mốc 20.0 và hồi phục kỹ thuật (Technical Rebound) lên 20.5 - 21.0. Đây là cơ hội để <strong>cơ cấu thoát hàng</strong> cho những ai đang kẹp giá cao.</p>"
-},
-{
-    "ticker": "HPG",
-    "exchange": "HSX",
-    "companyName": "Tập đoàn Hòa Phát",
-    "price": "26.5",
-    "priceChange": "0.00 (0.00%)",
-    "priceColorClass": "text-yellow",
-    "trendText": "📉 Trend: Giảm (Điều chỉnh)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Suy yếu",
-    "signalDesc": "Giá nằm dưới MA20, động lượng (RSI, MACD) suy giảm, chưa có tín hiệu dòng tiền lớn quay lại.",
-    "rsi": "43.17",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "94%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "26.85 (Kháng cự)",
-    "riskWarning": "Ngành thép có tính chu kỳ cao, phụ thuộc nhiều vào giá thép thế giới và đầu tư công.",
-    "chartData": [26.3, 26.1, 26.05, 26.45, 26.6, 27.0, 26.55, 26.9, 27.3, 27.5, 27.6, 27.25, 27.4, 27.1, 26.9, 27.1, 26.9, 26.55, 26.5, 26.5],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến Doji/Thân nhỏ đóng cửa tại tham chiếu 26.5. Cây nến thể hiện sự lưỡng lự (Indecision) của nhà đầu tư tại vùng đáy ngắn hạn: phe bán đã ngừng bán mạnh nhưng phe mua vẫn chưa dám nhập cuộc.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 26 triệu cổ phiếu, thấp hơn mức trung bình 20 phiên (94%). Trạng thái <strong>'Tiết cung' (Drying Up)</strong> là tín hiệu tích cực đầu tiên trong một xu hướng giảm, cho thấy lượng hàng giá rẻ không còn nhiều.</li> <li><strong>Hành động giá:</strong> Giá đã gãy xu hướng tăng ngắn hạn và đang vận động dưới đường kháng cự động MA20.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Đang trong nhịp điều chỉnh giảm (Correction Phase). Cổ phiếu cần thời gian để tìm điểm cân bằng mới.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về vùng 43.17 - Vùng tiêu cực (Bearish Zone). MACD Histogram < 0 xác nhận phe Gấu vẫn đang kiểm soát thế trận.</li> <li><strong>Vùng giá:</strong> Đang kiểm định lại vùng đáy cũ 26.0 - 26.1. Kháng cự gần nhất là đường MA20 tại 26.85.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy cứng 26.0 với Vol lớn, HPG sẽ mở biên rơi về vùng hỗ trợ sâu hơn tại 24.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Tích lũy đi ngang (Sideway) trong biên độ hẹp 26.0 - 26.8 thêm 3-5 phiên nữa để hấp thụ cung. Chỉ cân nhắc giải ngân khi giá có phiên bùng nổ vượt 27.0 với thanh khoản > 40 triệu cp.</p>"
-},
-   {
-    "ticker": "MWG",
-    "exchange": "HSX",
-    "companyName": "CTCP Đầu tư Thế giới Di động",
-    "price": "80.0",
-    "priceChange": "0.00 (0.00%)",
-    "priceColorClass": "text-yellow",
-    "trendText": "📉 Trend: Giảm (Điều chỉnh)",
-    "dateText": "📅 12/02",
-    "signalTitle": "⚠️ Tín hiệu: Cạn cung",
-    "signalDesc": "Giá dừng đà giảm tại mốc hỗ trợ tâm lý 80.0, thanh khoản thấp (80% TB20) cho thấy áp lực bán suy yếu.",
-    "rsi": "48.08",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "80%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "80.00 (Kháng cự)",
-    "riskWarning": "Áp lực bán ròng từ khối ngoại vẫn là rủi ro hiện hữu cần theo dõi sát.",
-    "chartData": [80.2, 80.3, 76.5, 76.8, 78.0, 80.5, 80.1, 81.4, 82.4, 83.0, 82.4, 81.0, 80.0, 79.3, 78.5, 80.2, 80.0, 79.9, 80.0, 80.0],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến Doji hoặc thân rất nhỏ đóng cửa tại 80.0. Biến động giá thu hẹp (Volatility Contraction) cho thấy sự lưỡng lự của thị trường ngay tại vùng hỗ trợ tâm lý quan trọng.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 3.95 triệu cổ phiếu, thấp hơn mức trung bình 20 phiên (80%). Đây là trạng thái <strong>'Tiết cung' (Drying Up)</strong>: Phe bán không còn chấp nhận bán giá rẻ, nhưng phe mua vẫn thận trọng chưa đẩy giá lên.</li> <li><strong>Hành động giá:</strong> Giá đang nỗ lực giữ vững mốc 80.0. Tuy nhiên, giá vẫn nằm dưới đường kháng cự động MA20, nên xu hướng giảm ngắn hạn chưa bị đảo ngược.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Điều chỉnh ngắn hạn (Correction Phase). Cổ phiếu đang trong quá trình tìm điểm cân bằng sau nhịp giảm từ đỉnh 83.x.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 48.08 - Vùng trung tính yếu. MACD Histogram vẫn nằm dưới 0, báo hiệu phe Gấu vẫn còn kiểm soát cuộc chơi.</li> <li><strong>Vùng giá:</strong> Đang test vùng hỗ trợ cứng 80.0. Kháng cự gần nhất chính là đường MA20 đang chúc xuống tại 80.02 - 80.50.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng mốc 80.0 với Vol lớn, MWG sẽ kích hoạt đợt bán tháo về vùng hỗ trợ sâu hơn tại 75.x - 76.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Tích lũy đi ngang quanh 80.0 - 81.0 thêm 3-5 phiên nữa để hấp thụ cung. Điểm mua thăm dò (Pivot Point) chỉ xuất hiện khi giá vượt dứt khoát 82.0 với thanh khoản cải thiện.</p>"
-},
-{
-    "ticker": "FPT",
-    "exchange": "HSX",
-    "companyName": "CTCP FPT",
-    "price": "96.6",
-    "priceChange": "0.00 (0.00%)",
-    "priceColorClass": "text-yellow",
-    "trendText": "📉 Trend: Giảm (Điều chỉnh)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Chỉnh sâu",
-    "signalDesc": "Giá giảm dưới MA20, thanh khoản thấp (91%) cho thấy thiếu lực cầu bắt đáy.",
-    "rsi": "46.51",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "91%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "98.15 (Kháng cự MA20)",
-    "riskWarning": "Định giá P/E đang ở vùng cao lịch sử, rất nhạy cảm với các biến động vĩ mô.",
-    "chartData": [99.86, 99.17, 99.96, 95.21, 95.11, 99.56, 97.88, 98.97, 99.96, 98.97, 96.99, 97.98, 99.76, 99.17, 98.67, 97.98, 98.48, 96.1, 96.6, 96.6],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến Doji hoặc thân rất nhỏ đóng cửa tại tham chiếu 96.6. Sau nhịp giảm mạnh từ đỉnh 100, sự xuất hiện của nến Doji cho thấy đà giảm đã tạm chững lại, cung cầu đang giằng co tại vùng giá này.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 5.56 triệu cổ phiếu (91% trung bình 20 phiên). Thanh khoản thấp trong xu hướng giảm thường được hiểu là <strong>'Thiếu cầu' (Lack of Demand)</strong> hơn là cạn cung. Tức là người bán đã bớt bán, nhưng người mua vẫn chưa thấy hấp dẫn để vào.</li> <li><strong>Hành động giá:</strong> FPT đã chính thức gãy trend tăng ngắn hạn khi xuyên thủng MA20 (vùng 98.x).</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Đang trong nhịp điều chỉnh ngắn hạn (Short-term Correction) sau giai đoạn tăng nóng.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 46.51, mất mốc 50 quan trọng. MACD Histogram đã chuyển sang âm, xác nhận áp lực điều chỉnh vẫn còn.</li> <li><strong>Vùng giá:</strong> Đang tìm điểm cân bằng mới. Hỗ trợ đáy gần nhất khá xa tại 86.x (MA50/Đáy cũ). Kháng cự mạnh bây giờ là vùng 98.0 - 98.5.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thị trường chung xấu, FPT có thể tiếp tục bị chiết khấu về vùng hỗ trợ sâu hơn quanh 90-92 để kích thích dòng tiền mới.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Cần đi ngang tích lũy (Sideway) quanh 95-97 trong 1-2 tuần tới để hấp thụ lượng hàng kẹp bên trên. Nhà đầu tư chưa nên vội bắt đáy cho đến khi giá vượt lại 98.15.</p>"
-},
-{
-    "ticker": "KDH",
-    "exchange": "HSX",
-    "companyName": "Nhà Khang Điền",
-    "price": "33.55",
-    "priceChange": "-0.60 (-1.76%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Bearish)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Xả hàng (Selling Climax)",
-    "signalDesc": "Giá giảm biên độ rộng (-1.8%) kèm khối lượng tăng vọt (137% TB20), xác nhận áp lực bán tháo.",
-    "rsi": "44.92",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "137%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "34.35 (Hồi phục)",
-    "riskWarning": "Thị trường BĐS trầm lắng và áp lực đáo hạn trái phiếu vẫn là rủi ro lớn.",
-    "chartData": [34.95, 34.1, 32.5, 32.0, 33.0, 34.1, 34.45, 34.65, 35.1, 35.4, 34.6, 34.65, 34.85, 34.85, 34.5, 35.4, 35.4, 35.0, 34.15, 33.55],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Xuất hiện nến đỏ thân dài (Long Bearish Candle), đóng cửa ở mức thấp nhất phiên 33.55. Cây nến này phá vỡ cấu trúc tích lũy ngắn hạn trước đó, thể hiện sự quyết đoán của phe bán.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 7.78 triệu cổ phiếu, vượt 37% so với mức trung bình 20 phiên. Trong bối cảnh giá giảm, Vol tăng cao là tín hiệu <strong>'Cung lấn át Cầu' (Supply Overwhelms Demand)</strong>, cho thấy áp lực thoát hàng của dòng tiền lớn.</li> <li><strong>Hành động giá:</strong> KDH đã gãy đường xu hướng tăng và các đường trung bình động ngắn hạn (MA10, MA20), chuyển sang trạng thái dò đáy.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Xu hướng Giảm ngắn hạn (Short-term Downtrend) đã được xác nhận.</li> <li><strong>Động lượng:</strong> RSI(14) cắm đầu xuống vùng 44.92, chưa đi vào vùng quá bán nhưng xung lực giảm đang mạnh. MACD Histogram cắt xuống dưới 0, báo hiệu chu kỳ điều chỉnh chưa kết thúc.</li> <li><strong>Vùng giá:</strong> Đang hướng về vùng hỗ trợ đáy cũ mạnh tại 31.5 - 32.0. Kháng cự gần nhất là vùng vừa gãy 34.3 - 34.5.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu quán tính giảm tiếp diễn và thủng mốc 33.0, giá sẽ nhanh chóng tìm về vùng cân bằng thấp hơn tại 31.5. Tuyệt đối không bắt đáy sớm.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Giá chững lại đà rơi quanh 33.0 và có nhịp hồi phục kỹ thuật (Technical Rebound) kiểm định lại vùng 34.3. Đây là cơ hội để <strong>cơ cấu giảm tỷ trọng</strong> cho các vị thế ngắn hạn.</p>"
-},
-{
-    "ticker": "DCM",
-    "exchange": "HSX",
-    "companyName": "Đạm Cà Mau",
-    "price": "33.85",
-    "priceChange": "+0.15 (+0.45%)",
-    "priceColorClass": "text-green",
-    "trendText": "📉 Trend: Giảm (Hồi kỹ thuật)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Hồi phục yếu (Weak Rally)",
-    "signalDesc": "Giá tăng nhẹ nhưng thanh khoản rất thấp (61% TB20), cho thấy lực cầu bắt đáy không mặn mà.",
-    "rsi": "44.28",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "61%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "34.40 (Kháng cự)",
-    "riskWarning": "Thị trường phân bón thế giới chưa có động lực tăng trưởng mới.",
-    "chartData": [35.95, 35.4, 34.2, 33.6, 33.8, 34.3, 34.7, 34.4, 35.0, 34.8, 35.35, 34.8, 34.05, 33.85, 33.55, 33.95, 33.95, 33.9, 33.7, 33.85],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến xanh thân nhỏ (Small Green Candle) nằm gọn trong biên độ giảm của phiên trước đó (Harami). Đây là mẫu hình cho thấy đà giảm tạm thời chững lại nhưng chưa đủ sức đảo chiều.</li> <li><strong>VSA:</strong> Khối lượng giao dịch sụt giảm mạnh, chỉ đạt 1.19 triệu đơn vị (61% trung bình 20 phiên). Trong một xu hướng giảm, giá hồi phục với Vol thấp (Low Volume Pullback) thường là bẫy tăng giá (Bulltrap) hoặc chỉ là nhịp nghỉ chân trước khi giảm tiếp.</li> <li><strong>Hành động giá:</strong> Giá vẫn đang vận động dưới đường kháng cự động MA20, xác nhận xu hướng chính vẫn là giảm.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Downtrend ngắn hạn. Cổ phiếu liên tục tạo các đỉnh và đáy thấp dần.</li> <li><strong>Động lượng:</strong> RSI(14) nhích nhẹ lên 44.28 nhưng vẫn nằm trong vùng tiêu cực. MACD Histogram vẫn đang âm, chưa có tín hiệu cắt lên.</li> <li><strong>Vùng giá:</strong> Đang nỗ lực giữ vùng hỗ trợ đáy cũ 33.5 - 33.6. Kháng cự mạnh ngay trên đầu là đường MA20 tại 34.4.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy ngắn hạn 33.5 với Vol gia tăng, DCM sẽ tiếp tục tìm đáy mới quanh 31.x - 32.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Hồi phục kỹ thuật lên test lại kháng cự 34.4. Đây là cơ hội tốt để <strong>cơ cấu hạ tỷ trọng</strong>, tuyệt đối chưa nên mua mới hay trung bình giá.</p>"
-},
-{
-    "ticker": "DPM",
-    "exchange": "HSX",
-    "companyName": "Đạm Phú Mỹ",
-    "price": "23.0",
-    "priceChange": "-0.10 (-0.43%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Tiêu cực",
-    "signalDesc": "Giá giảm về vùng đáy cũ, thanh khoản thấp (70% TB20) cho thấy dòng tiền không mặn mà bắt đáy.",
-    "rsi": "41.67",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "70%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "23.70 (Kháng cự)",
-    "riskWarning": "Ngành phân bón đã qua đỉnh chu kỳ lợi nhuận, thiếu động lực tăng trưởng mới.",
-    "chartData": [24.9, 24.45, 23.65, 23.3, 23.2, 23.6, 23.95, 23.85, 24.35, 24.15, 24.45, 24.25, 23.6, 23.15, 23.1, 23.45, 23.3, 23.1, 23.1, 23.0],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ tiếp tục đóng cửa tại mức thấp nhất phiên 23.0. Không có bóng nến dưới, cho thấy phe mua hoàn toàn buông xuôi tại vùng giá này.</li> <li><strong>VSA:</strong> Khối lượng giao dịch sụt giảm còn 3.06 triệu cổ phiếu (70% trung bình 20 phiên). Trong bối cảnh giá giảm, Vol thấp thể hiện sự <strong>'Thiếu cầu' (No Demand)</strong> nghiêm trọng. Giá giảm không phải vì áp lực bán quá mạnh mà vì không có người mua đỡ giá.</li> <li><strong>Hành động giá:</strong> Giá đang trôi dần (Drifting) về vùng hỗ trợ đáy cũ tháng trước, nằm hoàn toàn dưới các đường MA quan trọng.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Xu hướng Giảm ngắn hạn đang chi phối. Cấu trúc giá yếu.</li> <li><strong>Động lượng:</strong> RSI(14) lùi sâu về 41.67. MACD Histogram tiếp tục âm. Các chỉ báo kỹ thuật chưa cho thấy bất kỳ tín hiệu đảo chiều nào.</li> <li><strong>Vùng giá:</strong> Đang kiểm định lại vùng đáy cứng 22.1 - 22.2. Kháng cự gần nhất là đường MA20 đang chúc xuống tại 23.7.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy 22.1, DPM sẽ tiếp tục quá trình dò đáy về vùng 20.x - 21.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Cần một phiên bật tăng mạnh mẽ (Reversal Day) với thanh khoản lớn để xác nhận vùng 23.0 là đáy ngắn hạn. Nếu chỉ hồi phục yếu ớt lên 23.7, nhà đầu tư nên tận dụng để <strong>cơ cấu danh mục</strong> sang các nhóm ngành khỏe hơn.</p>"
-},
-{
-    "ticker": "HAH",
-    "exchange": "HSX",
-    "companyName": "Vận tải Hải An",
-    "price": "61.0",
-    "priceChange": "+0.20 (+0.33%)",
-    "priceColorClass": "text-green",
-    "trendText": "📉 Trend: Giảm (Điều chỉnh)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Suy yếu",
-    "signalDesc": "Gãy trend tăng ngắn hạn, hồi phục yếu ớt với thanh khoản thấp (70% TB20).",
-    "rsi": "48.17",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "70%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "63.00 (Kháng cự)",
-    "riskWarning": "Biến động mạnh của giá cước vận tải biển (BDI/SCFI) là yếu tố rủi ro cần theo dõi.",
-    "chartData": [60.9, 62.6, 60.8, 61.7, 61.3, 62.8, 66.0, 65.0, 66.0, 67.5, 66.3, 66.0, 64.6, 61.7, 60.3, 61.8, 60.3, 60.9, 60.8, 61.0],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến xanh thân nhỏ hoặc Doji đóng cửa tại 61.0. Sau nhịp giảm mạnh từ đỉnh 67.x, nến nhỏ cho thấy đà giảm tạm chững lại nhưng chưa có dấu hiệu đảo chiều dứt khoát.</li> <li><strong>VSA:</strong> Khối lượng giao dịch sụt giảm còn 1.68 triệu cổ phiếu (70% trung bình 20 phiên). Trong một xu hướng giảm, thanh khoản thấp ở các phiên xanh nhẹ thường là biểu hiện của <strong>'Thiếu cầu' (Lack of Demand)</strong>. Dòng tiền lớn chưa quay lại nâng đỡ giá.</li> <li><strong>Hành động giá:</strong> Giá đang vận động dưới đường trung bình động MA20, xác nhận xu hướng ngắn hạn đã chuyển sang giảm/điều chỉnh.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Đang trong pha điều chỉnh (Correction Phase). Cổ phiếu đã mất động lực tăng giá mạnh mẽ trước đó.</li> <li><strong>Động lượng:</strong> RSI(14) = 48.17, nằm dưới ngưỡng trung tính 50. MACD Histogram tiếp tục nằm ở vùng âm, cho thấy phe bán vẫn đang kiểm soát thế trận.</li> <li><strong>Vùng giá:</strong> Đang tích lũy lại quanh vùng 60.x - 61.x. Hỗ trợ cứng gần nhất là 53.4 (khá xa). Kháng cự mạnh là đường MA20 tại 63.0.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu không giữ được mốc 60.0, HAH có thể tiếp tục trượt giá về vùng hỗ trợ sâu hơn.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Có nhịp hồi phục kỹ thuật (Technical Rebound) kiểm định lại vùng kháng cự 62.9 - 63.0. Đây là điểm lý tưởng để <strong>cơ cấu hạ tỷ trọng</strong> danh mục.</p>"
-},
     {
-    "ticker": "MBS",
-    "exchange": "HNX",
-    "companyName": "Chứng khoán MB",
-    "price": "28.5",
-    "priceChange": "+0.20 (+0.71%)",
-    "priceColorClass": "text-green",
-    "trendText": "📉 Trend: Giảm (Bulltrap?)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Bulltrap (Bẫy tăng giá)",
-    "signalDesc": "Hồi phục nhẹ nhưng thanh khoản cao (121% TB20) cho thấy áp lực bán ở vùng giá trên vẫn rất mạnh.",
-    "rsi": "41.83",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "121%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "29.35 (Kháng cự)",
-    "riskWarning": "Nhóm chứng khoán có độ nhạy (Beta) cao, dễ bị tổn thương khi thị trường chung điều chỉnh.",
-    "chartData": [29.6, 29.7, 28.5, 28.9, 29.7, 30.1, 29.6, 30.1, 30.5, 30.5, 29.7, 29.5, 29.2, 29.4, 28.4, 29.4, 29.0, 28.5, 28.3, 28.5],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến xanh thân nhỏ đóng cửa tại 28.5. Sau phiên giảm điểm trước đó, nến xanh này mang tính chất 'cầm máu' nhiều hơn là đảo chiều.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 3.23 triệu cổ phiếu, cao hơn mức trung bình 20 phiên (121%). Trong một phiên hồi phục nhẹ, Vol cao cho thấy lực cung bán ra vẫn rất dồi dào, phe mua phải vất vả hấp thụ mới giữ được giá xanh. Đây chưa phải là tín hiệu tích cực.</li> <li><strong>Hành động giá:</strong> Giá vẫn đang nằm dưới đường trung bình động MA20 (vùng 29.3 - 29.4), xác nhận xu hướng giảm ngắn hạn vẫn còn nguyên hiệu lực.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Downtrend ngắn hạn. Cổ phiếu đang cố gắng tạo đáy ngắn hạn quanh 28.x nhưng chưa thành công.</li> <li><strong>Động lượng:</strong> RSI(14) ở mức 41.83 - Vùng tiêu cực. MACD Histogram vẫn âm.</li> <li><strong>Vùng giá:</strong> Đang được đỡ bởi hỗ trợ đáy cũ 28.0 - 28.3. Kháng cự mạnh ngay trên đầu là vùng kẹp hàng 29.3 - 29.5.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy 28.0 với Vol lớn, MBS sẽ kích hoạt đà giảm về vùng hỗ trợ sâu hơn tại 26.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Tiếp tục hồi phục kỹ thuật lên test vùng kháng cự 29.3. Nhà đầu tư kẹp hàng nên tận dụng nhịp này để bán ra (Sell the Rip), không nên mua đuổi.</p>"
-},
-{
-    "ticker": "FTS",
-    "exchange": "HSX",
-    "companyName": "Chứng khoán FPT",
-    "price": "32.3",
-    "priceChange": "+0.10 (+0.31%)",
-    "priceColorClass": "text-green",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Dò đáy",
-    "signalDesc": "RSI thủng mốc 40, giá nỗ lực cầm máu nhưng chưa thành công do thiếu dòng tiền.",
-    "rsi": "39.74",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "91%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "33.40 (Kháng cự)",
-    "riskWarning": "Thanh khoản nhóm chứng khoán đang teo tóp, rủi ro điều chỉnh vẫn còn.",
-    "chartData": [35.0, 34.6, 33.2, 32.95, 33.45, 33.85, 33.6, 33.7, 34.1, 34.4, 33.9, 33.65, 33.2, 33.05, 32.2, 33.05, 32.75, 32.4, 32.2, 32.3],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến xanh thân nhỏ (Small Real Body) đóng cửa tại 32.3. Đây chỉ là một phiên 'cầm máu' tạm thời sau chuỗi ngày giảm điểm liên tiếp, chưa đủ tín hiệu tin cậy để xác nhận đảo chiều (Reversal).</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 0.78 triệu cổ phiếu (91% trung bình 20 phiên). Thanh khoản ở mức trung bình và không có sự đột biến, cho thấy dòng tiền bắt đáy (Bottom Fishing) vẫn còn rất dè dặt.</li> <li><strong>Hành động giá:</strong> Cấu trúc giá vẫn rất yếu khi liên tục tạo đáy sau thấp hơn đáy trước (Lower Lows). Giá đang ngụp lặn dưới các đường MA quan trọng.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Xu hướng Giảm ngắn hạn (Short-term Downtrend) đang chi phối.</li> <li><strong>Động lượng:</strong> RSI(14) rơi về vùng 39.74 (Vùng yếu). Tâm lý nhà đầu tư đang khá bi quan. MACD Histogram tiếp tục nằm dưới 0.</li> <li><strong>Vùng giá:</strong> Đang mò mẫm tìm đáy quanh vùng 32.0. Kháng cự gần nhất là đường MA20 đang dốc xuống tại 33.4.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy tạm thời 32.0, FTS có nguy cơ kích hoạt làn sóng cắt lỗ và giải chấp (Margin Call), đẩy giá về vùng 30.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Giá cần hồi phục và tích lũy lại trên vùng 33.4 để phá vỡ xu hướng giảm. Hiện tại, nhịp hồi (nếu có) chỉ nên xem là cơ hội để <strong>thoát hàng/cơ cấu</strong>.</p>"
-},
-{
-    "ticker": "CTD",
-    "exchange": "HSX",
-    "companyName": "Xây dựng Coteccons",
-    "price": "83.9",
-    "priceChange": "-0.50 (-0.59%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Phân phối đỉnh",
-    "signalDesc": "Gãy đường xu hướng tăng trung hạn, mô hình 2 đỉnh (Double Top) đang hình thành rõ rệt.",
-    "rsi": "43.92",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "87%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "86.50 (Kháng cự)",
-    "riskWarning": "Cổ phiếu đã có nhịp tăng nóng trước đó, rủi ro giảm bù (Mean Reversion) là rất cao.",
-    "chartData": [95.67, 89.94, 83.71, 83.02, 84.1, 87.96, 87.37, 86.97, 87.76, 86.87, 85.69, 84.9, 84.9, 87.56, 85.88, 86.77, 86.48, 84.5, 84.4, 83.9],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ tiếp tục đóng cửa thấp dần (Lower Close). Đây là chuỗi nến giảm điểm dai dẳng sau khi giá thất bại trong việc chinh phục lại mốc 90.</li> <li><strong>VSA:</strong> Khối lượng giao dịch thấp hơn trung bình (87%), cho thấy lực bán tháo ồ ạt đã qua đi nhưng nguy hiểm nằm ở chỗ lực cầu (Buying Power) gần như biến mất. Giá 'rơi tự do' trong thanh khoản thấp (Drifting Down) là trạng thái rất tiêu cực.</li> <li><strong>Hành động giá:</strong> CTD đã xác nhận gãy vùng nền hỗ trợ quan trọng 86-87, chính thức chuyển pha từ Tăng sang Giảm/Tích lũy.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Xu hướng Giảm ngắn hạn đang chi phối. Cấu trúc đỉnh sau thấp hơn đỉnh trước (Lower Highs) đã được xác lập.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 43.92. MACD Histogram cắt xuống dưới 0 và mở rộng. Các chỉ báo kỹ thuật đều đồng thuận cho kịch bản điều chỉnh sâu hơn.</li> <li><strong>Vùng giá:</strong> Đang tìm về vùng hỗ trợ đáy cũ/nền tảng lớn tại 74.x - 75.x. Kháng cự mạnh bây giờ là vùng kẹp hàng 86.5 - 87.0.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng tiếp mốc 80.0, CTD sẽ kích hoạt mô hình Vai-Đầu-Vai lớn, mở ra nhịp giảm sâu về vùng 70.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Nếu có nhịp hồi phục kỹ thuật (Technical Rebound) lên kiểm định lại vùng đứt gãy 86.x, đây là <strong>cơ hội thoát hàng (Exit Point)</strong> tuyệt vời cho những nhà đầu tư còn kẹp vị thế.</p>"
-},
-{
-    "ticker": "CTR",
-    "exchange": "HSX",
-    "companyName": "Công trình Viettel",
-    "price": "87.0",
-    "priceChange": "-0.50 (-0.57%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Sideway Down)",
-    "dateText": "📅 12/02",
-    "signalTitle": "⚠️ Tín hiệu: Cạn cung (No Supply)",
-    "signalDesc": "Giá giảm nhẹ với Vol siêu thấp (27% TB20), cho thấy sự thờ ơ của dòng tiền.",
-    "rsi": "44.60",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "27%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "89.65 (Kháng cự)",
-    "riskWarning": "Thanh khoản cạn kiệt, rủi ro khó thoát hàng (Liquidity Risk) nếu thị trường biến động mạnh.",
-    "chartData": [90.5, 89.3, 89.3, 87.0, 90.0, 91.4, 92.9, 92.6, 91.2, 93.0, 92.5, 91.5, 90.3, 88.6, 86.2, 88.0, 87.8, 86.4, 87.5, 87.0],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ đóng cửa tại 87.0. Biên độ dao động trong phiên rất hẹp, phản ánh tâm lý chán nản và buông xuôi của nhà đầu tư.</li> <li><strong>VSA:</strong> Khối lượng giao dịch sụt giảm nghiêm trọng, chỉ đạt 140 nghìn đơn vị (27% mức trung bình). Đây là trạng thái <strong>'Cạn kiệt thanh khoản' (Liquidity Dry Up)</strong>. Trong một xu hướng giảm, điều này có nghĩa là nguồn cung giá thấp đã cạn (không ai muốn bán nữa), nhưng lực cầu (người mua) cũng hoàn toàn mất hút.</li> <li><strong>Hành động giá:</strong> Giá đang trôi dạt (Drifting) tìm đáy mới, nằm dưới đường MA20. Cổ phiếu dường như đã bị lãng quên.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá hoặc Đi ngang vùng đáy (Sideway Down). Cổ phiếu đã mất đi động lực tăng trưởng (Momentum) ngắn hạn.</li> <li><strong>Động lượng:</strong> RSI(14) đi ngang quanh vùng 44.6. MACD Histogram âm nhẹ. Tất cả đều cho thấy sự thiếu vắng xung lực.</li> <li><strong>Vùng giá:</strong> Đang tích lũy đáy quanh vùng 86.0 - 87.0. Kháng cự mạnh là đường MA20 tại 89.6.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy 86.0 với Vol đột biến, CTR sẽ xác nhận phá đáy và tìm về vùng 80.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Tiếp tục đi ngang (Sideway) thêm một thời gian dài với thanh khoản thấp để tạo nền tảng mới. Nhà đầu tư chỉ nên quan tâm trở lại khi thấy dấu hiệu của dòng tiền lớn (Vol bùng nổ > 1 triệu cp).</p>"
-},
-{
-    "ticker": "BVH",
-    "exchange": "HSX",
-    "companyName": "Tập đoàn Bảo Việt",
-    "price": "51.7",
-    "priceChange": "+0.20 (+0.39%)",
-    "priceColorClass": "text-green",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Hồi yếu (Weak Rally)",
-    "signalDesc": "Hồi phục kỹ thuật nhẹ nhưng vẫn nằm dưới MA20, thanh khoản (121% TB20) chưa đủ thuyết phục.",
-    "rsi": "45.37",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "121%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "53.20 (Kháng cự)",
-    "riskWarning": "Cổ phiếu vốn hóa lớn (Large Cap), thường biến động chậm và phụ thuộc vào sự điều tiết chỉ số.",
-    "chartData": [53.47, 53.08, 51.02, 52.0, 52.39, 54.94, 54.94, 55.3, 54.1, 54.2, 54.2, 55.3, 54.1, 53.2, 51.9, 51.9, 52.9, 52.1, 51.5, 51.7],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến xanh thân nhỏ (Small Green Candle) đóng cửa tại 51.7. Đây là nhịp hồi phục kỹ thuật nhẹ (Technical Rebound) sau chuỗi giảm điểm. Thân nến nhỏ cho thấy lực mua chưa quyết liệt, chủ yếu là lực đỡ giá tại vùng hỗ trợ.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 0.5 triệu cổ phiếu, cao hơn mức trung bình 20 phiên (121%). Việc Vol tăng trong phiên hồi phục là một điểm cộng, nhưng cần quan sát thêm: nếu giá không thể bứt phá mạnh, Vol cao này có thể là do phe bán tranh thủ thoát hàng giá tốt (Selling into Strength).</li> <li><strong>Hành động giá:</strong> Giá vẫn đang nằm dưới đường trung bình động 20 ngày (MA20), xác nhận xu hướng chính trong ngắn hạn vẫn là giảm/điều chỉnh.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá (Downtrend) ngắn hạn. Cổ phiếu đang tìm điểm cân bằng mới sau khi mất mốc 53.0.</li> <li><strong>Động lượng:</strong> RSI(14) = 45.37, nằm dưới ngưỡng 50 (Vùng yếu). MACD Histogram tiếp tục âm, chưa có tín hiệu cắt lên đường tín hiệu.</li> <li><strong>Vùng giá:</strong> Đang được hỗ trợ bởi vùng đáy cũ/nền giá dài hạn quanh 51.0 - 51.5. Kháng cự mạnh ngay trên đầu là đường MA20 tại 53.2.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng hỗ trợ 51.0 với Vol lớn, BVH sẽ mở biên rơi về vùng giá thấp hơn tại 48.x - 49.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Hồi phục kỹ thuật kiểm định lại vùng kháng cự 53.0 - 53.2. Đây là điểm lý tưởng để <strong>cơ cấu lại danh mục</strong>, hạ tỷ trọng đối với nhà đầu tư lướt sóng.</p>"
-},
-{
-    "ticker": "HDG",
-    "exchange": "HSX",
-    "companyName": "Tập đoàn Hà Đô",
-    "price": "31.1",
-    "priceChange": "-0.10 (-0.32%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Tiêu cực",
-    "signalDesc": "Giá giảm về vùng đáy cũ, rủi ro thủng đáy 31.0 là hiện hữu.",
-    "rsi": "45.63",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "97%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "31.75 (Kháng cự)",
-    "riskWarning": "Thủy điện gặp khó do El Nino, BĐS đóng băng thanh khoản.",
-    "chartData": [30.9, 31.4, 30.2, 30.2, 30.55, 31.55, 31.25, 32.7, 33.6, 32.8, 32.0, 32.4, 32.3, 32.8, 31.8, 32.5, 32.2, 31.75, 31.2, 31.1],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ đóng cửa thấp nhất phiên tại 31.1. Đây là tín hiệu tiếp diễn xu hướng giảm sau khi giá không thể vượt qua đường kháng cự động ngắn hạn.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 2.41 triệu cổ phiếu, xấp xỉ mức trung bình 20 phiên. Dù áp lực bán không quá ồ ạt (Panic Selling) nhưng sự thiếu vắng hoàn toàn của lực cầu (No Demand) khiến giá cứ lịm dần (Drifting Down).</li> <li><strong>Hành động giá:</strong> Giá đang mấp mé vùng hỗ trợ quan trọng 31.0. Việc đóng cửa sát mức này làm gia tăng rủi ro phá đáy trong các phiên tới.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá (Downtrend) ngắn hạn. Cổ phiếu Hà Đô đang chịu áp lực từ khó khăn chung của cả hai mảng kinh doanh cốt lõi là năng lượng và bất động sản.</li> <li><strong>Động lượng:</strong> RSI(14) = 45.63, nằm dưới 50. MACD Histogram tiếp tục âm. Các chỉ báo kỹ thuật đều đồng thuận cho thấy phe bán đang kiểm soát hoàn toàn thế trận.</li> <li><strong>Vùng giá:</strong> Đang kiểm định lại đáy cũ 31.0. Nếu thủng, hỗ trợ tiếp theo là vùng đáy dài hạn 29.8. Kháng cự gần nhất là MA20 tại 31.75.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng 31.0, HDG sẽ mở biên rơi về vùng 29.x. Nhà đầu tư cầm hàng cần tuân thủ kỷ luật cắt lỗ.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Cần giữ vững mốc 31.0 và có nhịp hồi phục kỹ thuật lên 31.75. Đây là cơ hội để <strong>cơ cấu thoát hàng</strong>, chưa phù hợp để mua mới.</p>"
-},
-{
-    "ticker": "LPB",
-    "exchange": "HSX",
-    "companyName": "LPBank",
-    "price": "47.5",
-    "priceChange": "-0.40 (-0.84%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Thiếu cầu (No Demand)",
-    "signalDesc": "Giá trượt giảm về vùng thấp nhất đợt điều chỉnh, thanh khoản thấp (82% TB20) cho thấy dòng tiền bắt đáy vắng bóng.",
-    "rsi": "39.21",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "82%",
-    "buyZone": "Tuyệt đối không mua",
-    "cutLoss": "N/A",
-    "target": "49.00 (Kháng cự)",
-    "riskWarning": "Cổ phiếu đã tăng nóng giai đoạn trước, rủi ro điều chỉnh sâu để rũ bỏ margin là rất cao.",
-    "chartData": [51.5, 51.5, 49.3, 48.3, 47.5, 48.65, 48.9, 49.9, 50.2, 49.55, 49.5, 49.3, 48.55, 48.55, 49.0, 49.6, 49.3, 48.6, 47.9, 47.5],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ đóng cửa tại mức thấp nhất phiên 47.5. Đây là phiên giảm điểm thứ 4 liên tiếp, xác nhận đà rơi chưa có dấu hiệu dừng lại.</li> <li><strong>VSA:</strong> Khối lượng giao dịch thấp hơn trung bình (82%). Trong xu hướng giảm, Vol thấp không hẳn là tốt (cạn cung) mà thường là tín hiệu <strong>'Thiếu Cầu' (Lack of Demand)</strong>. Giá giảm dễ dàng vì không có lực mua đối ứng.</li> <li><strong>Hành động giá:</strong> LPB đã gãy hoàn toàn các đường xu hướng ngắn hạn và đang quay lại kiểm định vùng đáy thấp nhất của nhịp chỉnh trước đó.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Xu hướng Giảm (Bearish) đang chi phối. Cấu trúc đỉnh sau thấp hơn đỉnh trước (Lower Highs) rất rõ ràng từ vùng giá 51.x về 47.x.</li> <li><strong>Động lượng:</strong> RSI(14) đã xuyên thủng mốc 40, rơi về 39.21. Đây là vùng tâm lý yếu, nhà đầu tư cầm hàng dễ hoảng loạn. MACD Histogram âm và mở rộng xuống dưới.</li> <li><strong>Vùng giá:</strong> Đang mấp mé phá vỡ hỗ trợ 47.5. Nếu thủng, vùng hỗ trợ tiếp theo khá xa ở 44.x - 45.x. Kháng cự gần nhất là vùng kẹp hàng 49.0 - 49.5.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Thủng mốc 47.5 sẽ kích hoạt đà bán tháo kỹ thuật (Technical Selling) về vùng 45.0.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Giá cần ngưng giảm và đi ngang tích lũy quanh 47-48 trong ít nhất 3-5 phiên tới. Các nhịp hồi phục lên 49.0 (nếu có) chỉ nên xem là cơ hội để <strong>thoát hàng</strong>.</p>"
-},
-{
-    "ticker": "IDC",
-    "exchange": "HNX",
-    "companyName": "Tổng công ty IDICO",
-    "price": "39.7",
-    "priceChange": "-0.20 (-0.50%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Gãy nền (Broken Support)",
-    "signalDesc": "Giá xuyên thủng mốc hỗ trợ tâm lý 40.0, thanh khoản thấp (67% TB20) cho thấy cầu yếu.",
-    "rsi": "49.83",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "67%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "40.20 (Kháng cự)",
-    "riskWarning": "Nhóm BĐS Khu công nghiệp đang chững lại sau giai đoạn tăng nóng đầu năm.",
-    "chartData": [38.6, 38.3, 38.0, 37.6, 39.2, 39.3, 41.7, 42.7, 42.4, 41.1, 41.5, 41.2, 41.2, 40.0, 39.8, 40.9, 39.8, 40.3, 39.9, 39.7],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ tiếp tục đóng cửa thấp hơn phiên trước. Đây là dạng vận động 'Cưa chân bàn' (Grinding Down), giá giảm từ từ gây ức chế tâm lý nhưng không có phiên bán tháo (Washout) để rũ bỏ dứt khoát.</li> <li><strong>VSA:</strong> Khối lượng giao dịch sụt giảm còn 1.69 triệu đơn vị (67% trung bình). Trạng thái này gọi là <strong>'Thiếu Cầu' (Lack of Demand)</strong>: Người bán không bán mạnh, nhưng người mua cũng không chấp nhận trả giá cao hơn, khiến giá cứ lịm dần.</li> <li><strong>Hành động giá:</strong> Việc để mất mốc hỗ trợ tròn số 40.0 là một tín hiệu tiêu cực về mặt kỹ thuật, biến vùng hỗ trợ này thành kháng cự trong ngắn hạn.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Đang trong nhịp điều chỉnh ngắn hạn. Cổ phiếu đã mất động lực tăng giá (Momentum) sau khi không thể vượt đỉnh 42.x.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 49.83, chớm mất mốc 50. MACD Histogram cắt xuống dưới 0. Các chỉ báo đều ủng hộ phe Gấu.</li> <li><strong>Vùng giá:</strong> Đang trôi về vùng hỗ trợ đáy cũ/MA200 tại 38.x. Kháng cự gần nhất là vùng nền vừa gãy 40.0 - 40.2.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy 38.0, IDC sẽ xác nhận mô hình đảo chiều và tìm về vùng cân bằng thấp hơn tại 35.x - 36.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Cần sớm lấy lại mốc 40.0 và tích lũy đi ngang trên đó để ổn định tâm lý. Hiện tại, nhà đầu tư nên đứng ngoài quan sát, chưa có điểm mua an toàn.</p>"
-},
-{
-    "ticker": "DPG",
-    "exchange": "HSX",
-    "companyName": "Tập đoàn Đạt Phương",
-    "price": "42.8",
-    "priceChange": "-0.40 (-0.93%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Suy yếu",
-    "signalDesc": "Giá giảm thủng nền tích lũy ngắn hạn kèm thanh khoản gia tăng (115% TB20), áp lực bán chủ động mạnh.",
-    "rsi": "41.93",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "115%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "43.90 (Kháng cự)",
-    "riskWarning": "Thanh khoản cổ phiếu không quá dồi dào, dễ bị biến động mạnh khi có lệnh bán lớn.",
-    "chartData": [43.45, 43.55, 42.55, 42.7, 42.7, 43.95, 43.55, 44.2, 44.95, 45.65, 44.8, 44.2, 44.5, 44.0, 44.05, 44.75, 44.2, 43.6, 43.2, 42.8],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ bao trùm (Bearish Engulfing) đóng cửa tại mức thấp nhất phiên 42.8. Đây là mẫu hình nến đảo chiều giảm rất mạnh, phủ nhận hoàn toàn nỗ lực hồi phục yếu ớt của các phiên trước đó.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 0.65 triệu cổ phiếu, vượt 15% so với mức trung bình 20 phiên. Hành động giá giảm đi kèm khối lượng tăng (Volume Expansion on Downside) xác nhận phe bán đang chiếm ưu thế kiểm soát và quyết liệt hạ giá.</li> <li><strong>Hành động giá:</strong> Giá đã chính thức xuyên thủng các đường trung bình động ngắn hạn (MA10, MA20) và đang quay lại kiểm định vùng đáy hỗ trợ cũ.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Chuyển từ đi ngang sang Giảm giá ngắn hạn. Cổ phiếu đang trong quá trình điều chỉnh (Correction) sau nhịp tăng.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 41.93, nằm sâu dưới 50. MACD Histogram tiếp tục âm và mở rộng. Các chỉ báo kỹ thuật chưa cho thấy dấu hiệu dừng lại của đà giảm.</li> <li><strong>Vùng giá:</strong> Đang test lại vùng hỗ trợ quan trọng 42.2 - 42.5. Kháng cự gần nhất là đường MA20 tại 43.9.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy 42.2 với Vol lớn, DPG sẽ mở biên rơi về vùng giá thấp hơn tại 40.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Nếu có nhịp hồi phục kỹ thuật (Technical Rebound) kiểm định lại vùng kháng cự 43.8 - 43.9, đây là điểm lý tưởng để <strong>cơ cấu lại danh mục</strong>, hạ tỷ trọng.</p>"
-},
-              {
-    "ticker": "HSG",
-    "exchange": "HSX",
-    "companyName": "Tập đoàn Hoa Sen",
-    "price": "16.5",
-    "priceChange": "0.00 (0.00%)",
-    "priceColorClass": "text-yellow",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "⚠️ Tín hiệu: Quá bán (Oversold)",
-    "signalDesc": "RSI rơi sâu về vùng 34.77, cảnh báo lực bán quá đà, có thể xuất hiện nhịp hồi kỹ thuật.",
-    "rsi": "34.77",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "99%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "16.95 (Kháng cự)",
-    "riskWarning": "Biên lợi nhuận ngành thép đang chịu áp lực thu hẹp do giá nguyên liệu biến động.",
-    "chartData": [17.1, 17.0, 16.85, 16.85, 16.9, 17.1, 17.05, 17.05, 17.2, 17.3, 17.3, 17.1, 17.1, 16.9, 16.7, 16.85, 16.85, 16.7, 16.5, 16.5],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến Doji đóng cửa tại tham chiếu 16.5. Cây nến thể hiện sự cân bằng tạm thời (Equilibrium) giữa cung và cầu tại vùng đáy ngắn hạn sau chuỗi giảm điểm.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 3.28 triệu cổ phiếu (99% mức trung bình). Thanh khoản duy trì ở mức trung bình cho thấy áp lực bán tháo đã giảm bớt, nhưng quan trọng là chưa thấy dấu hiệu dòng tiền lớn (Smart Money) quay trở lại gom hàng.</li> <li><strong>Hành động giá:</strong> Giá đang trôi dần (Drifting) về vùng đáy cũ, nằm hoàn toàn dưới các đường MA quan trọng, xác nhận xu hướng giảm vẫn đang chi phối.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá (Downtrend) ngắn hạn. Cổ phiếu liên tục tạo các đỉnh sau thấp hơn đỉnh trước.</li> <li><strong>Động lượng:</strong> RSI(14) đã giảm sâu về 34.77 - Vùng quá bán (Oversold). Theo thống kê, khi RSI về vùng này thường sẽ có nhịp hồi phục kỹ thuật (Dead Cat Bounce) do lực bán cạn kiệt. MACD Histogram vẫn âm.</li> <li><strong>Vùng giá:</strong> Đang kiểm định lại vùng đáy hỗ trợ 16.3. Kháng cự gần nhất là đường MA20 tại 16.95.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng đáy 16.3 với Vol lớn, HSG sẽ mở biên rơi về vùng giá thấp hơn tại 15.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Xuất hiện nhịp hồi phục kỹ thuật lên kiểm định vùng 16.9 - 17.0. Đây là cơ hội để lướt sóng T+ (rủi ro cao) hoặc <strong>cơ cấu hạ giá vốn</strong> cho nhà đầu tư kẹp hàng.</p>"
-},
-{
-    "ticker": "NKG",
-    "exchange": "HSX",
-    "companyName": "Thép Nam Kim",
-    "price": "15.95",
-    "priceChange": "-0.05 (-0.31%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Tiêu cực",
-    "signalDesc": "Chính thức thủng mốc hỗ trợ tâm lý 16.0 với thanh khoản thấp (72% TB20), biểu hiện của sự thiếu cầu.",
-    "rsi": "40.12",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "72%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "16.65 (Kháng cự)",
-    "riskWarning": "Giá thép HRC thế giới giảm và nhu cầu nội địa yếu đang gây áp lực lên biên lợi nhuận.",
-    "chartData": [16.95, 16.75, 16.7, 16.35, 16.45, 17.1, 16.95, 17.05, 17.25, 17.25, 17.2, 16.8, 16.5, 16.4, 16.1, 16.6, 16.35, 16.2, 16.0, 15.95],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ đóng cửa thấp nhất phiên tại 15.95. Dù biên độ giảm không lớn, nhưng việc đóng cửa dưới mốc tròn số 16.0 là một tín hiệu kỹ thuật xấu, xác nhận phe Gấu vẫn làm chủ cuộc chơi.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 5.23 triệu cổ phiếu (72% trung bình 20 phiên). Thanh khoản thấp cho thấy không có lực bán tháo ồ ạt, nhưng nguy hiểm hơn là <strong>'Cầu rỗng' (Hollow Demand)</strong>. Phe mua hoàn toàn vắng bóng, để mặc cho giá trôi.</li> <li><strong>Hành động giá:</strong> Cổ phiếu liên tục tạo đáy sau thấp hơn đáy trước (Lower Lows). Việc mất mốc 16.0 có thể kích hoạt các lệnh cắt lỗ tự động của nhà đầu tư cá nhân.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá (Bearish) ngắn hạn. Nhóm thép (HPG, HSG, NKG) đang đồng loạt suy yếu so với thị trường chung.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 40.12, tiệm cận vùng quá bán. MACD Histogram tiếp tục âm. Động lượng rất yếu ớt.</li> <li><strong>Vùng giá:</strong> Đang hướng về vùng hỗ trợ đáy cũ mạnh hơn tại 15.0 - 15.5. Kháng cự gần nhất là đường MA20 tại 16.65.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu tiếp tục thủng 15.5, NKG sẽ mở biên rơi về vùng đáy dài hạn 14.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Cần lấy lại mốc 16.0 ngay trong phiên tới và tích lũy trên đó. Các nhịp hồi phục lên 16.5 - 16.6 là cơ hội để <strong>cơ cấu hạ tỷ trọng</strong>.</p>"
-},
-{
-    "ticker": "NLG",
-    "exchange": "HSX",
-    "companyName": "Đầu tư Nam Long",
-    "price": "35.2",
-    "priceChange": "-0.45 (-1.26%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Bán mạnh",
-    "signalDesc": "Giá giảm gãy nền 36.0 kèm thanh khoản gia tăng (114% TB20), áp lực thoát hàng chủ động.",
-    "rsi": "42.47",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "114%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "36.50 (Kháng cự)",
-    "riskWarning": "Thị trường BĐS vẫn trầm lắng, rủi ro thanh khoản của các dự án.",
-    "chartData": [37.6, 37.95, 37.65, 36.5, 36.35, 36.8, 36.5, 37.2, 37.9, 37.5, 36.3, 35.35, 35.95, 35.85, 35.0, 36.15, 35.7, 35.95, 35.65, 35.2],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ thân dài đóng cửa tại mức thấp nhất phiên 35.2. Đây là dạng nến <strong>Bearish Marubozu</strong>, thể hiện sự quyết liệt của phe bán từ đầu đến cuối phiên, không cho phép giá hồi phục.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 1.94 triệu cổ phiếu, cao hơn 14% so với mức trung bình 20 phiên. Hành động giá giảm mạnh đi kèm sự gia tăng về thanh khoản xác nhận áp lực bán là thực chất (Real Selling Pressure), không phải chỉ là rũ bỏ nhẹ.</li> <li><strong>Hành động giá:</strong> Cổ phiếu đã chính thức đánh mất vùng nền tích lũy ngắn hạn 36.0 - 36.5, mở ra biên độ giảm giá mới.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Xu hướng Giảm ngắn hạn đã hình thành. Cấu trúc đỉnh và đáy thấp dần (Lower Highs & Lower Lows) đang chi phối diễn biến giá.</li> <li><strong>Động lượng:</strong> RSI(14) cắm đầu về 42.47, chưa quá bán nhưng xung lực giảm đang gia tăng. MACD Histogram tiếp tục âm và mở rộng biên độ.</li> <li><strong>Vùng giá:</strong> Đang hướng về vùng hỗ trợ đáy cũ/hỗ trợ tâm lý quanh 34.0 - 34.2. Kháng cự mạnh bây giờ là vùng nền vừa gãy 36.0 - 36.5.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng tiếp vùng hỗ trợ 34.0, NLG có thể bị bán tháo về vùng giá 32.x. Đây là kịch bản rủi ro cao.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Giá cần ngưng giảm và đi ngang (Base Building) quanh 35.0 ít nhất 3 phiên. Các nhịp hồi phục lên test lại 36.5 là cơ hội để <strong>bán cơ cấu</strong>.</p>"
-},
-{
-    "ticker": "REE",
-    "exchange": "HSX",
-    "companyName": "Cơ Điện Lạnh",
-    "price": "63.1",
-    "priceChange": "-1.50 (-2.32%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Bán tháo (Selling Climax)",
-    "signalDesc": "Giá giảm biên độ lớn (-2.3%) thủng nền, kèm Vol tăng vọt (130% TB20).",
-    "rsi": "38.76",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "130%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "65.50 (Kháng cự)",
-    "riskWarning": "Gãy nền tích lũy dài hạn, rủi ro mô hình 2 đỉnh lớn.",
-    "chartData": [65.2, 65.1, 64.6, 63.5, 63.9, 64.5, 65.8, 66.4, 66.3, 67.4, 68.0, 67.5, 67.0, 66.3, 65.0, 65.0, 66.0, 65.2, 64.6, 63.1],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ đặc thân dài (Bearish Marubozu) đóng cửa thấp nhất phiên tại 63.1. Đây là cây nến tiêu cực nhất trong vòng 1 tháng qua, xác nhận sự áp đảo hoàn toàn của phe bán.</li> <li><strong>VSA:</strong> Khối lượng giao dịch tăng lên mức 130% so với trung bình 20 phiên. Hành động giá giảm mạnh (Spread lớn) đi kèm Volume lớn xác nhận đây là nhịp <strong>Bán tháo (Selling Climax)</strong>, dòng tiền lớn đang thoát vị thế quyết liệt.</li> <li><strong>Hành động giá:</strong> REE đã chính thức đánh mất vùng hỗ trợ quan trọng 64.5 - 65.0, phá vỡ cấu trúc đi ngang tích lũy trước đó để mở ra xu hướng giảm.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Xu hướng Giảm ngắn hạn đang chi phối mạnh. Cổ phiếu đã tạo đỉnh sau thấp hơn đỉnh trước (Lower Highs) và đáy sau thấp hơn đáy trước (Lower Lows).</li> <li><strong>Động lượng:</strong> RSI(14) cắm đầu về vùng 38.76, cho thấy xung lực giảm rất mạnh. MACD Histogram mở rộng biên độ âm. Chưa có tín hiệu phân kỳ dương nào xuất hiện.</li> <li><strong>Vùng giá:</strong> Đang rơi tự do tìm đáy mới. Vùng hỗ trợ tâm lý tiếp theo là mốc tròn số 60.0. Kháng cự mạnh bây giờ là vùng nền vừa gãy 65.0 - 65.5.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu không giữ được mốc 62.0, REE sẽ tiếp tục trượt giá về vùng hỗ trợ cứng dài hạn quanh 58.x - 60.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Giá chững lại đà giảm và có nhịp hồi phục kỹ thuật (Technical Rebound) kiểm định lại vùng 65.0. Đây là cơ hội cuối cùng để <strong>cơ cấu thoát hàng</strong> cho nhà đầu tư lỡ kẹp ở vùng giá cao.</p>"
-},
-{
-    "ticker": "SIP",
-    "exchange": "HSX",
-    "companyName": "Đầu tư Sài Gòn VRG",
-    "price": "55.8",
-    "priceChange": "-0.20 (-0.36%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Điều chỉnh)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Điều chỉnh tích lũy",
-    "signalDesc": "Giá giảm nhẹ dưới MA20, thanh khoản thấp (82% TB20) cho thấy áp lực bán không quá lớn.",
-    "rsi": "47.53",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "82%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "56.50 (Kháng cự)",
-    "riskWarning": "Thanh khoản cổ phiếu SIP thường thấp, dễ bị biến động giá lớn khi có lệnh quét.",
-    "chartData": [54.96, 55.55, 54.08, 54.08, 53.39, 54.47, 57.03, 58.01, 59.49, 58.7, 57.8, 58.0, 57.7, 57.0, 57.0, 57.7, 57.0, 56.6, 56.0, 55.8],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ giảm điểm nhẹ. Đây là phiên giảm thứ 4 liên tiếp nhưng biên độ giảm không lớn, cho thấy tâm lý chán nản (Drifting) hơn là bán tháo.</li> <li><strong>VSA:</strong> Khối lượng giao dịch thấp dưới trung bình (82%). Trạng thái <strong>'Tiết Cung' (Supply Drying Up)</strong> được duy trì, nghĩa là người cầm cổ phiếu không muốn bán giá rẻ, nhưng lực cầu (Demand) cũng chưa thấy lý do để mua lên.</li> <li><strong>Hành động giá:</strong> Giá đang vận động dưới đường xu hướng ngắn hạn MA20, xác nhận xu hướng điều chỉnh đang diễn ra.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Xu hướng chủ đạo là Đi ngang/Giảm nhẹ (Sideway Down). Sau nhịp tăng lên 60.x, cổ phiếu đang trong quá trình tiêu hóa lượng cung chốt lời.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 47.53, mất mốc 50. MACD Histogram cắt xuống dưới 0. Các chỉ báo đều ở mức trung tính thiên về tiêu cực.</li> <li><strong>Vùng giá:</strong> Đang tích lũy lại quanh vùng nền cũ 55.x - 56.x. Kháng cự gần nhất là đường MA20 tại 56.5.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng nền 54.0 với Vol lớn, SIP sẽ xác nhận phá đáy và tìm về vùng 50.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Cần sớm lấy lại mốc 56.5 và tích lũy trên đó. Với thanh khoản thấp như hiện tại, chỉ cần một dòng tiền nhỏ cũng có thể đẩy giá đảo chiều, nhưng nhà đầu tư nên chờ xác nhận.</p>"
-},
-{
-    "ticker": "SSI",
-    "exchange": "HSX",
-    "companyName": "Chứng khoán SSI",
-    "price": "32.3",
-    "priceChange": "+0.30 (+0.94%)",
-    "priceColorClass": "text-green",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Hồi yếu (Weak Rally)",
-    "signalDesc": "Giá tăng nhẹ nhưng gặp áp lực bán lớn (Vol 116% TB20), chưa vượt được kháng cự.",
-    "rsi": "37.31",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "116%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "34.10 (Kháng cự)",
-    "riskWarning": "Cổ phiếu đầu ngành chứng khoán đang dẫn đầu đà giảm, rủi ro điều chỉnh theo thị trường chung.",
-    "chartData": [34.9, 34.3, 32.95, 33.6, 34.85, 35.5, 34.95, 34.95, 35.4, 35.55, 34.65, 34.8, 34.3, 34.4, 32.85, 34.0, 33.2, 32.8, 32.0, 32.3],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến xanh thân nhỏ đóng cửa tại 32.3. Đây là nhịp hồi phục kỹ thuật (Technical Rebound) sau khi giá chạm vùng hỗ trợ tâm lý 32.0.</li> <li><strong>VSA:</strong> Khối lượng giao dịch tăng lên 31.34 triệu cổ phiếu (116% trung bình 20 phiên). Tuy nhiên, giá chỉ tăng nhẹ (+0.94%) cho thấy lực cung bán ra tại vùng giá xanh là rất lớn (Supply Overhang). Dòng tiền bắt đáy vào nhưng phe bán cũng tranh thủ thoát hàng quyết liệt.</li> <li><strong>Hành động giá:</strong> Giá vẫn đang nằm dưới đường trung bình động 20 phiên (MA20), xác nhận xu hướng chính vẫn là giảm.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá (Downtrend) ngắn hạn. Nhóm chứng khoán đang thiếu động lực tăng trưởng mới.</li> <li><strong>Động lượng:</strong> RSI(14) = 37.31, nằm sâu trong vùng yếu. MACD Histogram tiếp tục âm và chưa có dấu hiệu đảo chiều.</li> <li><strong>Vùng giá:</strong> Đang nỗ lực tạo đáy ngắn hạn quanh 32.0. Kháng cự mạnh gần nhất là vùng đáy cũ vừa thủng tại 34.1.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng đáy 32.0 với Vol lớn, SSI sẽ kích hoạt đà bán tháo về vùng hỗ trợ sâu hơn tại 30.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Tiếp tục hồi phục kỹ thuật lên kiểm định vùng 34.1. Đây là cơ hội để <strong>cơ cấu danh mục</strong>, hạ tỷ trọng cho nhà đầu tư kẹp hàng.</p>"
-},
-{
-    "ticker": "SZC",
-    "exchange": "HSX",
-    "companyName": "Sonadezi Châu Đức",
-    "price": "30.75",
-    "priceChange": "0.00 (0.00%)",
-    "priceColorClass": "text-yellow",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Tiêu cực",
-    "signalDesc": "Giá trôi dạt (Drifting) dưới đường MA20, thanh khoản thấp (77% TB20) phản ánh sự thiếu vắng lực cầu.",
-    "rsi": "42.56",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "77%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "31.35 (Kháng cự)",
-    "riskWarning": "Nhóm BĐS Khu công nghiệp đang thiếu thông tin hỗ trợ ngắn hạn để bứt phá.",
-    "chartData": [30.85, 31.3, 30.3, 30.05, 30.2, 30.6, 32.0, 32.0, 32.65, 32.45, 32.1, 32.45, 31.9, 31.65, 31.0, 31.4, 31.35, 30.9, 30.75, 30.75],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến thân nhỏ hoặc Doji đóng cửa tại tham chiếu 30.75. Cây nến cho thấy sự lưỡng lự (Indecision) và cân bằng tạm thời giữa cung và cầu tại vùng giá thấp.</li> <li><strong>VSA:</strong> Khối lượng giao dịch sụt giảm, chỉ đạt 0.46 triệu đơn vị (77% trung bình 20 phiên). Trong xu hướng giảm, đây là trạng thái <strong>'Thiếu Cầu' (Lack of Demand)</strong> điển hình. Người bán đã chán nản ngừng bán, nhưng người mua cũng chưa thấy mức giá này đủ hấp dẫn để giải ngân mạnh.</li> <li><strong>Hành động giá:</strong> Giá đang trôi dạt (Drifting) tìm đáy mới dưới đường trung bình động MA20, xác nhận xu hướng giảm ngắn hạn vẫn đang hiện hữu.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá (Bearish Trend) ngắn hạn. Cổ phiếu liên tục tạo các đỉnh sau thấp hơn đỉnh trước.</li> <li><strong>Động lượng:</strong> RSI(14) = 42.56, nằm trong vùng tiêu cực. MACD Histogram tiếp tục âm. Các chỉ báo kỹ thuật chưa cho thấy bất kỳ tín hiệu đảo chiều nào đáng tin cậy.</li> <li><strong>Vùng giá:</strong> Đang kiểm định lại vùng hỗ trợ đáy cũ 29.3 - 29.5. Kháng cự gần nhất là đường MA20 tại 31.35.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy 29.3 với Vol gia tăng, SZC sẽ mở biên rơi về vùng hỗ trợ sâu hơn tại 27.x - 28.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Cần một phiên bùng nổ vượt 31.5 với thanh khoản lớn để xác nhận đảo chiều. Hiện tại, các nhịp hồi phục kỹ thuật lên 31.3 là cơ hội để <strong>cơ cấu hạ tỷ trọng</strong>.</p>"
-},
-{
-    "ticker": "TCM",
-    "exchange": "HSX",
-    "companyName": "Dệt may Thành Công",
-    "price": "28.0",
-    "priceChange": "-0.05 (-0.18%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "🔴 Tín hiệu: Tiêu cực",
-    "signalDesc": "Giá giảm nhẹ dưới MA20, thanh khoản thấp (85% TB20) cho thấy dòng tiền lớn chưa mặn mà.",
-    "rsi": "40.28",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "85%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "28.25 (Kháng cự)",
-    "riskWarning": "Ngành dệt may đang đối mặt với khó khăn về đơn hàng và tỷ giá.",
-    "chartData": [28.1, 28.15, 27.9, 27.6, 27.6, 27.6, 28.25, 28.9, 28.95, 29.0, 28.75, 28.65, 28.5, 28.45, 28.1, 28.2, 28.2, 28.2, 28.05, 28.0],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ giảm điểm nhẹ. Thân nến nhỏ và bóng nến ngắn cho thấy biên độ giao dịch hẹp, tâm lý thị trường đang rất thận trọng và ảm đạm.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 1.13 triệu đơn vị (85% trung bình 20 phiên). Áp lực bán không quá lớn nhưng vấn đề nằm ở <strong>'Thiếu Cầu' (Lack of Demand)</strong>. Dòng tiền thông minh (Smart Money) dường như đang lãng quên cổ phiếu này.</li> <li><strong>Hành động giá:</strong> Giá đang trôi dần (Drifting) tìm đáy mới, liên tục nằm dưới các đường trung bình động ngắn hạn (MA10, MA20).</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá (Bearish Trend) ngắn hạn. Cấu trúc đỉnh sau thấp hơn đỉnh trước vẫn được duy trì.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 40.28, nằm trong vùng tiêu cực. MACD Histogram tiếp tục âm. Chưa có tín hiệu đảo chiều nào xuất hiện.</li> <li><strong>Vùng giá:</strong> Đang kiểm định lại vùng đáy cũ 27.6. Kháng cự gần nhất là đường MA20 tại 28.25.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy 27.6, TCM sẽ mở biên rơi về vùng hỗ trợ sâu hơn tại 26.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Giá cần hồi phục vượt lên trên 28.3 và tích lũy lại để phá vỡ xu hướng giảm. Hiện tại chỉ phù hợp để quan sát.</p>"
-},
-{
-    "ticker": "TNG",
-    "exchange": "HNX",
-    "companyName": "Đầu tư và Thương mại TNG",
-    "price": "18.9",
-    "priceChange": "0.00 (0.00%)",
-    "priceColorClass": "text-yellow",
-    "trendText": "📉 Trend: Giảm (Sideway Down)",
-    "dateText": "📅 12/02",
-    "signalTitle": "⚠️ Tín hiệu: Cạn cầu (No Demand)",
-    "signalDesc": "Giá đi ngang vùng đáy, thanh khoản thấp (63% TB20) cho thấy không có lực mua.",
-    "rsi": "45.99",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "63%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "19.25 (Kháng cự)",
-    "riskWarning": "Dòng tiền vào nhóm dệt may rất yếu, cổ phiếu thiếu động lực tăng.",
-    "chartData": [18.89, 19.08, 18.79, 18.11, 18.5, 18.7, 19.3, 19.7, 20.0, 20.1, 19.7, 19.9, 19.6, 19.5, 19.1, 19.3, 19.4, 19.3, 18.9, 18.9],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến thân nhỏ/Doji đóng cửa tại tham chiếu 18.9. Biên độ dao động trong phiên rất hẹp, phản ánh tâm lý chán nản và thận trọng của nhà đầu tư.</li> <li><strong>VSA:</strong> Khối lượng giao dịch sụt giảm mạnh, chỉ đạt 0.62 triệu đơn vị (63% trung bình 20 phiên). Đây là trạng thái <strong>'Thiếu Cầu' (Lack of Demand)</strong> điển hình. Áp lực bán không quá mạnh (không có bán tháo), nhưng bên mua hoàn toàn thờ ơ, không chấp nhận mua lên.</li> <li><strong>Hành động giá:</strong> Giá đang trôi dạt (Drifting) tìm đáy mới dưới đường trung bình động MA20, xác nhận xu hướng giảm ngắn hạn vẫn đang hiện hữu.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá hoặc Đi ngang vùng đáy (Sideway Down). Cổ phiếu đã mất động lực tăng trưởng (Momentum) ngắn hạn.</li> <li><strong>Động lượng:</strong> RSI(14) đi ngang quanh vùng 45.99. MACD Histogram tiếp tục âm. Tất cả đều cho thấy sự thiếu vắng xung lực.</li> <li><strong>Vùng giá:</strong> Đang tích lũy đáy quanh vùng 18.8 - 18.9. Hỗ trợ cứng là đáy cũ 17.6. Kháng cự mạnh là đường MA20 tại 19.25.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy 18.0 với Vol đột biến, TNG sẽ xác nhận phá đáy và tìm về vùng 17.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Tiếp tục đi ngang (Sideway) thêm một thời gian dài với thanh khoản thấp để tạo nền tảng mới. Chỉ quan tâm trở lại khi thấy dấu hiệu của dòng tiền lớn (Vol bùng nổ > 1.5 triệu cp).</p>"
-},
-{
-    "ticker": "VCB",
-    "exchange": "HSX",
-    "companyName": "Vietcombank",
-    "price": "57.6",
-    "priceChange": "+0.10 (+0.17%)",
-    "priceColorClass": "text-green",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "⚠️ Tín hiệu: Quá bán (Oversold)",
-    "signalDesc": "RSI giảm sâu về 33.09, vùng cực kỳ rủi ro nhưng cũng báo hiệu khả năng có nhịp hồi phục kỹ thuật.",
-    "rsi": "33.09",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "111%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "59.00 (Kháng cự)",
-    "riskWarning": "Là cổ phiếu trụ điều tiết chỉ số, VCB thường bị bán mạnh khi thị trường phái sinh biến động.",
-    "chartData": [60.8, 60.3, 59.3, 58.8, 58.9, 59.5, 59.8, 60.0, 60.2, 59.9, 59.4, 59.4, 59.0, 58.8, 58.2, 58.1, 57.9, 57.4, 57.5, 57.6],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến xanh thân nhỏ (Small Green Candle) đóng cửa tại 57.6. Đây là phiên cầm máu thứ 2 liên tiếp sau chuỗi giảm mạnh, nhưng thân nến nhỏ cho thấy lực cầu bắt đáy vẫn rất rụt rè.</li> <li><strong>VSA:</strong> Khối lượng giao dịch đạt 3.19 triệu cổ phiếu (111% trung bình 20 phiên). Áp lực bán (Selling Pressure) vẫn còn khá mạnh mỗi khi giá hồi phục lên, thể hiện qua việc Vol cao nhưng giá không tăng được bao nhiêu.</li> <li><strong>Hành động giá:</strong> VCB đang trong nhịp giảm (Mark-down) mạnh nhất từ đầu năm, gãy hoàn toàn các mốc hỗ trợ quan trọng 60.0 và 58.0.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Downtrend ngắn hạn rõ rệt. Đỉnh sau thấp hơn đỉnh trước, đáy sau thấp hơn đáy trước.</li> <li><strong>Động lượng:</strong> RSI(14) rơi sâu về 33.09 - Vùng Quá bán (Oversold). Theo thống kê kỹ thuật, xác suất có nhịp hồi phục (Rebound) tại vùng này là khá cao, nhưng đó thường là cơ hội để bán hơn là mua. MACD Histogram tiếp tục âm.</li> <li><strong>Vùng giá:</strong> Đang kiểm định lại vùng đáy hỗ trợ cứng 57.4. Kháng cự gần nhất là đường MA20 tại 59.0.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng 57.4, VCB có thể bị bán giải chấp về vùng hỗ trợ rất sâu tại 55.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Xuất hiện nhịp hồi phục kỹ thuật (Dead Cat Bounce) lên vùng 59.0 để lấp lại Gap giảm. Nhà đầu tư nên tận dụng để <strong>cơ cấu danh mục</strong>, thoát khỏi cổ phiếu yếu.</p>"
-},
-{
-    "ticker": "VGC",
-    "exchange": "HSX",
-    "companyName": "Viglacera",
-    "price": "43.3",
-    "priceChange": "-0.50 (-1.14%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "⚠️ Tín hiệu: Thiếu cầu (No Demand)",
-    "signalDesc": "Giá giảm về đáy cũ với thanh khoản thấp (66% TB20), cho thấy lực cầu bắt đáy vắng bóng.",
-    "rsi": "39.36",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "66%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "45.00 (Kháng cự)",
-    "riskWarning": "Dòng tiền vào nhóm BĐS Khu công nghiệp đang suy yếu rõ rệt.",
-    "chartData": [44.69, 45.73, 44.4, 44.4, 43.45, 44.7, 46.6, 46.55, 47.0, 46.8, 45.85, 45.4, 45.05, 45.2, 43.5, 45.75, 44.8, 44.0, 43.8, 43.3],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ bao trùm (Bearish Candle) đóng cửa tại mức thấp nhất phiên 43.3. Đây là phiên giảm điểm thứ 4 liên tiếp, xác nhận đà rơi chưa dừng lại.</li> <li><strong>VSA:</strong> Khối lượng giao dịch chỉ đạt 0.64 triệu cổ phiếu (66% trung bình 20 phiên). Trong một xu hướng giảm, Vol thấp cho thấy sự chán nản của nhà đầu tư. Bên bán không bán tháo ồ ạt, nhưng bên mua (Cầu) thì hoàn toàn mất hút, khiến giá cứ từ từ trôi xuống (Drifting Down).</li> <li><strong>Hành động giá:</strong> Giá đang vận động dưới tất cả các đường trung bình động ngắn hạn (MA10, MA20), xu hướng rất yếu.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá ngắn hạn (Short-term Downtrend). Cổ phiếu đã tạo đỉnh sau thấp hơn đỉnh trước.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 39.36 - Vùng tiêu cực. MACD Histogram tiếp tục âm và chưa có dấu hiệu thu hẹp.</li> <li><strong>Vùng giá:</strong> Đang kiểm định lại vùng đáy hỗ trợ cũ 43.0. Nếu thủng mốc này, hỗ trợ tiếp theo sẽ là vùng đáy dài hạn 40.x. Kháng cự gần nhất là đường MA20 tại 45.0.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng 43.0, VGC sẽ kích hoạt đà bán kỹ thuật về vùng 40.x - 41.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Cần giữ được mốc 43.0 và tích lũy đi ngang với thanh khoản cạn kiệt thêm vài phiên nữa để tạo nền. Chỉ quan tâm khi có dòng tiền lớn quay lại.</p>"
-},
-{
-    "ticker": "VHC",
-    "exchange": "HSX",
-    "companyName": "Vĩnh Hoàn",
-    "price": "57.0",
-    "priceChange": "-0.50 (-0.87%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "⚠️ Tín hiệu: Thiếu cầu (No Demand)",
-    "signalDesc": "Giá trôi về đáy cũ với thanh khoản thấp (66% TB20), cho thấy lực cầu bắt đáy rất yếu.",
-    "rsi": "47.46",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "66%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "58.00 (Kháng cự)",
-    "riskWarning": "Xuất khẩu thủy sản hồi phục chậm hơn kỳ vọng, ảnh hưởng đến tâm lý nhà đầu tư.",
-    "chartData": [58.7, 57.7, 56.0, 56.0, 56.8, 57.2, 58.8, 58.6, 58.7, 60.7, 58.3, 57.6, 58.4, 58.4, 57.5, 58.5, 57.8, 57.6, 57.5, 57.0],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ thân nhỏ tiếp tục đóng cửa tại mức thấp nhất trong 5 phiên gần đây. Đây là phiên giảm điểm thứ 4 liên tiếp, xác nhận đà rơi (Drifting Down) vẫn chưa dừng lại.</li> <li><strong>VSA:</strong> Khối lượng giao dịch sụt giảm mạnh, chỉ đạt 0.86 triệu đơn vị (66% trung bình 20 phiên). Trong một xu hướng giảm, Vol thấp cho thấy áp lực bán không quá mạnh (không có bán tháo), nhưng nguy hiểm hơn là <strong>'Cầu rỗng' (Hollow Demand)</strong>. Phe mua hoàn toàn vắng bóng tại vùng giá này.</li> <li><strong>Hành động giá:</strong> Giá đang vận động dưới đường trung bình động MA20 và có xu hướng tìm về các vùng hỗ trợ thấp hơn.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá (Bearish Trend) ngắn hạn. Cổ phiếu đã tạo đỉnh sau thấp hơn đỉnh trước tại vùng 60.x.</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 47.46, nằm dưới mốc 50. MACD Histogram tiếp tục âm. Động lượng rất yếu ớt.</li> <li><strong>Vùng giá:</strong> Đang kiểm định lại vùng đáy cũ 56.0. Kháng cự gần nhất là đường MA20 tại 58.0.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu thủng vùng đáy 56.0 với Vol gia tăng, VHC sẽ mở biên rơi về vùng hỗ trợ sâu hơn tại 54.x - 55.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Cần giữ vững mốc 56.0 và có nhịp hồi phục kỹ thuật lên 58.0. Đây là cơ hội để <strong>cơ cấu hạ tỷ trọng</strong>, chưa phù hợp để mua mới.</p>"
-},
-{
-    "ticker": "VTP",
-    "exchange": "HSX",
-    "companyName": "Viettel Post",
-    "price": "99.8",
-    "priceChange": "-1.80 (-1.77%)",
-    "priceColorClass": "text-red",
-    "trendText": "📉 Trend: Giảm (Downtrend)",
-    "dateText": "📅 12/02",
-    "signalTitle": "⚠️ Tín hiệu: Cạn cầu (No Demand)",
-    "signalDesc": "Giá giảm thủng mốc 100.0, thanh khoản sụt giảm mạnh (50% TB20) phản ánh sự thờ ơ của dòng tiền.",
-    "rsi": "41.86",
-    "macd": "Cắt xuống",
-    "macdColorClass": "text-red",
-    "vol": "50%",
-    "buyZone": "Quan sát (Chưa mua)",
-    "cutLoss": "N/A",
-    "target": "104.00 (Kháng cự)",
-    "riskWarning": "Việc đánh mất mốc hỗ trợ tâm lý 100 có thể gây áp lực bán thêm.",
-    "chartData": [110.0, 106.6, 105.0, 102.2, 103.4, 105.5, 106.3, 106.3, 104.8, 108.8, 107.0, 104.8, 104.0, 102.8, 99.6, 100.4, 99.8, 99.0, 101.6, 99.8],
-    "detailedAnalysisHTML": "<h3>1. Đánh giá VSA / Mẫu hình nến</h3> <ul> <li><strong>Mẫu hình nến:</strong> Nến đỏ đóng cửa thấp nhất phiên tại 99.8. Đây là tín hiệu tiêu cực xác nhận việc phá vỡ (Breakdown) mốc hỗ trợ tâm lý quan trọng 100.0.</li> <li><strong>VSA:</strong> Khối lượng giao dịch rơi xuống mức cực thấp, chỉ đạt 0.27 triệu cổ phiếu (50% trung bình 20 phiên). Sự sụt giảm thanh khoản này cho thấy <strong>'Cầu đã cạn' (Demand Dried Up)</strong>. Không có dòng tiền bắt đáy nào xuất hiện để đỡ giá khi cổ phiếu thủng hỗ trợ.</li> <li><strong>Hành động giá:</strong> Giá đang trôi dạt (Drifting Down) tìm đáy mới, nằm hoàn toàn dưới các đường MA ngắn hạn.</li> </ul> <h3>2. Phân tích bối cảnh chung</h3> <ul> <li><strong>Xu hướng:</strong> Giảm giá ngắn hạn (Short-term Downtrend). Cổ phiếu liên tục tạo các đỉnh thấp dần (Lower Highs).</li> <li><strong>Động lượng:</strong> RSI(14) lùi về 41.86, nằm trong vùng yếu. MACD Histogram tiếp tục âm. Động lượng vẫn đang nghiêng về phe bán.</li> <li><strong>Vùng giá:</strong> Đang kiểm định lại vùng đáy hỗ trợ cũ 94.6. Kháng cự mạnh gần nhất là đường MA20 đang dốc xuống tại 104.0.</li> </ul> <h3>3. Kịch bản hành động</h3> <p><strong>🔴 Kịch bản Tiêu cực:</strong> Nếu tiếp tục thủng 94.6, VTP có thể mở biên rơi về vùng 90.x.</p> <p><strong>🟢 Kịch bản Tích cực:</strong> Cần sớm lấy lại mốc 100.0 và tích lũy đi ngang để ổn định tâm lý. Hiện tại chưa có điểm mua an toàn, chỉ phù hợp để quan sát.</p>"
-}
+        ticker: "FPT",
+        exchange: "HSX",
+        companyName: "CTCP FPT",
+        price: "135.0",
+        priceChange: "-2.40 (-1.75%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "42.61",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "128%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [136.7, 137.9, 138.8, 137.9, 138.0, 138.5, 138.4, 138.2, 138.2, 138.0, 137.9, 137.6, 137.7, 137.0, 137.5, 138.9, 139.0, 139.1, 137.4, 135.0],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 5.37tr (Cao (Áp lực bán mạnh)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 42.61 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 137.40. Hỗ trợ tâm lý 133.00.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "MSN",
+        exchange: "HSX",
+        companyName: "CTCP Tap doan Masan",
+        price: "70.3",
+        priceChange: "-1.70 (-2.36%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "34.02",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "188%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [72.3, 73.0, 74.0, 74.5, 74.9, 74.5, 74.2, 73.0, 71.9, 71.3, 72.8, 73.4, 73.0, 73.1, 74.0, 73.6, 73.7, 72.3, 72.0, 70.3],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 5.86tr (Cao (Áp lực bán mạnh)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 34.02 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 72.00. Hỗ trợ tâm lý 67.55.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "DIG",
+        exchange: "HSX",
+        companyName: "Tong CTCP Dau tu Phat trien Xay dung",
+        price: "19.6",
+        priceChange: "-0.55 (-2.73%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "42.06",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "84%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [21.3, 21.05, 21.05, 21.3, 21.15, 20.65, 20.3, 20.35, 19.8, 19.8, 20.15, 20.1, 19.9, 20.35, 20.6, 21.25, 21.0, 20.65, 20.15, 19.6],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 5.43tr (Thấp (Thiếu cầu)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 42.06 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 20.15. Hỗ trợ tâm lý 19.00.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "DXG",
+        exchange: "HSX",
+        companyName: "CTCP Tap doan Dat Xanh",
+        price: "16.15",
+        priceChange: "-0.55 (-3.29%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "41.67",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "128%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [17.15, 16.95, 16.9, 17.1, 17.1, 16.7, 16.5, 16.65, 16.4, 16.35, 16.55, 16.5, 16.5, 16.65, 17.1, 17.4, 17.3, 17.0, 16.7, 16.15],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 12.33tr (Cao (Áp lực bán mạnh)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 41.67 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 16.70. Hỗ trợ tâm lý 15.68.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "PDR",
+        exchange: "HSX",
+        companyName: "CTCP Phat trien Bat dong san Phat Dat",
+        price: "20.9",
+        priceChange: "-0.60 (-2.79%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "39.46",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "84%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [22.0, 21.85, 21.8, 22.1, 22.0, 21.65, 21.35, 21.4, 21.0, 21.0, 21.25, 21.35, 21.35, 21.65, 21.9, 22.3, 22.35, 21.95, 21.5, 20.9],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 3.73tr (Thấp (Thiếu cầu)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 39.46 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 21.50. Hỗ trợ tâm lý 20.19.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "DGC",
+        exchange: "HSX",
+        companyName: "CTCP Tap doan Hoa chat Duc Giang",
+        price: "108.8",
+        priceChange: "-0.90 (-0.82%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "36.56",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "50%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [111.9, 112.4, 112.4, 112.3, 112.9, 113.6, 112.5, 112.4, 111.4, 111.4, 111.8, 112.1, 111.6, 111.9, 112.0, 112.0, 111.1, 110.8, 109.7, 108.8],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 1.25tr (Thấp (Thiếu cầu)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 36.56 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 109.70. Hỗ trợ tâm lý 106.90.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "VRE",
+        exchange: "HSX",
+        companyName: "CTCP Vincom Retail",
+        price: "17.9",
+        priceChange: "-0.60 (-3.24%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "32.48",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "123%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [18.5, 18.5, 18.65, 18.75, 18.55, 18.4, 18.3, 18.25, 17.85, 18.1, 18.1, 18.2, 18.3, 18.4, 18.55, 18.9, 18.8, 18.55, 18.5, 17.9],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 10.97tr (Cao (Áp lực bán mạnh)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 32.48 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 18.50. Hỗ trợ tâm lý 17.50.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "GEX",
+        exchange: "HSX",
+        companyName: "CTCP Tap doan GELEX",
+        price: "18.1",
+        priceChange: "-0.30 (-1.63%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "36.88",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "121%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [18.7, 18.65, 18.8, 19.1, 18.95, 18.9, 18.7, 18.7, 18.4, 18.45, 18.55, 18.65, 18.45, 18.55, 18.6, 18.9, 18.85, 18.55, 18.4, 18.1],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 9.22tr (Cao (Áp lực bán mạnh)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 36.88 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 18.40. Hỗ trợ tâm lý 17.65.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "KBC",
+        exchange: "HSX",
+        companyName: "Tong Cong ty Phat trien Do thi Kinh Bac-CTCP",
+        price: "25.5",
+        priceChange: "-0.65 (-2.49%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "36.85",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "84%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [26.7, 26.55, 26.6, 26.75, 26.9, 26.7, 26.55, 26.5, 26.1, 26.1, 26.25, 26.4, 26.2, 26.4, 26.5, 26.8, 26.65, 26.45, 26.15, 25.5],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 3.42tr (Thấp (Thiếu cầu)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 36.85 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 26.15. Hỗ trợ tâm lý 25.00.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "VHC",
+        exchange: "HSX",
+        companyName: "CTCP Vinh Hoan",
+        price: "67.0",
+        priceChange: "-1.50 (-2.19%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "36.72",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "91%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [70.9, 71.3, 71.0, 71.3, 71.5, 71.0, 71.0, 70.2, 69.3, 68.7, 69.8, 69.3, 68.9, 69.0, 69.5, 69.8, 69.2, 68.9, 68.5, 67.0],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 1.14tr (Thấp (Thiếu cầu)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 36.72 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 68.50. Hỗ trợ tâm lý 65.50.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "DGW",
+        exchange: "HSX",
+        companyName: "CTCP The Gioi So",
+        price: "56.5",
+        priceChange: "-1.30 (-2.25%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "33.72",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "92%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [62.2, 62.4, 62.0, 62.0, 61.9, 61.5, 60.8, 60.7, 59.4, 59.5, 60.0, 59.9, 59.4, 60.0, 60.2, 60.0, 59.2, 59.0, 57.8, 56.5],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 1.34tr (Thấp (Thiếu cầu)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 33.72 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 57.80. Hỗ trợ tâm lý 55.40.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "ANV",
+        exchange: "HSX",
+        companyName: "CTCP Nam Viet",
+        price: "27.95",
+        priceChange: "-0.10 (-0.36%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "41.81",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "43%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [29.15, 30.0, 30.4, 30.2, 30.6, 30.8, 28.8, 28.4, 28.75, 28.35, 27.9, 27.6, 27.2, 28.15, 28.1, 29.1, 29.3, 29.8, 30.6, 27.95],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 0.82tr (Thấp (Thiếu cầu)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 41.81 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 30.60. Hỗ trợ tâm lý 27.30.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    },
+    {
+        ticker: "DCM",
+        exchange: "HSX",
+        companyName: "CTCP Phan bon Dau khi Ca Mau",
+        price: "37.55",
+        priceChange: "-0.45 (-1.18%)",
+        priceColorClass: "text-red",
+        trendText: "📉 Trend: Giảm / Tiêu cực",
+        dateText: "📅 12/10/2025",
+        signalTitle: "⚠️ Tín hiệu: Suy yếu",
+        signalDesc: "Áp lực bán gia tăng, thủng các mốc hỗ trợ.",
+        rsi: "46.22",
+        macd: "Cắt xuống",
+        macdColorClass: "text-red",
+        vol: "60%",
+        buyZone: "Chưa có điểm mua",
+        cutLoss: "N/A",
+        target: "N/A",
+        riskWarning: "Xu hướng giảm chủ đạo.",
+        chartData: [37.75, 37.6, 37.7, 37.8, 37.85, 37.5, 37.45, 37.15, 37.05, 37.1, 37.5, 37.4, 37.0, 37.25, 37.65, 38.05, 38.0, 37.9, 38.0, 37.55],
+        detailedAnalysisHTML: `
+                <h3>1. Đánh giá VSA / Mẫu hình nến</h3>
+                <ul>
+                    <li><strong>Mẫu hình nến:</strong> Nến đỏ/giảm điểm hoặc nến hồi phục yếu ớt.</li>
+                    <li><strong>VSA:</strong> Vol 1.94tr (Thấp (Thiếu cầu)). Phe bán đang chiếm ưu thế kiểm soát xu hướng.</li>
+                </ul>
+
+                <h3>2. Phân tích bối cảnh chung</h3>
+                <ul>
+                    <li><strong>Xu hướng:</strong> Giảm ngắn hạn (Downtrend). Giá nằm dưới MA20.</li>
+                    <li><strong>Động lượng:</strong> RSI 46.22 (Yếu). MACD Histogram âm thể hiện đà giảm chưa kết thúc.</li>
+                    <li><strong>Vùng giá:</strong> Kháng cự gần nhất 38.00. Hỗ trợ tâm lý 37.20.</li>
+                </ul>
+
+                <h3>3. Kịch bản hành động</h3>
+                <p><strong>🔴 Khuyến nghị:</strong> Hạn chế bắt đáy. Ưu tiên canh nhịp hồi kỹ thuật để hạ tỷ trọng/cơ cấu danh mục.</p>
+                <p><strong>⚠️ Cảnh báo:</strong> Rủi ro giảm điểm vẫn còn hiện hữu.</p>
+            `
+    }
 ],
 "observe": [
     {
@@ -2804,6 +2619,7 @@
     </script>
 </body>
 </html>
+
 
 
 
